@@ -19,12 +19,17 @@ public class TestController {
     private List<Answer> answers;
     private Map<Integer, List<Answer>> answersMap;
     private int qId = 0;
+    private int rughtAnsw = 0;
+
+
+
 
     @RequestMapping("/getNextQuestion")
     String getNextQuestion(Model ui){
         String page = "test";
         if (qId >= questions.size()){
-            page = showEnd();
+                rughtAnsw = 1;
+            page = showEnd(ui);
         } else {
             ui.addAttribute("answersMap", answersMap);
             ui.addAttribute("questions", questions);
@@ -35,7 +40,9 @@ public class TestController {
         return page;
     }
 
-    String showEnd(){
+    String showEnd(Model ui){
+        ui.addAttribute("rightAnsw", rughtAnsw);
+        ui.addAttribute("avg", questions.size()/2);
         return "endTesting";
     }
 
@@ -47,6 +54,8 @@ public class TestController {
 
     @RequestMapping("/startTestNow")
     String setTests(Model ui){
+        qId = 0;
+        rughtAnsw = 0;
         Connection connection = null;
         Statement statement = null;
         ResultSet rs = null;
