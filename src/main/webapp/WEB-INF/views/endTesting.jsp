@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+UUU - ${users}
     Hey! you got ${rightAnsw} right answers!
 <br>
     <c:if test="${rightAnsw >= avg}">

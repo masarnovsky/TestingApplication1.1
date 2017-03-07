@@ -12,6 +12,14 @@ public class User {
     private String role;
     private Date birthDate;
 
+    public User(int id, String fio, String email, String login, String password, String role) {
+        this.id = id;
+        this.fio = fio;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 
     public int getId() {
         return id;
