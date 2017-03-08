@@ -15,6 +15,8 @@ public class Question {
         this.type = type;
     }
 
+    public Question(){}
+
     public int getId() {
         return id;
     }

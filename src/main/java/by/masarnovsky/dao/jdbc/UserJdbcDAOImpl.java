@@ -1,33 +1,33 @@
-package by.masarnovsky.dao;
+package by.masarnovsky.dao.jdbc;
 
+import by.masarnovsky.dao.UserDAO;
+import by.masarnovsky.dao.rowmapper.UserRowMapper;
 import by.masarnovsky.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 //@Repository
-public class UserDAOImpl implements UserDAO {
+public class UserJdbcDAOImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
-    private final String ADD_NEW_USER = "insert into users(fio, email, login, password, role) values (?, ?, ?, ?, ?)";
+    private final String SELECT_ALL_USERS = "select * from users";
+    private final String ADD_NEW_USER = "insert into users(name, surname, email, login, password) values (?, ?, ?, ?, ?)";
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     public void addUser(User user) {
-        jdbcTemplate.update(ADD_NEW_USER, "test1", "test1", "test1", "test1", "user");
+        jdbcTemplate.update(ADD_NEW_USER, user.getName(), user.getSurname(), user.getEmail(), user.getLogin(), user.getPassword());
     }
 
     public void updateUser(User user) {
-
+        //
     }
 
     public List<User> listUsers() {
-        return jdbcTemplate.query("select * from users", new UserRowMapper());
+        return jdbcTemplate.query(SELECT_ALL_USERS, new UserRowMapper());
     }
 
     public User getUserById(int id) {
@@ -76,15 +76,3 @@ public class UserDAOImpl implements UserDAO {
 //    }
 }
 
-class UserRowMapper implements RowMapper<User> {
-
-    public User mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        User user = new User(resultSet.getInt("id"),
-                resultSet.getString("fio"),
-                resultSet.getString("email"),
-                resultSet.getString("login"),
-                resultSet.getString("password"),
-                resultSet.getString("role"));
-        return user;
-    }
-}

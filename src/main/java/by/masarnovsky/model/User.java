@@ -5,20 +5,48 @@ import java.util.Date;
 public class User {
 
     private int id;
-    private String fio;
+    private String name;
+    private String surname;
     private String email;
     private String login;
     private String password;
     private String role;
-    private Date birthDate;
+    private Date regDate;
 
-    public User(int id, String fio, String email, String login, String password, String role) {
+    public User(String name, String surname, String email, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(int id, String name, String surname, String email, String login, String password, String role, Date regDate) {
         this.id = id;
-        this.fio = fio;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.login = login;
         this.password = password;
         this.role = role;
+        this.regDate = regDate;
+    }
+
+    public User(){}
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname='").append(surname).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", login='").append(login).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", role='").append(role).append('\'');
+        sb.append(", regDate=").append(regDate);
+        sb.append('}');
+        return sb.toString();
     }
 
     public int getId() {
@@ -29,12 +57,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFio() {
-        return fio;
+    public String getName() {
+        return name;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -69,25 +105,11 @@ public class User {
         this.role = role;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getRegDate() {
+        return regDate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("id=").append(id);
-        sb.append(", fio='").append(fio).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append(", login='").append(login).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", role='").append(role).append('\'');
-        sb.append(", birthDate=").append(birthDate);
-        sb.append('}');
-        return sb.toString();
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 }

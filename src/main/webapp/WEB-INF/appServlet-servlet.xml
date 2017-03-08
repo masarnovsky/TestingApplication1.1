@@ -38,12 +38,28 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="userDAO" class="by.masarnovsky.dao.UserDAOImpl">
+    <bean id="userDAO" class="by.masarnovsky.dao.jdbc.UserJdbcDAOImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
     <bean id="userService" class="by.masarnovsky.service.UserServiceImpl">
         <property name="userDAO" ref="userDAO"/>
+    </bean>
+
+    <bean id="questionDAO" class="by.masarnovsky.dao.jdbc.QuestionJdbcDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="questionService" class="by.masarnovsky.service.QuestionServiceImpl">
+        <property name="questionDAO" ref="questionDAO"/>
+    </bean>
+
+    <bean id="answerDAO" class="by.masarnovsky.dao.jdbc.AnswerJdbcDAOImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="answerService" class="by.masarnovsky.service.AnswerServiceImpl">
+        <property name="answerDAO" ref="answerDAO"/>
     </bean>
 
 
@@ -72,7 +88,7 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!--<bean id="userDAO" class="by.masarnovsky.dao.UserDAOImpl">-->
+    <!--<bean id="userDAO" class="by.masarnovsky.dao.UserJDBCDAOImplImpl">-->
         <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
     <!--</bean>-->
     <!--<bean id="userService" class="by.masarnovsky.service.UserServiceImpl">-->

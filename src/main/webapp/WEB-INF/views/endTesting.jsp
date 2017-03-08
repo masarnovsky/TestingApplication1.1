@@ -6,6 +6,12 @@
 </head>
 <body>
 UUU - ${users}
+<br>
+questions 3 - ${quest}
+<br>
+answ for 1 ind - ${answ}
+<br>
+<br>
     Hey! you got ${rightAnsw} right answers!
 <br>
     <c:if test="${rightAnsw >= avg}">
