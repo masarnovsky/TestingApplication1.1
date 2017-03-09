@@ -6,6 +6,9 @@ public class Answer {
     private String text;
     private boolean isRight;
 
+    public Answer() {
+    }
+
     public Answer(int id, int questionId, String text, boolean isRight) {
         this.id = id;
         this.questionId = questionId;

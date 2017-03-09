@@ -39,7 +39,7 @@ public class UsController {
 
     @RequestMapping("/getMyUsers")
     String getMyUsers(Model ui){
-        List<Question> q = questionService.getQuestionSet(3);
+        List<Question> q = questionService.getQuestionSet(4);
        ui.addAttribute("users", userService.listUsers());
        ui.addAttribute("quest", q);
        ui.addAttribute("answ", answerService.getAnswersForQuestion(q.get(1)));
@@ -55,7 +55,7 @@ public class UsController {
 
 
 
-    @RequestMapping("/getNextQuestion")
+    //@RequestMapping("/getNextQuestion")
     String getNextQuestion(Model ui){
         String page = "test";
         if (qId >= questions.size()){
@@ -78,12 +78,12 @@ public class UsController {
     }
 
     //@RequestMapping("/startTest")
-    @RequestMapping("/")
+    //@RequestMapping("/")
     String pageTest(){
         return "startTest";
     }
 
-    @RequestMapping("/startTestNow")
+    //@RequestMapping("/startTestNow")
     String setTests(Model ui){
         qId = 0;
         rughtAnsw = 0;

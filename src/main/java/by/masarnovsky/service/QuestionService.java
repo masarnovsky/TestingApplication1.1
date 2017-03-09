@@ -5,6 +5,6 @@ import by.masarnovsky.model.Question;
 import java.util.List;
 
 public interface QuestionService {
-    List<Question> getQuestionSet(int id);
+    List<Question> getQuestionSet(int count);
     Question getQuestionById(int id);
 }

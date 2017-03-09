@@ -3,17 +3,20 @@ package by.masarnovsky.dao.jdbc;
 import by.masarnovsky.dao.UserDAO;
 import by.masarnovsky.dao.rowmapper.UserRowMapper;
 import by.masarnovsky.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public class UserJdbcDAOImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
     private final String SELECT_ALL_USERS = "select * from users";
     private final String ADD_NEW_USER = "insert into users(name, surname, email, login, password) values (?, ?, ?, ?, ?)";
 
+    @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

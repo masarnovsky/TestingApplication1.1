@@ -5,20 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-UUU - ${users}
+${msg}
 <br>
-questions 3 - ${quest}
-<br>
-answ for 1 ind - ${answ}
-<br>
-<br>
-    Hey! you got ${rightAnsw} right answers!
+    Вы ответили на ${rightAnsw} правильных вопросов!
 <br>
     <c:if test="${rightAnsw >= avg}">
-        Your got great result!
+        Отличный результат!
     </c:if>
 <c:if test="${rightAnsw <= avg}">
-    Bad result!
+    Плохой результат!
 </c:if>
 </body>
 </html>
