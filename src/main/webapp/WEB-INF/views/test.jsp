@@ -8,8 +8,8 @@
     <c:set var="qId" value="${qId}"/>
     <c:set var="qType" value="${questions[qId].getType()}"/>
     <div>
-        IT'S ${qId} | ${qCount} <br>
-        Right answers: ${rightAnswers}
+        Вопрос ${qId} из ${qCount} <br>
+        Правильных ответов: ${rightAnswers}
     </div>
     <div> Question:  ${questions[qId].getQuestion()}</div>
     <c:if test="${questions[qId].getImg() ne null and qType ne 4}">

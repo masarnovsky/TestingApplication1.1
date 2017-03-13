@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +30,14 @@ public class TestController {
     @Autowired
     private AnswerService answerService;
 
+    private final int TRAINING_SIZE = 3;
+    private final int TESTING_SIZE = 6;
+
     private static int qId = 0;
     private static int qCount = 1;
     private static int rightAnswers = 0;
     private List<Question> questions = null;
+    private boolean[] questionsAnsw = null;
     private Map<Integer, List<Answer>> answersMap = null;
     private Answer answer;
     private String testType = null;
@@ -49,16 +54,18 @@ public class TestController {
         rightAnswers = 0;
         if ("training".equals(type)){
             testType = "training";
-            qCount = 3;
+            qCount = TRAINING_SIZE;
         } else if ("testing".equals(type)){
             testType = "testing";
-            qCount = 6;
+            qCount = TESTING_SIZE;
         }
 
         questions = questionService.getQuestionSet(qCount);
+        questionsAnsw = new boolean[qCount];
         answersMap = new HashMap<Integer, List<Answer>>();
         for (Question q: questions){
             List<Answer> a = answerService.getAnswersForQuestion(q);
+            Collections.shuffle(a);
             answersMap.put(q.getId(), a);
         }
 
@@ -82,7 +89,10 @@ public class TestController {
             if (an.getId() == id){
                 if (an.isRight()){
                     rightAnswers++;
+                    questionsAnsw[qId-1] = true;
                 }
+                else
+                    questionsAnsw[qId-1] = false;
             }
         }
 
@@ -103,7 +113,10 @@ public class TestController {
 
     String showEnd(Model ui){
         ui.addAttribute("rightAnsw", rightAnswers);
+        ui.addAttribute("questions", questions);
+        ui.addAttribute("qCount", qCount);
         ui.addAttribute("avg", qCount/2);
+        ui.addAttribute("questionsAnsw", questionsAnsw);
         testType = null;
         return "endTesting";
     }
