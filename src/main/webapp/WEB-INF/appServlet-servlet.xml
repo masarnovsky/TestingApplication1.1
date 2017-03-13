@@ -27,7 +27,8 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
-    <context:component-scan base-package="by.masarnovsky.controller" />
+    <!--<context:component-scan base-package="by.masarnovsky.controller" />-->
+    <context:component-scan base-package="by.masarnovsky" />
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
@@ -73,38 +74,4 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
-
-
-    <!--<bean id="hibernate4AnnotatedSessionFactory"-->
-          <!--class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
-        <!--<property name="annotatedClasses">-->
-            <!--<list>-->
-                <!--<value>by.masarnovsky.model.User</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <!--<property name="hibernateProperties">-->
-            <!--<props>-->
-                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect-->
-                <!--</prop>-->
-                <!--<prop key="hibernate.show_sql">true</prop>-->
-            <!--</props>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--<bean id="userDAO" class="by.masarnovsky.dao.UserJDBCDAOImplImpl">-->
-        <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
-    <!--</bean>-->
-    <!--<bean id="userService" class="by.masarnovsky.service.UserServiceImpl">-->
-        <!--<property name="userDAO" ref="userDAO"></property>-->
-    <!--</bean>-->
-    <!--<context:component-scan base-package="by.masarnovsky" />-->
-
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
-
-    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
-        <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />-->
-    <!--</bean>-->
-
 </beans>

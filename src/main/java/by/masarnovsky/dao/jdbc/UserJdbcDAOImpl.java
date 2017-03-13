@@ -13,8 +13,8 @@ import java.util.List;
 public class UserJdbcDAOImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
-    private final String SELECT_ALL_USERS = "select * from users";
-    private final String ADD_NEW_USER = "insert into users(name, surname, email, login, password) values (?, ?, ?, ?, ?)";
+    private final String SELECT_ALL_USERS = "select id, name, surname, email, login, AES_DECRYPT(login, password) from users";
+    private final String ADD_NEW_USER = "insert into users(name, surname, email, login, AES_ENCRYPT(login, password)) values (?, ?, ?, ?, ?)";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

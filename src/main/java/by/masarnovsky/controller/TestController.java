@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/")
 public class TestController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class TestController {
     private String testType = null;
 
     @RequestMapping("/startTest/{type}")
-    String startTest(@PathVariable(value = "type") String type, Model ui){
+    String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
         if (testType != null){
             ui.addAttribute("msg", "another test started!");
             return "endTesting";
@@ -80,10 +81,10 @@ public class TestController {
     }
 
     @RequestMapping(value = "/getNextQuestion/{id}", method = RequestMethod.POST)
-    String nextQuestion(@PathVariable(value = "id") int id, HttpSession session, Model ui){
+    String nextQuestion(@PathVariable(value = "id") int id, HttpServletRequest request, Model ui){
         String page = "test";
         List<Answer> a = answersMap.get(questions.get(qId-1).getId());
-        System.out.println(a);
+
 
         for (Answer an: a){
             if (an.getId() == id){
