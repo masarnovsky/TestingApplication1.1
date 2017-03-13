@@ -13,8 +13,10 @@ import java.util.List;
 public class UserJdbcDAOImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
-    private final String SELECT_ALL_USERS = "select id, name, surname, email, login, AES_DECRYPT(login, password) from users";
-    private final String ADD_NEW_USER = "insert into users(name, surname, email, login, AES_ENCRYPT(login, password)) values (?, ?, ?, ?, ?)";
+    private final String SELECT_ALL_USERS = "select * from users";
+    private final String ADD_NEW_USER = "insert into users(name, surname, email, login, password) values (?, ?, ?, ?, ?)";
+    private final String GET_USER_BY_LOGIN = "select * from users where login=?";
+    private final String GET_USER_BY_ID = "select * from users where id=?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -35,6 +37,10 @@ public class UserJdbcDAOImpl implements UserDAO {
 
     public User getUserById(int id) {
         return null;
+    }
+
+    public User getUserByLogin(String login) {
+        return jdbcTemplate.queryForObject(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
     }
 
     public void removeUser(int id) {

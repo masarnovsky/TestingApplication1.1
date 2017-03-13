@@ -31,6 +31,10 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserById(id);
     }
 
+    public User getUserByLogin(String login) {
+        return userDAO.getUserByLogin(login);
+    }
+
     public void removeUser(int id) {
         userDAO.removeUser(id);
     }

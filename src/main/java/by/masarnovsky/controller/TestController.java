@@ -45,7 +45,7 @@ public class TestController {
 
     @RequestMapping("/startTest/{type}")
     String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
-        if (testType != null){
+        if (testType != null){ //request.getSession().getAttribute("testType")
             ui.addAttribute("msg", "another test started!");
             return "endTesting";
         }

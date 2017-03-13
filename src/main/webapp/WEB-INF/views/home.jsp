@@ -4,7 +4,9 @@
 <jsp:include page="header.jsp"/>
 
 <div>
-    ${name}
+    ${user}
+
+    ${msg}
 </div>
 
 <jsp:include page="footer.jsp"/>
