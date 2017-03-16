@@ -4,31 +4,36 @@
 
 <c:import url="header.jsp"/>
 
-<div style="border: 1px solid black;">
-    <c:set var="qId" value="${qId}"/>
-    <c:set var="qType" value="${questions[qId].getType()}"/>
-    <div>
-        Вопрос ${qId + 1} из ${qCount} <br>
-        Правильных ответов: ${rightAnswers}
-    </div>
-    <div> Question:  ${questions[qId].getQuestion()}</div>
-    <c:if test="${questions[qId].getImg() ne null and qType ne 4}">
-        <img src="/resources/img/${questions[qId].getImg()}"/>
-    </c:if>
+<c:set var="qId" value="${qId}"/>
+<c:set var="qType" value="${questions[qId].getType()}"/>
 
-    <form:form modelAttribute="answer"  id="answerForm">
-        <c:if test="${qType ne 4}">
-            <div>
-                <c:forEach var="answer" items="${answersMap[questions[qId].getId()]}">
-                    <input name="group1" type="radio" id="id${answer.getId()}" onclick="submitForm(${answer.getId()})">
-                    <%--<br>--%>
-                    <label for="id${answer.getId()}">${answer.getText()}</label>
-                </c:forEach>
-                <%--<form:radiobuttons path="text" items="${answersMap[questions[qId].getId()]}"/>--%>
-            </div>
-        </c:if>
-        <c:if test="${qType eq 4}">
-            <img class="responsive-img" src="/resources/img/${questions[qId].getImg()}" usemap="#${questions[qId].getId()}"></div>
+<div class="container">
+    <div class="row">
+        <div class="col s12 l10 offset-l1">
+                <h5 class="center-align col s12">Вопрос ${qId + 1} из ${qCount}</h5>
+                <h5 class="center-align col s12">Правильных ответов: ${rightAnswers}</h5>
+                <%--<div class="progress">--%>
+                    <%--<div class="determinate" style="width: 70%"/>--%>
+                <%--</div>--%>
+                <div class="col s12">
+                    <p class="center-align col s12">Question:  ${questions[qId].getQuestion()}</p>
+                    <c:if test="${questions[qId].getImg() ne null and qType ne 4}">
+                        <img src="/resources/img/${questions[qId].getImg()}"/>
+                    </c:if>
+                </div>
+
+            <form:form class="col s12" modelAttribute="answer"  id="answerForm">
+            <c:if test="${qType ne 4}">
+                <div class="col s12">
+                    <c:forEach var="answer" items="${answersMap[questions[qId].getId()]}">
+                        <input name="group1" type="radio" id="id${answer.getId()}" onclick="submitForm(${answer.getId()})">
+                        <label for="id${answer.getId()}">${answer.getText()}</label>
+                        <br>
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${qType eq 4}">
+            <img src="/resources/img/${questions[qId].getImg()}" usemap="#${questions[qId].getId()}"></div>
             <map name="#${questions[qId].getId()}">
                 <c:forEach var="answer" items="${answersMap[questions[qId].getId()]}">
                     <area shape="poly" href="#${answer.getId()}" coords="${answer.getText()}" onclick="submitForm(${answer.getId()})">
@@ -36,9 +41,12 @@
             </map>
         </c:if>
 
-        <div><input type="hidden" id="selectedAnswer" name="selectedAnswer" value=""></div>
-        <div><input id="submitButton" type="submit" value="Send" disabled></div>
-    </form:form>
+        <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" type="submit" disabled>Далее</button>
+        </form:form>
+
+
+        </div>
+    </div>
 </div>
 
 

@@ -33,11 +33,12 @@ public class UserController {
 //        }
         if (userService.getUserByLogin(user.getLogin()).isEmpty()){
             userService.addUser(user);
-            ui.addAttribute(user);
+            ui.addAttribute("message", "Пользователь зарегистрирован. Пожалуйста, авторизуйтесь.");
         } else {
-            ui.addAttribute("msg", "Пользователь уже существует");
+            ui.addAttribute("message", "Пользователь c таким логином уже существует!");
+            return "signin";
         }
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "login")
@@ -50,7 +51,6 @@ public class UserController {
     public String loginUser(User user, Model ui, HttpServletRequest request){
         List<User> currentUser = userService.getUserByLogin(user.getLogin());
         if (!currentUser.isEmpty() && currentUser.get(0).getPassword().equals(user.getPassword())){
-            //ui.addAttribute(currentUser.get(0));
             request.getSession().setAttribute("user", currentUser.get(0));
             request.getSession().setAttribute("isLogged", true);
         }
