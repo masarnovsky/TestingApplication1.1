@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/test")
 public class TestController {
 
     @Autowired
@@ -34,25 +34,17 @@ public class TestController {
     private final int TRAINING_SIZE = 3;
     private final int TESTING_SIZE = 6;
 
-    private static int qId = 0;
-    private static int qCount = 1;
-    private static int rightAnswers = 0;
-    private List<Question> questions = null;
-    private boolean[] questionsAnsw = null;
-    private Map<Integer, List<Answer>> answersMap = null;
-    private Answer answer;
-    private String testType = null;
-
-    @RequestMapping("/startTest/{type}")
+    @RequestMapping("/start/{type}")
     String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
-        if (testType != null){ //request.getSession().getAttribute("testType")
+        if (request.getSession().getAttribute("testType") != null){
             ui.addAttribute("msg", "another test started!");
             return "endTesting";
         }
 
-        qId = 0;
-        qCount = 1;
-        rightAnswers = 0;
+        int qId = 0;
+        int qCount = 1;
+        int rightAnswers = 0;
+        String testType = null;
         if ("training".equals(type)){
             testType = "training";
             qCount = TRAINING_SIZE;
@@ -61,21 +53,22 @@ public class TestController {
             qCount = TESTING_SIZE;
         }
 
-        questions = questionService.getQuestionSet(qCount);
-        questionsAnsw = new boolean[qCount];
-        answersMap = new HashMap<Integer, List<Answer>>();
+        List<Question> questions = questionService.getQuestionSet(qCount);
+        boolean[] questionsAnsw = new boolean[qCount];
+        Map<Integer, List<Answer>> answersMap = new HashMap<Integer, List<Answer>>();
         for (Question q: questions){
             List<Answer> a = answerService.getAnswersForQuestion(q);
             Collections.shuffle(a);
             answersMap.put(q.getId(), a);
         }
 
-        ui.addAttribute("answersMap", answersMap);
-        ui.addAttribute("questions", questions);
-        ui.addAttribute("qId", qId);
-        ui.addAttribute("qCount", qCount);
-        ui.addAttribute("rightAnswers", rightAnswers);
-        qId++;
+        request.getSession().setAttribute("answersMap", answersMap);
+        request.getSession().setAttribute("questions", questions);
+        request.getSession().setAttribute("qId", qId);
+        request.getSession().setAttribute("qCount", qCount);
+        request.getSession().setAttribute("rightAnswers", rightAnswers);
+        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
+        request.getSession().setAttribute("testType", testType);
 
         return "test";
     }
@@ -83,9 +76,16 @@ public class TestController {
     @RequestMapping(value = "/getNextQuestion/{id}", method = RequestMethod.POST)
     String nextQuestion(@PathVariable(value = "id") int id, HttpServletRequest request, Model ui){
         String page = "test";
+
+        int qId = (Integer) request.getSession().getAttribute("qId");
+        qId++;
+        int qCount = (Integer) request.getSession().getAttribute("qCount");
+        int rightAnswers = (Integer) request.getSession().getAttribute("rightAnswers");
+        List<Question> questions = (List<Question>) request.getSession().getAttribute("questions");
+        Map<Integer, List<Answer>> answersMap = (Map<Integer, List<Answer>>) request.getSession().getAttribute("answersMap");
+        boolean[] questionsAnsw = (boolean[]) request.getSession().getAttribute("questionsAnsw");
+
         List<Answer> a = answersMap.get(questions.get(qId-1).getId());
-
-
         for (Answer an: a){
             if (an.getId() == id){
                 if (an.isRight()){
@@ -97,35 +97,26 @@ public class TestController {
             }
         }
 
+        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
+        request.getSession().setAttribute("answersMap", answersMap);
+        request.getSession().setAttribute("questions", questions);
+        request.getSession().setAttribute("qId", qId);
+        request.getSession().setAttribute("qCount", qCount);
+        request.getSession().setAttribute("rightAnswers", rightAnswers);
         if (qId >= qCount){
-            page = showEnd(ui);
-        } else {
-
-            ui.addAttribute("answersMap", answersMap);
-            ui.addAttribute("questions", questions);
-            ui.addAttribute("qId", qId);
-            ui.addAttribute("qCount", qCount);
-            ui.addAttribute("rightAnswers", rightAnswers);
-            qId++;
+            page = showEnd(request);
         }
 
         return page;
     }
 
-    String showEnd(Model ui){
-        ui.addAttribute("rightAnsw", rightAnswers);
-        ui.addAttribute("questions", questions);
-        ui.addAttribute("qCount", qCount);
-        ui.addAttribute("avg", qCount/2);
-        ui.addAttribute("questionsAnsw", questionsAnsw);
-        testType = null;
+    String showEnd(HttpServletRequest request){
+        int qCount = (Integer) request.getSession().getAttribute("qCount");
+        request.getSession().setAttribute("avg", (Integer)request.getSession().getAttribute("qCount")/2);
+        request.getSession().setAttribute("qCount", qCount);
+        request.getSession().setAttribute("testType", null);
+
         return "endTesting";
     }
 
-
-
-    @RequestMapping("/")
-    String getStart(){
-        return "startTest";
-    }
 }

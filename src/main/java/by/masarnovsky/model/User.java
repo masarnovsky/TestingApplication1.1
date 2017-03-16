@@ -1,16 +1,23 @@
 package by.masarnovsky.model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class User {
 
     private int id;
-
-
     private String name;
     private String surname;
+
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Неверный email")
     private String email;
+
+    @Size(min = 3, max = 20, message = "Логин должен состоять минимум из 3 символов, максимум 20")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Только буквы и цифры, без пробелов.")
     private String login;
+
+    @Size(min = 6, max = 20, message = "Минимум 6 символов.")
     private String password;
     private String role;
     private Date regDate;

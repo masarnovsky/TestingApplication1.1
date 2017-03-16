@@ -7,6 +7,13 @@
     ${user}
 
     ${msg}
+
+
+
+        <div>
+            <a href="/test/start/testing">Тестовый режим (6 questions)</a>
+            <a href="/test/start/training">Тренировочный режим (3 questions)</a>
+        </div>
 </div>
 
 <jsp:include page="footer.jsp"/>

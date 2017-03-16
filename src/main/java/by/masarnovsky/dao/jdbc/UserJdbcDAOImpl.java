@@ -39,8 +39,8 @@ public class UserJdbcDAOImpl implements UserDAO {
         return null;
     }
 
-    public User getUserByLogin(String login) {
-        return jdbcTemplate.queryForObject(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
+    public List<User> getUserByLogin(String login) {
+        return jdbcTemplate.query(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
     }
 
     public void removeUser(int id) {

@@ -7,12 +7,12 @@
 <body>
 ${msg}
 <br>
-    Вы ответили на ${rightAnsw} правильных вопросов из ${qCount}
+    Вы ответили на ${rightAnswers} правильных вопросов из ${qCount}
 <br>
-    <c:if test="${rightAnsw >= avg}">
+    <c:if test="${rightAnswers >= avg}">
         Отличный результат!
     </c:if>
-<c:if test="${rightAnsw <= avg}">
+<c:if test="${rightAnswers < avg}">
     Плохой результат!
 </c:if>
 
