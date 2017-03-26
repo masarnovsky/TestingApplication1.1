@@ -24,21 +24,5 @@
     </div>
 </div>
 
-<%--<div>--%>
-    <%--<h3>Авторизация</h3>--%>
-    <%--<h5>${message}</h5>--%>
-    <%--<form:form method="post" modelAttribute="user" action="/user/login">--%>
-        <%--<fieldset>--%>
-            <%--<label for="login">Логин</label>--%>
-            <%--<form:input path="login" id="login"/>--%>
-            <%--&lt;%&ndash;<form:errors path="login" cssClass="error"/>&ndash;%&gt;--%>
-            <%--<label for="password">Пароль</label>--%>
-            <%--<form:password path="password" id="password"/>--%>
-            <%--&lt;%&ndash;<form:errors path="password" cssClass="error"/>&ndash;%&gt;--%>
-            <%--<input type="submit" value="Войти">--%>
-        <%--</fieldset>--%>
-    <%--</form:form>--%>
-<%--</div>--%>
-
 <c:import url="footer.jsp"/>
 

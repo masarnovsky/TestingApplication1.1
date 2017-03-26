@@ -58,7 +58,7 @@ public class UserController {
             ui.addAttribute("message", "Неверные данные");
             return "login";
         }
-        return "home";
+        return "redirect:/home";
     }
 
     @RequestMapping("/logout")

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ResultJdbcDAOImpl implements ResultDAO {
+public class ResultDAOJdbcImpl implements ResultDAO {
     private JdbcTemplate jdbcTemplate;
 
     private final String GET_USER_RESULT = "select * from results where userId=?";

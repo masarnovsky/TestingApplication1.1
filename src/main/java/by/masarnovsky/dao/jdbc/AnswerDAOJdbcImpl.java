@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AnswerJdbcDAOImpl implements AnswerDAO {
+public class AnswerDAOJdbcImpl implements AnswerDAO {
     JdbcTemplate jdbcTemplate;
 
     private final String GET_ANSWERS_FOR_QUESTION = "select * from answers where questionId=?";

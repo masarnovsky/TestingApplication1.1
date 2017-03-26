@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class QuestionJdbcDAOImpl implements QuestionDAO{
+public class QuestionDAOJdbcImpl implements QuestionDAO{
     private JdbcTemplate jdbcTemplate;
 
     private final String GET_RANDOM_QUESTION_SET = "select * from questions order by rand() limit ?";

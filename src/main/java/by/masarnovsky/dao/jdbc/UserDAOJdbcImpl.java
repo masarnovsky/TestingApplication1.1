@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserJdbcDAOImpl implements UserDAO {
+public class UserDAOJdbcImpl implements UserDAO {
     private JdbcTemplate jdbcTemplate;
 
     private final String SELECT_ALL_USERS = "select * from users";

@@ -25,6 +25,6 @@
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </nav>
-<script type="text/javascript" src="/resources/js/jquery.js"></script>
-<%--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>--%>
-<script type="text/javascript" src="/resources/js/materialize.min.js"></script>
+<%--<script type="text/javascript" src="/resources/js/jquery.js"></script>--%>
+<%--&lt;%&ndash;<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>&ndash;%&gt;--%>
+<%--<script type="text/javascript" src="/resources/js/materialize.min.js"></script>--%>
