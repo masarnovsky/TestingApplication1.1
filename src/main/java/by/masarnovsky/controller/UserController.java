@@ -1,6 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.model.User;
+import by.masarnovsky.service.ModuleService;
 import by.masarnovsky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ModuleService moduleService;
 
     @RequestMapping(method = RequestMethod.GET, params = "signin")
     public String sendSigninUserForm(Model model){
@@ -59,6 +63,13 @@ public class UserController {
             return "login";
         }
         return "redirect:/home";
+    }
+
+    @RequestMapping("/cabinet")
+    public String cabinet(HttpServletRequest request){
+        // update modules
+        // get&set module status (from results)
+        return "cabinet";
     }
 
     @RequestMapping("/logout")
