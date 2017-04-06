@@ -17,3 +17,11 @@
 .padding30px {
     padding: 30px;
 }
+
+.true {
+    color: green;
+}
+
+.false {
+    color: red;
+}

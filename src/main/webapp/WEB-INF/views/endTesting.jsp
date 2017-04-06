@@ -24,9 +24,9 @@
         <c:set var="ind" value="${0}"/>
 
         <div class="col s12">
-            <ul class="center-align">
+            <ul class="left-align">
                 <c:forEach var="a" items="${answ}">
-                    <li>${ind} - ${questions[ind].getQuestion()} - ${a}</li>
+                    <li class="${a}">${ind} - ${questions[ind].getQuestion()} - ${a}</li>
                     <c:set var="ind" value="${ind+1}"/>
                 </c:forEach>
             </ul>

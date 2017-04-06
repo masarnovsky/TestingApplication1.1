@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">ECDL</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">ECDL</a>
         <ul class="right hide-on-med-and-down">
             <li><a href="#">Тесты</a></li>
             <c:if test="${isLogged == true}">
