@@ -1,0 +1,19 @@
+#imgBack {
+    background-image: url(/resources/img/background5.jpg);
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+}
+
+.fullHeight {
+    height: 70%;
+}
+
+.padding-bottom-30px {
+    padding-bottom: 30px;
+}
+
+.padding30px {
+    padding: 30px;
+}
