@@ -32,9 +32,9 @@ public class UserController {
 
     @RequestMapping(value = "/signin",method = RequestMethod.POST)
     public String addNewUser(@Valid User user, BindingResult br, Model ui){
-//        if (br.hasErrors()){
-//            return "signin";
-//        }
+        if (br.hasErrors()){
+            return "signin";
+        }
         if (userService.getUserByLogin(user.getLogin()).isEmpty()){
             userService.addUser(user);
             ui.addAttribute("message", "Пользователь зарегистрирован. Пожалуйста, авторизуйтесь.");

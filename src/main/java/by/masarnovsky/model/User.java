@@ -4,10 +4,15 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+
 public class User {
 
     private int id;
+
+    @Size(min = 2, max = 25, message = "2-25 символов")
     private String name;
+
+    @Size(min = 2, max = 25, message = "2-25 символов")
     private String surname;
 
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Неверный email")

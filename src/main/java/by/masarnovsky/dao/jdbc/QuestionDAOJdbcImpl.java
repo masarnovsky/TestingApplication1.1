@@ -14,6 +14,7 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
     private JdbcTemplate jdbcTemplate;
 
     private final String GET_RANDOM_QUESTION_SET = "select * from questions order by rand() limit ?";
+    private final String GET_QUESTIONS_FOR_MODULE = "select * from questions where module = ? order by rand() limit ?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -22,6 +23,11 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     public List<Question> getQuestionSet(int count) {
         return jdbcTemplate.query(GET_RANDOM_QUESTION_SET, new Object[]{count} ,new QuestionRowMapper());
+    }
+
+    @Override
+    public List<Question> getQuestionsForModule(int moduleId, int count) {
+        return jdbcTemplate.query(GET_QUESTIONS_FOR_MODULE, new Object[]{moduleId, count}, new QuestionRowMapper());
     }
 
     public Question getQuestionById(int id) {

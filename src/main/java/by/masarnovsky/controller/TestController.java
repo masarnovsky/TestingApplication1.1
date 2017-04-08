@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
@@ -34,7 +35,49 @@ public class TestController {
     private final int TRAINING_SIZE = 3;
     private final int TESTING_SIZE = 6;
 
-    @RequestMapping("/start/{type}")
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
+    String startTesting(@RequestParam(value = "module", required = true) int moduleId,
+                     @RequestParam(value = "type", required = true) String type,
+                     HttpServletRequest request, Model ui){
+        if (request.getSession().getAttribute("testType") != null){
+            ui.addAttribute("msg", "another test started!");
+            return "endTesting";
+        }
+
+        int qId = 0;
+        int qCount = 1;
+        int rightAnswers = 0;
+        String testType = null;
+        if ("training".equals(type)){
+            testType = "training";
+            qCount = TRAINING_SIZE;
+        } else if ("testing".equals(type)){
+            testType = "testing";
+            qCount = TESTING_SIZE;
+        }
+
+        List<Question> questions = questionService.getQuestionsForModule(moduleId, qCount);
+        boolean[] questionsAnsw = new boolean[qCount];
+        Map<Integer, List<Answer>> answersMap = new HashMap<>();
+        for (Question q: questions){
+            List<Answer> a = answerService.getAnswersForQuestion(q);
+            Collections.shuffle(a);
+            answersMap.put(q.getId(), a);
+        }
+
+        request.getSession().setAttribute("answersMap", answersMap);
+        request.getSession().setAttribute("questions", questions);
+        request.getSession().setAttribute("qId", qId);
+        request.getSession().setAttribute("qCount", qCount);
+        request.getSession().setAttribute("rightAnswers", rightAnswers);
+        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
+        request.getSession().setAttribute("testType", testType);
+
+        return "test";
+
+    }
+
+    @RequestMapping(value = "/start/{type}", method = RequestMethod.GET)
     String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
         if (request.getSession().getAttribute("testType") != null){
             ui.addAttribute("msg", "another test started!");

@@ -23,10 +23,10 @@
                                 <div class="col s12">
                                     <div class="col s6">${module.getTheme()}</div>
                                     <div class="col s3">
-                                        <a  href="/test/module?${module.getId()}&type?training">Тренировка</a>
+                                        <a  href="/test/start?module=${module.getId()}&type=training">Тренировка</a>
                                     </div>
                                     <div class="col s3">
-                                        <a href="/test/module?${module.getId()}&type?testing">Тестирование</a>
+                                        <a href="/test/start?module=${module.getId()}&type=testing">Тестирование</a>
                                     </div>
                                 </div>
                             </div>
