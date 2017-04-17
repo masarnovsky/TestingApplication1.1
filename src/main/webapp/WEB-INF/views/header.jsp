@@ -13,9 +13,9 @@
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">ECDL</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="#">Тесты</a></li>
             <c:if test="${isLogged == true}">
-                <li><a href="/user/account">Пользователь: ${user.getLogin()}</a></li>
+                <li><a href="/home">Тесты</a></li>
+                <li><a href="/user/cabinet">Пользователь: ${user.getLogin()}</a></li>
                 <li><a href="/user/logout">Выйти</a></li>
             </c:if>
         </ul>
@@ -26,6 +26,3 @@
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
 </nav>
-<%--<script type="text/javascript" src="/resources/js/jquery.js"></script>--%>
-<%--&lt;%&ndash;<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>&ndash;%&gt;--%>
-<%--<script type="text/javascript" src="/resources/js/materialize.min.js"></script>--%>

@@ -1,7 +1,8 @@
-package by.masarnovsky.service;
+package by.masarnovsky.service.impl;
 
 import by.masarnovsky.dao.UserDAO;
 import by.masarnovsky.model.User;
+import by.masarnovsky.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

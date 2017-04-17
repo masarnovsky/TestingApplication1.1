@@ -1,7 +1,10 @@
 package by.masarnovsky.controller;
 
+import by.masarnovsky.model.Module;
+import by.masarnovsky.model.Result;
 import by.masarnovsky.model.User;
 import by.masarnovsky.service.ModuleService;
+import by.masarnovsky.service.ResultService;
 import by.masarnovsky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -23,6 +28,9 @@ public class UserController {
 
     @Autowired
     ModuleService moduleService;
+
+    @Autowired
+    ResultService resultService;
 
     @RequestMapping(method = RequestMethod.GET, params = "signin")
     public String sendSigninUserForm(Model model){
@@ -67,9 +75,31 @@ public class UserController {
 
     @RequestMapping("/cabinet")
     public String cabinet(HttpServletRequest request){
-        // update modules
+        updateModulesResults(request);
         // get&set module status (from results)
         return "cabinet";
+    }
+
+    private void updateModulesResults(HttpServletRequest request){
+        List<Module> modules = (List<Module>) request.getSession().getAttribute("modules");
+        User user = (User) request.getSession().getAttribute("user");
+        if (modules == null){
+            modules = moduleService.getModules();
+            request.getSession().setAttribute("modules", modules);
+        }
+        Map<Integer, String> resultStatus = new HashMap<>();
+        List<Result> resultsForModule;
+        String moduleStatus = "not_started";
+        for (Module m: modules){
+            resultsForModule = resultService.getUserResultByModule(user.getId(), m.getId());
+            if (resultsForModule != null && resultsForModule.contains("passed")){
+                moduleStatus = "passed";
+            } else if (resultsForModule != null && resultsForModule.contains("failed")){
+                moduleStatus = "failed";
+            }
+            resultStatus.put(m.getId(), moduleStatus);
+        }
+        request.getSession().setAttribute("resultStatus", resultStatus);
     }
 
     @RequestMapping("/logout")

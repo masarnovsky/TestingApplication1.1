@@ -25,3 +25,15 @@
 .false {
     color: red;
 }
+
+.not_started {
+    color: blue;
+}
+
+.passed {
+    color: green;
+}
+
+.failed {
+    color: red;
+}

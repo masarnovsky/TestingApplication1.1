@@ -27,29 +27,9 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-        <!--<servlet-name>startTest</servlet-name>-->
-        <!--<jsp-file>/WEB-INF/views/startTest.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>startTest</servlet-name>-->
-        <!--<url-pattern>/startTest</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-        <!--<servlet-name>header</servlet-name>-->
-        <!--<jsp-file>/WEB-INF/views/header.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>header</servlet-name>-->
-        <!--<url-pattern>/header</url-pattern>-->
-    <!--</servlet-mapping>-->
-    <!--<servlet>-->
-        <!--<servlet-name>footer</servlet-name>-->
-        <!--<jsp-file>/WEB-INF/views/footer.jsp</jsp-file>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>footer</servlet-name>-->
-        <!--<url-pattern>/footer</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <!--<filter>-->
+        <!--<filter-name>springSecurityFilterChain</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
 
 </web-app>

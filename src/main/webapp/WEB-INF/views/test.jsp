@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-            <form:form class="col s12" modelAttribute="answer"  id="answerForm">
+            <form:form class="col s12" modelAttribute="answer"  id="answerForm" action="/test/getNextQuestion/-1">
 
             <c:if test="${qType ne 4}">
                 <div class="row">
@@ -59,7 +59,15 @@
                 </div>
             </c:if>
 
-        <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" type="submit">Далее</button>
+        <c:if test="${testType eq 'training'}">
+            <div class="col s12">
+                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="prevButton" type="submit">Назад</button>
+                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="submitButton" type="submit">Далее</button>
+            </div>
+        </c:if>
+        <c:if test="${testType eq 'testing'}">
+            <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" type="submit">Далее</button>
+        </c:if>
         </form:form>
 
 

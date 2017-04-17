@@ -12,7 +12,7 @@ public class ResultRowMapper implements RowMapper<Result> {
                 resultSet.getInt("id"),
                 resultSet.getInt("userId"),
                 resultSet.getInt("module"),
-                resultSet.getInt("result"),
+                resultSet.getString("result"),
                 resultSet.getDate("date")
         );
         return result;

@@ -1,8 +1,9 @@
-package by.masarnovsky.service;
+package by.masarnovsky.service.impl;
 
 import by.masarnovsky.dao.AnswerDAO;
 import by.masarnovsky.model.Answer;
 import by.masarnovsky.model.Question;
+import by.masarnovsky.service.AnswerService;
 
 import java.util.List;
 

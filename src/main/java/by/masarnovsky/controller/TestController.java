@@ -72,6 +72,7 @@ public class TestController {
         request.getSession().setAttribute("rightAnswers", rightAnswers);
         request.getSession().setAttribute("questionsAnsw", questionsAnsw);
         request.getSession().setAttribute("testType", testType);
+        request.getSession().setAttribute("module", moduleId);
 
         return "test";
 
@@ -98,7 +99,7 @@ public class TestController {
 
         List<Question> questions = questionService.getQuestionSet(qCount);
         boolean[] questionsAnsw = new boolean[qCount];
-        Map<Integer, List<Answer>> answersMap = new HashMap<Integer, List<Answer>>();
+        Map<Integer, List<Answer>> answersMap = new HashMap<>();
         for (Question q: questions){
             List<Answer> a = answerService.getAnswersForQuestion(q);
             Collections.shuffle(a);

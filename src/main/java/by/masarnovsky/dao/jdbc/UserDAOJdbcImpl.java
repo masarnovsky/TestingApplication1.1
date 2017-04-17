@@ -3,7 +3,6 @@ package by.masarnovsky.dao.jdbc;
 import by.masarnovsky.dao.UserDAO;
 import by.masarnovsky.dao.rowmapper.UserRowMapper;
 import by.masarnovsky.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,7 +17,7 @@ public class UserDAOJdbcImpl implements UserDAO {
     private final String GET_USER_BY_LOGIN = "select * from users where login=?";
     private final String GET_USER_BY_ID = "select * from users where id=?";
 
-    @Autowired
+    //@Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -44,7 +43,6 @@ public class UserDAOJdbcImpl implements UserDAO {
     }
 
     public void removeUser(int id) {
-
     }
 
 

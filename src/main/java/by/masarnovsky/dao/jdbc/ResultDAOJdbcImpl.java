@@ -15,6 +15,7 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     private JdbcTemplate jdbcTemplate;
 
     private final String GET_USER_RESULT = "select * from results where userId=?";
+    private final String GET_USER_RESULT_BY_MODULE = "select * from results where userId=? and module=?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -31,5 +32,10 @@ public class ResultDAOJdbcImpl implements ResultDAO {
 
     public List<Result> getUserResult(int id) {
         return jdbcTemplate.query(GET_USER_RESULT, new Object[]{id}, new ResultRowMapper());
+    }
+
+    @Override
+    public List<Result> getUserResultByModule(int idUser, int idModule) {
+        return jdbcTemplate.query(GET_USER_RESULT_BY_MODULE, new Object[]{idUser, idModule}, new ResultRowMapper());
     }
 }

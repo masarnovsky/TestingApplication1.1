@@ -6,19 +6,19 @@ public class Result {
     private int id;
     private int userId;
     private int module;
-    private int result;
+    private String result;
     private Date date;
 
     public Result() {
     }
 
-    public Result(int userId, int module, int result) {
+    public Result(int userId, int module, String result) {
         this.userId = userId;
         this.module = module;
         this.result = result;
     }
 
-    public Result(int id, int userId, int module, int result, Date date) {
+    public Result(int id, int userId, int module, String result, Date date) {
         this.id = id;
         this.userId = userId;
         this.module = module;
@@ -62,11 +62,11 @@ public class Result {
         this.module = module;
     }
 
-    public int getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(int result) {
+    public void setResult(String result) {
         this.result = result;
     }
 

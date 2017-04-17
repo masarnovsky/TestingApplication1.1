@@ -43,7 +43,7 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="userService" class="by.masarnovsky.service.UserServiceImpl">
+    <bean id="userService" class="by.masarnovsky.service.impl.UserServiceImpl">
         <property name="userDAO" ref="userDAO"/>
     </bean>
 
@@ -51,7 +51,7 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="questionService" class="by.masarnovsky.service.QuestionServiceImpl">
+    <bean id="questionService" class="by.masarnovsky.service.impl.QuestionServiceImpl">
         <property name="questionDAO" ref="questionDAO"/>
     </bean>
 
@@ -59,7 +59,7 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="answerService" class="by.masarnovsky.service.AnswerServiceImpl">
+    <bean id="answerService" class="by.masarnovsky.service.impl.AnswerServiceImpl">
         <property name="answerDAO" ref="answerDAO"/>
     </bean>
 
@@ -67,8 +67,16 @@
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <bean id="moduleService" class="by.masarnovsky.service.ModuleServiceImpl">
+    <bean id="moduleService" class="by.masarnovsky.service.impl.ModuleServiceImpl">
         <property name="moduleDAO" ref="moduleDAO"/>
+    </bean>
+
+    <bean id="resultDAO" class="by.masarnovsky.dao.jdbc.ResultDAOJdbcImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="resultService" class="by.masarnovsky.service.impl.ResultServiceImpl">
+        <property name="resultDAO" ref="resultDAO"/>
     </bean>
 
 

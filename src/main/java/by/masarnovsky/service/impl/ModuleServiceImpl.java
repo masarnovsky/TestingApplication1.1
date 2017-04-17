@@ -1,7 +1,8 @@
-package by.masarnovsky.service;
+package by.masarnovsky.service.impl;
 
 import by.masarnovsky.dao.ModuleDAO;
 import by.masarnovsky.model.Module;
+import by.masarnovsky.service.ModuleService;
 
 import java.util.List;
 
