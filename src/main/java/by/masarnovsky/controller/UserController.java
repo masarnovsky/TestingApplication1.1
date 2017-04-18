@@ -1,7 +1,6 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.model.Module;
-import by.masarnovsky.model.Result;
 import by.masarnovsky.model.User;
 import by.masarnovsky.service.ModuleService;
 import by.masarnovsky.service.ResultService;
@@ -91,17 +90,14 @@ public class UserController {
         List<String> resultsForModule;
         String moduleStatus = "not_started";
         for (Module m: modules){
-            System.out.println(user.getId());
-            System.out.println(m.getId());
             resultsForModule = resultService.getUserStringResultByModule(user.getId(), m.getId());
-            System.out.println(resultsForModule);
-            System.out.println("contsins passed:" + resultsForModule.contains("passed"));
             if (resultsForModule != null && resultsForModule.contains("passed")){
                 moduleStatus = "passed";
             } else if (resultsForModule != null && resultsForModule.contains("failed")){
                 moduleStatus = "failed";
             }
             resultStatus.put(m.getId(), moduleStatus);
+            moduleStatus = "not_started";
         }
         System.out.println(resultStatus);
         request.getSession().setAttribute("resultStatus", resultStatus);
