@@ -21,12 +21,12 @@ public class ResultServiceImpl implements ResultService{
 
     @Override
     public List<Result> getUserResult(User user) {
-        return null;
+        return getUserResult(user.getId());
     }
 
     @Override
     public List<Result> getUserResult(int id) {
-        return null;
+        return resultDAO.getUserResult(id);
     }
 
     @Override

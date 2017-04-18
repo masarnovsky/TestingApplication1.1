@@ -1,6 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.model.Module;
+import by.masarnovsky.model.Result;
 import by.masarnovsky.model.User;
 import by.masarnovsky.service.ModuleService;
 import by.masarnovsky.service.ResultService;
@@ -73,8 +74,9 @@ public class UserController {
     }
 
     @RequestMapping("/cabinet")
-    public String cabinet(HttpServletRequest request){
+    public String cabinet(HttpServletRequest request, Model ui){
         updateModulesResults(request);
+        updateResultHistory(request, ui);
         // get&set module status (from results)
         return "cabinet";
     }
@@ -99,8 +101,13 @@ public class UserController {
             resultStatus.put(m.getId(), moduleStatus);
             moduleStatus = "not_started";
         }
-        System.out.println(resultStatus);
         request.getSession().setAttribute("resultStatus", resultStatus);
+    }
+
+    private void updateResultHistory(HttpServletRequest request, Model ui){
+        User user = (User) request.getSession().getAttribute("user");
+        List<Result> resultHistory = resultService.getUserResult(user);
+        ui.addAttribute("resultHistory",resultHistory);
     }
 
     @RequestMapping("/logout")

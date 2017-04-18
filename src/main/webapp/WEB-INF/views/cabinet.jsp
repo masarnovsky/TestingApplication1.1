@@ -61,13 +61,24 @@
                 </div>
             </section>
             <section id="history" hidden>
-                //show more (history)
+                <h4 class="col s12 center-align">История прохождения тестов</h4>
+                    <c:forEach var="result" items="${resultHistory}">
+                        <div class="col s12 center-align padding-bottom-30px">
+                            <div class="col s12">Модуль: ${result.getModule()}</div>
+                            <div class="col s12">Результат: ${result.getResult()}</div>
+                            <div class="col s12">Дата: ${result.getDate()}</div>
+                        </div>
+                    </c:forEach>
             </section>
             <div class="col s12">
-                <button class="btn waves-effect waves-light indigo col s4 offset-s4">История прохождения</button>
+                <button class="btn waves-effect waves-light indigo col s4 offset-s4" onclick="getHistory()">История прохождения</button>
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    function getHistory() {
+        document.getElementById("history").removeAttribute("hidden");
+    }
+</script>
 <c:import url="footer.jsp"/>
