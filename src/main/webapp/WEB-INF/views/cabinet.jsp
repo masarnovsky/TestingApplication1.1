@@ -5,9 +5,26 @@
 <div class="container">
     <div class="row">
         <div class="col s3">
-            <h5 class="col s12 center-align">${user.getName()} ${user.getSurname()}</h5>
+            <h5 class="col s12 center-align">${user.getLogin()}</h5>
             <div class="col s12" style="height: 250px; width: 250px; border: 1px solid black">
-                // user info
+                <ul class="col s12">
+                    <li>
+                        <div class="col s6">Имя:</div>
+                        <div class="col s6">${user.getName()}</div>
+                    </li>
+                    <li>
+                        <div class="col s6">Фамилия:</div>
+                        <div class="col s6">${user.getSurname()}</div>
+                    </li>
+                    <li>
+                        <div class="col s6">email:</div>
+                        <div class="col s6">${user.getEmail()}</div>
+                    </li>
+                    <li>
+                        <div class="col s6">Дата регистрации:</div>
+                        <div class="col s6">${user.getRegDate()}</div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="col s9">

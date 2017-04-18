@@ -2,8 +2,11 @@ package by.masarnovsky.controller;
 
 import by.masarnovsky.model.Answer;
 import by.masarnovsky.model.Question;
+import by.masarnovsky.model.Result;
+import by.masarnovsky.model.User;
 import by.masarnovsky.service.AnswerService;
 import by.masarnovsky.service.QuestionService;
+import by.masarnovsky.service.ResultService;
 import by.masarnovsky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,9 @@ public class TestController {
 
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private ResultService resultService;
 
     private final int TRAINING_SIZE = 3;
     private final int TESTING_SIZE = 6;
@@ -65,6 +71,8 @@ public class TestController {
             answersMap.put(q.getId(), a);
         }
 
+        qCount = questions.size();
+
         request.getSession().setAttribute("answersMap", answersMap);
         request.getSession().setAttribute("questions", questions);
         request.getSession().setAttribute("qId", qId);
@@ -78,44 +86,47 @@ public class TestController {
 
     }
 
-    @RequestMapping(value = "/start/{type}", method = RequestMethod.GET)
-    String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
-        if (request.getSession().getAttribute("testType") != null){
-            ui.addAttribute("msg", "another test started!");
-            return "endTesting";
-        }
 
-        int qId = 0;
-        int qCount = 1;
-        int rightAnswers = 0;
-        String testType = null;
-        if ("training".equals(type)){
-            testType = "training";
-            qCount = TRAINING_SIZE;
-        } else if ("testing".equals(type)){
-            testType = "testing";
-            qCount = TESTING_SIZE;
-        }
-
-        List<Question> questions = questionService.getQuestionSet(qCount);
-        boolean[] questionsAnsw = new boolean[qCount];
-        Map<Integer, List<Answer>> answersMap = new HashMap<>();
-        for (Question q: questions){
-            List<Answer> a = answerService.getAnswersForQuestion(q);
-            Collections.shuffle(a);
-            answersMap.put(q.getId(), a);
-        }
-
-        request.getSession().setAttribute("answersMap", answersMap);
-        request.getSession().setAttribute("questions", questions);
-        request.getSession().setAttribute("qId", qId);
-        request.getSession().setAttribute("qCount", qCount);
-        request.getSession().setAttribute("rightAnswers", rightAnswers);
-        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
-        request.getSession().setAttribute("testType", testType);
-
-        return "test";
-    }
+//    old
+//    @RequestMapping(value = "/start/{type}", method = RequestMethod.GET)
+//    String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
+//        if (request.getSession().getAttribute("testType") != null){
+//            ui.addAttribute("msg", "another test started!");
+//            return "endTesting";
+//        }
+//
+//        int qId = 0;
+//        int qCount = 1;
+//        int rightAnswers = 0;
+//        String testType = null;
+//        if ("training".equals(type)){
+//            testType = "training";
+//            qCount = TRAINING_SIZE;
+//        } else if ("testing".equals(type)){
+//            testType = "testing";
+//            qCount = TESTING_SIZE;
+//        }
+//
+//        List<Question> questions = questionService.getQuestionSet(qCount);
+//        boolean[] questionsAnsw = new boolean[qCount];
+//        Map<Integer, List<Answer>> answersMap = new HashMap<>();
+//        for (Question q: questions){
+//            List<Answer> a = answerService.getAnswersForQuestion(q);
+//            Collections.shuffle(a);
+//            answersMap.put(q.getId(), a);
+//        }
+//
+//
+//        request.getSession().setAttribute("answersMap", answersMap);
+//        request.getSession().setAttribute("questions", questions);
+//        request.getSession().setAttribute("qId", qId);
+//        request.getSession().setAttribute("qCount", qCount);
+//        request.getSession().setAttribute("rightAnswers", rightAnswers);
+//        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
+//        request.getSession().setAttribute("testType", testType);
+//
+//        return "test";
+//    }
 
     @RequestMapping(value = "/getNextQuestion/{id}", method = RequestMethod.POST)
     String nextQuestion(@PathVariable(value = "id") int id, HttpServletRequest request, Model ui){
@@ -148,6 +159,17 @@ public class TestController {
         request.getSession().setAttribute("qCount", qCount);
         request.getSession().setAttribute("rightAnswers", rightAnswers);
         if (qId >= qCount){
+            String result = "failed";
+            if (rightAnswers > qCount/2){
+                result = "passed";
+            }
+            User user = (User) request.getSession().getAttribute("user");
+            resultService.insertResult(new Result(
+                    user.getId(),
+                    (int) request.getSession().getAttribute("module"),
+                    result
+            ));
+            request.getSession().setAttribute("modules", null);
             page = showEnd(request);
         }
 

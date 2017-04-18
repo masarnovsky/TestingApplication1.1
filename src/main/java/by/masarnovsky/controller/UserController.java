@@ -88,10 +88,14 @@ public class UserController {
             request.getSession().setAttribute("modules", modules);
         }
         Map<Integer, String> resultStatus = new HashMap<>();
-        List<Result> resultsForModule;
+        List<String> resultsForModule;
         String moduleStatus = "not_started";
         for (Module m: modules){
-            resultsForModule = resultService.getUserResultByModule(user.getId(), m.getId());
+            System.out.println(user.getId());
+            System.out.println(m.getId());
+            resultsForModule = resultService.getUserStringResultByModule(user.getId(), m.getId());
+            System.out.println(resultsForModule);
+            System.out.println("contsins passed:" + resultsForModule.contains("passed"));
             if (resultsForModule != null && resultsForModule.contains("passed")){
                 moduleStatus = "passed";
             } else if (resultsForModule != null && resultsForModule.contains("failed")){
@@ -99,6 +103,7 @@ public class UserController {
             }
             resultStatus.put(m.getId(), moduleStatus);
         }
+        System.out.println(resultStatus);
         request.getSession().setAttribute("resultStatus", resultStatus);
     }
 

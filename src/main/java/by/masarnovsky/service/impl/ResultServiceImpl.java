@@ -30,7 +30,22 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-    public List<Result> getUserResultByModule(int idUser, int id) {
-        return null;
+    public List<Result> getUserResultByModule(int idUser, int idModule) {
+        return resultDAO.getUserResultByModule(idUser, idModule);
+    }
+
+    @Override
+    public List<String> getUserStringResultByModule(int idUser, int idModule) {
+        return resultDAO.getUserStringResultByModule(idUser, idModule);
+    }
+
+    @Override
+    public void insertResult(Result result) {
+        resultDAO.insertResult(result);
+    }
+
+    @Override
+    public void insertResult(int userId, int moduleId, String result) {
+        resultDAO.insertResult(userId, moduleId, result);
     }
 }
