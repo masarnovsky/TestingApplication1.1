@@ -60,18 +60,44 @@
                     //output
                 </div>
             </section>
-            <section id="history" hidden>
-                <h4 class="col s12 center-align">История прохождения тестов</h4>
-                    <c:forEach var="result" items="${resultHistory}">
-                        <div class="col s12 center-align padding-bottom-30px">
-                            <div class="col s12">Модуль: ${result.getModule()}</div>
-                            <div class="col s12">Результат: ${result.getResult()}</div>
-                            <div class="col s12">Дата: ${result.getDate()}</div>
-                        </div>
-                    </c:forEach>
+            <section id="history" hidden class="row">
+                <h5 class="col s12 center-align">История прохождения тестов</h5>
+                    <table class="col s12 striped centered padding-bottom-30px">
+                        <thead><tr>
+                            <th>Модуль</th>
+                            <th>Результат</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                        </tr></thead>
+                        <tbody>
+                        <c:forEach var="result" items="${resultHistory}">
+                            <tr>
+                                <td>${result.getModule()}</td>
+
+                                <c:set var="res" value="${result.getResult()}"/>
+
+                                <c:if test="${res eq 'not_started'}">
+                                    <c:set var="res" value="Не начат"/>
+                                </c:if>
+                                <c:if test="${res eq 'passed'}">
+                                    <c:set var="res" value="Сдан"/>
+                                </c:if>
+                                <c:if test="${res eq 'failed'}">
+                                    <c:set var="res" value="Провален"/>
+                                </c:if>
+
+                                <td>${res}</td>
+                                <td>${result.getDate()}</td>
+                                <td>${result.getTime()}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
             </section>
-            <div class="col s12">
-                <button class="btn waves-effect waves-light indigo col s4 offset-s4" onclick="getHistory()">История прохождения</button>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light indigo col s4 offset-s4" onclick="getHistory()">История прохождения</button>
+                </div>
             </div>
         </div>
     </div>

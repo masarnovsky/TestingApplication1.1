@@ -1,5 +1,6 @@
 package by.masarnovsky.model;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class Result {
@@ -8,6 +9,7 @@ public class Result {
     private int module;
     private String result;
     private Date date;
+    private Time time;
 
     public Result() {
     }
@@ -18,12 +20,13 @@ public class Result {
         this.result = result;
     }
 
-    public Result(int id, int userId, int module, String result, Date date) {
+    public Result(int id, int userId, int module, String result, Date date, Time time) {
         this.id = id;
         this.userId = userId;
         this.module = module;
         this.result = result;
         this.date = date;
+        this.time = time;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class Result {
         sb.append(", module=").append(module);
         sb.append(", result=").append(result);
         sb.append(", date=").append(date);
+        sb.append(", time=").append(time);
         sb.append('}');
         return sb.toString();
     }
@@ -74,7 +78,16 @@ public class Result {
         return date;
     }
 
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
+
 }
