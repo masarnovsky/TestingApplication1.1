@@ -32,11 +32,16 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserById(id);
     }
 
-    public List<User> getUserByLogin(String login) {
+    public User getUserByLogin(String login) {
         return userDAO.getUserByLogin(login);
     }
 
     public void removeUser(int id) {
         userDAO.removeUser(id);
+    }
+
+    @Override
+    public boolean isAdmin(User user) {
+        return userDAO.isAdmin(user);
     }
 }

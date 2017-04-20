@@ -43,7 +43,7 @@ public class UserController {
         if (br.hasErrors()){
             return "signin";
         }
-        if (userService.getUserByLogin(user.getLogin()).isEmpty()){
+        if (userService.getUserByLogin(user.getLogin()) == null){
             userService.addUser(user);
             ui.addAttribute("message", "Пользователь зарегистрирован. Пожалуйста, авторизуйтесь.");
         } else {
@@ -61,16 +61,20 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginUser(User user, Model ui, HttpServletRequest request){
-        List<User> currentUser = userService.getUserByLogin(user.getLogin());
-        if (!currentUser.isEmpty() && currentUser.get(0).getPassword().equals(user.getPassword())){
-            request.getSession().setAttribute("user", currentUser.get(0));
+        User currentUser = userService.getUserByLogin(user.getLogin());
+        String page = "redirect:/home";
+        if (currentUser != null && currentUser.getPassword().equals(user.getPassword())){
+            if (userService.isAdmin(currentUser)){
+                page = "redirect:/admin/adminhome";
+            }
+            request.getSession().setAttribute("user", currentUser);
             request.getSession().setAttribute("isLogged", true);
         }
         else {
             ui.addAttribute("message", "Неверные данные");
-            return "login";
+            page = "login";
         }
-        return "redirect:/home";
+        return page;
     }
 
     @RequestMapping("/cabinet")

@@ -38,48 +38,16 @@ public class UserDAOJdbcImpl implements UserDAO {
         return null;
     }
 
-    public List<User> getUserByLogin(String login) {
-        return jdbcTemplate.query(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
+    public User getUserByLogin(String login) {
+        return jdbcTemplate.queryForObject(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
     }
 
     public void removeUser(int id) {
     }
 
-
-//    private SessionFactory sessionFactory;
-//
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-//
-//    public void addUser(User user) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.persist(user);
-//    }
-//
-//    public void updateUser(User user) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.update(user);
-//    }
-//
-//    public List<User> listUsers() {
-//        Session session = sessionFactory.getCurrentSession();
-//        List<User> userList = session.createQuery("from users").list();
-//        return userList;
-//    }
-//
-//    public User getUserById(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        User u = (User) session.load(User.class, new Integer(id));
-//        return u;
-//    }
-//
-//    public void removeUser(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        User u = (User) session.load(User.class, new Integer(id));
-//        if (u != null){
-//            session.delete(u);
-//        }
-//    }
+    @Override
+    public boolean isAdmin(User user) {
+        return user.getRole().equals("admin");
+    }
 }
 

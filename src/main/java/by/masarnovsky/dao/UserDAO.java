@@ -9,6 +9,7 @@ public interface UserDAO {
     void updateUser(User user);
     List<User> listUsers();
     User getUserById(int id);
-    List<User> getUserByLogin(String login);
+    User getUserByLogin(String login);
     void removeUser(int id);
+    boolean isAdmin(User user);
 }
