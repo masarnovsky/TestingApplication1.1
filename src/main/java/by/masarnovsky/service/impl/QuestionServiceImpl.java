@@ -2,6 +2,7 @@ package by.masarnovsky.service.impl;
 
 import by.masarnovsky.dao.QuestionDAO;
 import by.masarnovsky.model.Question;
+import by.masarnovsky.model.QuestionType;
 import by.masarnovsky.service.QuestionService;
 
 import java.util.List;
@@ -24,5 +25,15 @@ public class QuestionServiceImpl implements QuestionService {
 
     public Question getQuestionById(int id) {
         return questionDAO.getQuestionById(id);
+    }
+
+    @Override
+    public void addQuestion(Question q) {
+
+    }
+
+    @Override
+    public List<QuestionType> getTypes() {
+        return questionDAO.getTypes();
     }
 }

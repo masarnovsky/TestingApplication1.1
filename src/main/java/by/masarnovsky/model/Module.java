@@ -27,4 +27,13 @@ public class Module {
     public void setTheme(String theme) {
         this.theme = theme;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Module{");
+        sb.append("id=").append(id);
+        sb.append(", theme='").append(theme).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

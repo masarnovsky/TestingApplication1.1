@@ -2,7 +2,9 @@ package by.masarnovsky.dao.jdbc;
 
 import by.masarnovsky.dao.QuestionDAO;
 import by.masarnovsky.dao.rowmapper.QuestionRowMapper;
+import by.masarnovsky.dao.rowmapper.QuestionTypeRowMapper;
 import by.masarnovsky.model.Question;
+import by.masarnovsky.model.QuestionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,7 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     private final String GET_RANDOM_QUESTION_SET = "select * from questions order by rand() limit ?";
     private final String GET_QUESTIONS_FOR_MODULE = "select * from questions where module = ? order by rand() limit ?";
+    private final String GET_QUESTION_TYPES = "select * from questionTypes";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -32,5 +35,15 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     public Question getQuestionById(int id) {
         return null;
+    }
+
+    @Override
+    public void addQuestion(Question q) {
+        //
+    }
+
+    @Override
+    public List<QuestionType> getTypes() {
+        return jdbcTemplate.query(GET_QUESTION_TYPES, new QuestionTypeRowMapper());
     }
 }
