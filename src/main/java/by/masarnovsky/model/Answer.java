@@ -16,6 +16,12 @@ public class Answer {
         this.isRight = isRight;
     }
 
+    public Answer(int questionId, String text, boolean isRight) {
+        this.questionId = questionId;
+        this.text = text;
+        this.isRight = isRight;
+    }
+
     public int getId() {
         return id;
     }

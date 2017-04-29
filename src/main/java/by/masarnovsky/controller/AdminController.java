@@ -3,6 +3,7 @@ package by.masarnovsky.controller;
 import by.masarnovsky.model.Module;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.QuestionType;
+import by.masarnovsky.service.AnswerService;
 import by.masarnovsky.service.ModuleService;
 import by.masarnovsky.service.QuestionService;
 import by.masarnovsky.service.UserService;
@@ -32,6 +33,9 @@ public class AdminController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    AnswerService answerService;
 
     @RequestMapping(value = "/adminhome")
     String adminHome(){
@@ -74,37 +78,27 @@ public class AdminController {
 
         int questionId = questionService.addQuestion(q);
 
-
-        switch (qType){
-            case 1: insertFirstTypeAnswer(request, questionId);
-                break;
-            case 2: insertSecondTypeAnswer(request, questionId);
-                break;
-            case 3: insertThirdTypeAnswer(request, questionId);
-                break;
-            case 4: insertFourthTypeAnswer(request, questionId);
-                break;
-        }
+        insertAnswer(request, questionId, qType);
 
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
 
         return "forward:createQuestion";
     }
 
-    private void insertFourthTypeAnswer(HttpServletRequest request, int questionId) {
-        //
-    }
+    private void insertAnswer(HttpServletRequest request, int questionId, int qType) {
 
-    private void insertThirdTypeAnswer(HttpServletRequest request, int questionId) {
-        //
-    }
+        boolean isRight = false;
 
-    private void insertSecondTypeAnswer(HttpServletRequest request, int questionId) {
-        //
-    }
+        int end = 5;
+        int i = 1;
 
-    private void insertFirstTypeAnswer(HttpServletRequest request, int questionId) {
-        //
+        if (qType == 2)
+            end = 0;
+
+        while (i < end){
+            //
+            i++;
+        }
     }
 
     private void saveImage(String filename, MultipartFile image) {

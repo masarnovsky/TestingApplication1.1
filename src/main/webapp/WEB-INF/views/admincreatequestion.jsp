@@ -49,10 +49,6 @@
                     <div class="col s12">
                         <div class="input-field col s12">
                             <label>Правильный ответ:</label>
-                            <input name="rightAnswer" type="text" />
-                        </div>
-                        <div class="input-field col s12">
-                            <label>Ответ:</label>
                             <input name="answer1" type="text" />
                         </div>
                         <div class="input-field col s12">
@@ -63,6 +59,10 @@
                             <label>Ответ:</label>
                             <input name="answer3" type="text" />
                         </div>
+                        <div class="input-field col s12">
+                            <label>Ответ:</label>
+                            <input name="answer4" type="text" />
+                        </div>
                     </div>
                 </div>
 
@@ -71,11 +71,11 @@
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <label>Правильный ответ:</label>
-                                <input name="rightAnswer" type="text" />
+                                <input name="answer1" type="text" />
                             </div>
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
-                                <input name="answer1" type="text" />
+                                <input name="answer2" type="text" />
                             </div>
                         </div>
                     </div>
@@ -97,10 +97,6 @@
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <label>Правильный ответ:</label>
-                                <input name="rightAnswer" type="text" />
-                            </div>
-                            <div class="input-field col s12">
-                                <label>Ответ:</label>
                                 <input name="answer1" type="text" />
                             </div>
                             <div class="input-field col s12">
@@ -110,6 +106,10 @@
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
                                 <input name="answer3" type="text" />
+                            </div>
+                            <div class="input-field col s12">
+                                <label>Ответ:</label>
+                                <input name="answer4" type="text" />
                             </div>
                         </div>
                     </div>

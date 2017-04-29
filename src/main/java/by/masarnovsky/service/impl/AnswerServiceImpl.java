@@ -21,4 +21,9 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> getAnswersForQuestion(int id) {
         return answerDAO.getAnswersForQuestion(id);
     }
+
+    @Override
+    public void insertAnswer(Answer a) {
+        answerDAO.insertAnswer(a);
+    }
 }
