@@ -1,6 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.model.Module;
+import by.masarnovsky.model.Question;
 import by.masarnovsky.model.QuestionType;
 import by.masarnovsky.service.ModuleService;
 import by.masarnovsky.service.QuestionService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -53,17 +55,56 @@ public class AdminController {
 
     @RequestMapping(value = "/insertQuestionIntoDatabase", method = RequestMethod.POST)
     String insertQuestionIntoDatabase(Model ui,
-                                      @RequestParam(value = "image", required = false)MultipartFile image){
+                                      @RequestParam(value = "image", required = false)MultipartFile image,
+                                      HttpServletRequest request){
+
+        String imgName = null;
+        int qType = Integer.valueOf(request.getParameter("qType"));
+        int module = Integer.valueOf(request.getParameter("module"));
+        String question = request.getParameter("questionInput");
 
         if (image == null)
             ui.addAttribute("uploadImage", null);
-        else
-            saveImage("pic", image);
+        else{
+            imgName = request.getParameter("image-name");
+            saveImage(imgName, image);
+        }
 
-        //code
+        Question q = new Question(module, question, imgName, qType);
+
+        int questionId = questionService.addQuestion(q);
+
+
+        switch (qType){
+            case 1: insertFirstTypeAnswer(request, questionId);
+                break;
+            case 2: insertSecondTypeAnswer(request, questionId);
+                break;
+            case 3: insertThirdTypeAnswer(request, questionId);
+                break;
+            case 4: insertFourthTypeAnswer(request, questionId);
+                break;
+        }
+
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
 
         return "forward:createQuestion";
+    }
+
+    private void insertFourthTypeAnswer(HttpServletRequest request, int questionId) {
+        //
+    }
+
+    private void insertThirdTypeAnswer(HttpServletRequest request, int questionId) {
+        //
+    }
+
+    private void insertSecondTypeAnswer(HttpServletRequest request, int questionId) {
+        //
+    }
+
+    private void insertFirstTypeAnswer(HttpServletRequest request, int questionId) {
+        //
     }
 
     private void saveImage(String filename, MultipartFile image) {

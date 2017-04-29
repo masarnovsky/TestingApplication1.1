@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col s6">
                         <div class="input-field col s12">
-                            <select>
+                            <select name="module">
                                 <option value="" disabled selected>Выберите модуль</option>
                                 <c:forEach var="module" items="${modulesList}">
                                     <option value="${module.getId()}">${module.getTheme()}</option>
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col s6">
                         <div class="input-field col s12">
-                            <select onchange="qTypeChanged(this.value)">
+                            <select name="qType" onchange="qTypeChanged(this.value)">
                                 <option value="" disabled selected>Выберите тип вопроса</option>
                                 <c:forEach var="questionType" items="${qtList}">
                                     <option value="${questionType.getId()}">${questionType.getDescr()}</option>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <input id="questionInput" class="input-field col s12"/>
+                        <input id="questionInput" name="questionInput" class="input-field col s12"/>
                         <label for="questionInput">Текст вопроса</label>
                     </div>
                 </div>
@@ -49,19 +49,19 @@
                     <div class="col s12">
                         <div class="input-field col s12">
                             <label>Правильный ответ:</label>
-                            <input type="text" />
+                            <input name="rightAnswer" type="text" />
                         </div>
                         <div class="input-field col s12">
                             <label>Ответ:</label>
-                            <input type="text" />
+                            <input name="answer1" type="text" />
                         </div>
                         <div class="input-field col s12">
                             <label>Ответ:</label>
-                            <input type="text" />
+                            <input name="answer2" type="text" />
                         </div>
                         <div class="input-field col s12">
                             <label>Ответ:</label>
-                            <input type="text" />
+                            <input name="answer3" type="text" />
                         </div>
                     </div>
                 </div>
@@ -71,11 +71,11 @@
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <label>Правильный ответ:</label>
-                                <input type="text" />
+                                <input name="rightAnswer" type="text" />
                             </div>
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
-                                <input type="text" />
+                                <input name="answer1" type="text" />
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 <input type="file" name="image" accept="image/*">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
+                                <input name="image-name" class="file-path validate" type="text">
                             </div>
                         </div>
                     </div>
@@ -97,19 +97,19 @@
                         <div class="col s12">
                             <div class="input-field col s12">
                                 <label>Правильный ответ:</label>
-                                <input type="text" />
+                                <input name="rightAnswer" type="text" />
                             </div>
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
-                                <input type="text" />
+                                <input name="answer1" type="text" />
                             </div>
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
-                                <input type="text" />
+                                <input name="answer2" type="text" />
                             </div>
                             <div class="input-field col s12">
                                 <label>Ответ:</label>
-                                <input type="text" />
+                                <input name="answer3" type="text" />
                             </div>
                         </div>
                     </div>

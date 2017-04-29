@@ -1,7 +1,7 @@
 package by.masarnovsky.model;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Result {
     private int id;

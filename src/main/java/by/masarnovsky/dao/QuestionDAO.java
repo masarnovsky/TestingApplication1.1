@@ -9,6 +9,6 @@ public interface QuestionDAO {
     List<Question> getQuestionSet(int count);
     List<Question> getQuestionsForModule(int moduleId, int count);
     Question getQuestionById(int id);
-    void addQuestion(Question q);
+    int addQuestion(Question q);
     List<QuestionType> getTypes();
 }

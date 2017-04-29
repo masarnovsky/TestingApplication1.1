@@ -28,8 +28,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void addQuestion(Question q) {
-
+    public int addQuestion(Question q) {
+        return questionDAO.addQuestion(q);
     }
 
     @Override

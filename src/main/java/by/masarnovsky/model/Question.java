@@ -17,6 +17,13 @@ public class Question {
 
     public Question(){}
 
+    public Question(int module, String question, String img, int type) {
+        this.module = module;
+        this.question = question;
+        this.img = img;
+        this.type = type;
+    }
+
     public int getId() {
         return id;
     }
@@ -67,5 +74,10 @@ public class Question {
         sb.append(", type=").append(type);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
