@@ -30,27 +30,30 @@
         <div class="col s9">
             <h5 class="col s12 center-align">Статистика</h5>
             <section class="col s12">
-                <ul class="col s12">
+                <div class="col s12 collection">
                     <c:forEach var="module" items="${modules}">
                         <c:set var="mStatus" value="${resultStatus[module.getId()]}"/>
 
                         <c:if test="${mStatus eq 'not_started'}">
                             <c:set var="mStatusRus" value="Не начат"/>
+                            <c:set var="cl" value=""/>
                         </c:if>
                         <c:if test="${mStatus eq 'passed'}">
                             <c:set var="mStatusRus" value="Сдан"/>
+                            <c:set var="cl" value="blue"/>
                         </c:if>
                         <c:if test="${mStatus eq 'failed'}">
                             <c:set var="mStatusRus" value="Провален"/>
+                            <c:set var="cl" value="red"/>
                         </c:if>
 
-                        <li class="col s12">
-                            <div class="col s10">Модуль ${module.getId()} ${module.getTheme()}</div>
-                            <div class="col s2 ${mStatus}">${mStatusRus}</div>
+                        <div class="collection-item">
+                            Модуль ${module.getId()} ${module.getTheme()}
+                            <span class="new badge ${cl}" data-badge-caption="${mStatusRus}"></span>
                             <%--<div class="col s2">st : ${status[module.getId()]}</div>--%>
-                        </li>
+                        </div>
                     </c:forEach>
-                </ul>
+                </div>
             </section>
             <section class="col s12">
                 <div class="col s5">

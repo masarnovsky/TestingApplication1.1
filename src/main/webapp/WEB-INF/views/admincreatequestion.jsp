@@ -48,9 +48,6 @@
                 <div id="module" class="row">
 
                 </div>
-
-
-
                 <div class="row">
                     <div class="col s12">
                         <input type="submit" class="btn col s6 offset-s3" value="Создать">
