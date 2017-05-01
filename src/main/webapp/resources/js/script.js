@@ -10,22 +10,49 @@ $(document).ready(function() {
 
 var activeType;
 
+var firstType = '<div id="firstType">' +
+    '<div class="col s12">' +
+    '<div class="input-field col s12">' +
+    '<label>Правильный ответ:</label>' +
+    '<input name="answer1" type="text" />'+
+    '</div><div class="input-field col s12">'+
+    '<label>Ответ:</label><input name="answer2" type="text" /></div>'+
+    '<div class="input-field col s12"><label>Ответ:</label>'+
+    '<input name="answer3" type="text" /></div><div class="input-field col s12">' +
+    '<label>Ответ:</label><input name="answer4" type="text" /></div></div></div>';
+
+var secondType = '<div id="secondType"><div class="col s12"><div class="col s12"><div class="input-field col s12">'  +
+    '<label>Правильный ответ:</label><input name="answer1" type="text" /></div><div class="input-field col s12">' +
+'<label>Ответ:</label><input name="answer2" type="text" /></div></div></div></div>';
+
+var thirdType = '<div id="thirdType"><div class="col s12">'+
+    '<div class="col s12 file-field input-field"><div class="btn"><span>Загрузить картинку</span>'+
+    '<input type="file" name="image" accept="image/*"></div><div class="file-path-wrapper">'+
+    '<input name="image-name" class="file-path validate" type="text"></div></div></div><div class="col s12">'+
+    '<div class="col s12"><div class="input-field col s12"><label>Правильный ответ:</label>'+
+    '<input name="answer1" type="text" /></div><div class="input-field col s12"><label>Ответ:</label>'+
+    '<input name="answer2" type="text" /></div><div class="input-field col s12">'+
+    '<label>Ответ:</label><input name="answer3" type="text" /></div><div class="input-field col s12">'+
+    '<label>Ответ:</label><input name="answer4" type="text" /></div></div></div></div>';
+
+var fourthType = '<div id="fourthType"><div class="col s12"><div class="col s12 file-field input-field">' +
+    '<div class="btn"><span>Загрузить картинку</span><input type="file" name="image" accept="image/*">' +
+    '</div><div class="file-path-wrapper"><input class="file-path validate" type="text">' +
+    '</div></div></div></div>';
+
 function qTypeChanged(v){
     // 4 - 1, 2 - 1, 4+pic - 1, pic + map
-    var textType;
-    if (v == 1)
-        textType = '#firstType';
-    else if (v == 2)
-        textType = '#secondType';
-    else if (v == 3)
-        textType = '#thirdType';
-    else if (v == 4)
-        textType = '#fourthType';
 
-    if (activeType != null) {
-        $(activeType).hide();
+    if (v == 1){
+       document.getElementById('module').innerHTML = firstType;
     }
-    $(textType).show();
+    if (v == 2){
+       document.getElementById('module').innerHTML = secondType;
+    }
+    if (v == 3){
+        document.getElementById('module').innerHTML = thirdType;
+    } else if (v == 4){
+        document.getElementById('module').innerHTML = fourthType;
+    }
 
-    activeType = textType;
 }

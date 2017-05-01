@@ -45,89 +45,11 @@
                     </div>
                 </div>
 
-                <%--<div id="firstType" class="row" hidden>--%>
-                    <%--<div class="col s12">--%>
-                        <%--<div class="input-field col s12">--%>
-                            <%--<label>Правильный ответ:</label>--%>
-                            <%--<input name="answer1" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div class="input-field col s12">--%>
-                            <%--<label>Ответ:</label>--%>
-                            <%--<input name="answer2" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div class="input-field col s12">--%>
-                            <%--<label>Ответ:</label>--%>
-                            <%--<input name="answer3" type="text" />--%>
-                        <%--</div>--%>
-                        <%--<div class="input-field col s12">--%>
-                            <%--<label>Ответ:</label>--%>
-                            <%--<input name="answer4" type="text" />--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                <div id="module" class="row">
 
-                <div id="secondType" class="row" hidden>
-                    <div class="col s12">
-                        <div class="col s12">
-                            <div class="input-field col s12">
-                                <label>Правильный ответ:</label>
-                                <input name="answer1" type="text" />
-                            </div>
-                            <div class="input-field col s12">
-                                <label>Ответ:</label>
-                                <input name="answer2" type="text" />
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <%--<div id="thirdType" class="row" hidden>--%>
-                    <%--<div class="col s12">--%>
-                        <%--<div class="col s12 file-field input-field">--%>
-                            <%--<div class="btn">--%>
-                                <%--<span>Загрузить картинку</span>--%>
-                                <%--<input type="file" name="image" accept="image/*">--%>
-                            <%--</div>--%>
-                            <%--<div class="file-path-wrapper">--%>
-                                <%--<input name="image-name" class="file-path validate" type="text">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="col s12">--%>
-                        <%--<div class="col s12">--%>
-                            <%--<div class="input-field col s12">--%>
-                                <%--<label>Правильный ответ:</label>--%>
-                                <%--<input name="answer1" type="text" />--%>
-                            <%--</div>--%>
-                            <%--<div class="input-field col s12">--%>
-                                <%--<label>Ответ:</label>--%>
-                                <%--<input name="answer2" type="text" />--%>
-                            <%--</div>--%>
-                            <%--<div class="input-field col s12">--%>
-                                <%--<label>Ответ:</label>--%>
-                                <%--<input name="answer3" type="text" />--%>
-                            <%--</div>--%>
-                            <%--<div class="input-field col s12">--%>
-                                <%--<label>Ответ:</label>--%>
-                                <%--<input name="answer4" type="text" />--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
 
-                <%--<div id="fourthType" class="row" hidden>--%>
-                    <%--<div class="col s12">--%>
-                        <%--<div class="col s12 file-field input-field">--%>
-                            <%--<div class="btn">--%>
-                                <%--<span>Загрузить картинку</span>--%>
-                                <%--<input type="file" name="image" accept="image/*">--%>
-                            <%--</div>--%>
-                            <%--<div class="file-path-wrapper">--%>
-                                <%--<input class="file-path validate" type="text">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
 
                 <div class="row">
                     <div class="col s12">

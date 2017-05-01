@@ -64,6 +64,7 @@ public class AdminController {
                                       HttpServletRequest request){
 
         String imgName = null;
+
         int qType = Integer.valueOf(request.getParameter("qType"));
         int module = Integer.valueOf(request.getParameter("module"));
         String question = request.getParameter("questionInput");
@@ -76,9 +77,7 @@ public class AdminController {
         }
 
         Question q = new Question(module, question, imgName, qType);
-        int questionId = 0;
-        //int questionId = questionService.addQuestion(q);
-        System.out.println("questId: "+questionId);
+        int questionId = questionService.addQuestion(q);
         insertAnswers(request, questionId, qType);
 
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
@@ -101,14 +100,10 @@ public class AdminController {
                 isRight = true;
             else
                 isRight = false;
-            System.out.println("param + i:" + request.getParameter("answer"+i));
-            System.out.println("param:" + request.getParameter("answer1"));
-            System.out.println(new Answer(
-                    questionId, request.getParameter("answer"+i), isRight));
 
-//            answerService.insertAnswer(new Answer(
-//                    questionId, request.getParameter("answer"+i), isRight
-//            ));
+            answerService.insertAnswer(new Answer(
+                    questionId, request.getParameter("answer"+i), isRight
+            ));
             i++;
         }
     }
