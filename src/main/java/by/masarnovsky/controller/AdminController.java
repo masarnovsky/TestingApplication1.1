@@ -1,5 +1,6 @@
 package by.masarnovsky.controller;
 
+import by.masarnovsky.model.Answer;
 import by.masarnovsky.model.Module;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.QuestionType;
@@ -75,17 +76,17 @@ public class AdminController {
         }
 
         Question q = new Question(module, question, imgName, qType);
-
-        int questionId = questionService.addQuestion(q);
-
-        insertAnswer(request, questionId, qType);
+        int questionId = 0;
+        //int questionId = questionService.addQuestion(q);
+        System.out.println("questId: "+questionId);
+        insertAnswers(request, questionId, qType);
 
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
 
         return "forward:createQuestion";
     }
 
-    private void insertAnswer(HttpServletRequest request, int questionId, int qType) {
+    private void insertAnswers(HttpServletRequest request, int questionId, int qType) {
 
         boolean isRight = false;
 
@@ -93,10 +94,21 @@ public class AdminController {
         int i = 1;
 
         if (qType == 2)
-            end = 0;
+            end = 3;
 
         while (i < end){
-            //
+            if (i == 1)
+                isRight = true;
+            else
+                isRight = false;
+            System.out.println("param + i:" + request.getParameter("answer"+i));
+            System.out.println("param:" + request.getParameter("answer1"));
+            System.out.println(new Answer(
+                    questionId, request.getParameter("answer"+i), isRight));
+
+//            answerService.insertAnswer(new Answer(
+//                    questionId, request.getParameter("answer"+i), isRight
+//            ));
             i++;
         }
     }
