@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalTime;
+import java.util.*;
 
 @Controller
 @RequestMapping("/test")
@@ -43,12 +41,26 @@ public class TestController {
 
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     String startTesting(@RequestParam(value = "module", required = true) int moduleId,
-                     @RequestParam(value = "type", required = true) String type,
-                     HttpServletRequest request, Model ui){
+                        @RequestParam(value = "type", required = true) String type,
+                        final HttpServletRequest request, Model ui){
         if (request.getSession().getAttribute("testType") != null){
             ui.addAttribute("msg", "another test started!");
             return "endTesting";
         }
+
+        LocalTime localTime = LocalTime.now();
+        System.out.println("test started at: " + localTime);
+        final Timer testTimer = new Timer();
+        testTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                LocalTime llocalTime = LocalTime.now();
+                System.out.println("test ended at: " + llocalTime);
+                // add logic
+                testTimer.cancel();
+                testTimer.purge();
+            }
+        }, 20000);
 
         int qId = 0;
         int qCount = 1;
@@ -70,9 +82,7 @@ public class TestController {
             Collections.shuffle(a);
             answersMap.put(q.getId(), a);
         }
-
         qCount = questions.size();
-
         request.getSession().setAttribute("answersMap", answersMap);
         request.getSession().setAttribute("questions", questions);
         request.getSession().setAttribute("qId", qId);
@@ -81,52 +91,8 @@ public class TestController {
         request.getSession().setAttribute("questionsAnsw", questionsAnsw);
         request.getSession().setAttribute("testType", testType);
         request.getSession().setAttribute("module", moduleId);
-
         return "test";
-
     }
-
-
-//    old
-//    @RequestMapping(value = "/start/{type}", method = RequestMethod.GET)
-//    String startTest(@PathVariable(value = "type") String type, HttpServletRequest request, Model ui){
-//        if (request.getSession().getAttribute("testType") != null){
-//            ui.addAttribute("msg", "another test started!");
-//            return "endTesting";
-//        }
-//
-//        int qId = 0;
-//        int qCount = 1;
-//        int rightAnswers = 0;
-//        String testType = null;
-//        if ("training".equals(type)){
-//            testType = "training";
-//            qCount = TRAINING_SIZE;
-//        } else if ("testing".equals(type)){
-//            testType = "testing";
-//            qCount = TESTING_SIZE;
-//        }
-//
-//        List<Question> questions = questionService.getQuestionSet(qCount);
-//        boolean[] questionsAnsw = new boolean[qCount];
-//        Map<Integer, List<Answer>> answersMap = new HashMap<>();
-//        for (Question q: questions){
-//            List<Answer> a = answerService.getAnswersForQuestion(q);
-//            Collections.shuffle(a);
-//            answersMap.put(q.getId(), a);
-//        }
-//
-//
-//        request.getSession().setAttribute("answersMap", answersMap);
-//        request.getSession().setAttribute("questions", questions);
-//        request.getSession().setAttribute("qId", qId);
-//        request.getSession().setAttribute("qCount", qCount);
-//        request.getSession().setAttribute("rightAnswers", rightAnswers);
-//        request.getSession().setAttribute("questionsAnsw", questionsAnsw);
-//        request.getSession().setAttribute("testType", testType);
-//
-//        return "test";
-//    }
 
     @RequestMapping(value = "/getNextQuestion/{id}", method = RequestMethod.POST)
     String nextQuestion(@PathVariable(value = "id") int id, HttpServletRequest request, Model ui){
@@ -181,8 +147,8 @@ public class TestController {
         request.getSession().setAttribute("avg", (Integer)request.getSession().getAttribute("qCount")/2);
         request.getSession().setAttribute("qCount", qCount);
         request.getSession().setAttribute("testType", null);
-
         return "endTesting";
     }
-
 }
+
+
