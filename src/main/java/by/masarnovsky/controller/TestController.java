@@ -9,6 +9,7 @@ import by.masarnovsky.service.QuestionService;
 import by.masarnovsky.service.ResultService;
 import by.masarnovsky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/test")
+@EnableScheduling
 public class TestController {
 
     @Autowired
@@ -50,6 +52,7 @@ public class TestController {
 
         LocalTime localTime = LocalTime.now();
         System.out.println("test started at: " + localTime);
+
         final Timer testTimer = new Timer();
         testTimer.schedule(new TimerTask() {
             @Override
@@ -150,5 +153,3 @@ public class TestController {
         return "endTesting";
     }
 }
-
-

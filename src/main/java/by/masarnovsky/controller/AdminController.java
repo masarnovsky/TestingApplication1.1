@@ -45,7 +45,6 @@ public class AdminController {
 
     @RequestMapping(value = "/statistic")
     String getStatistic(Model ui){
-        //
         return "adminstatistic";
     }
 
@@ -64,7 +63,6 @@ public class AdminController {
                                       HttpServletRequest request){
 
         String imgName = null;
-
         int qType = Integer.valueOf(request.getParameter("qType"));
         int module = Integer.valueOf(request.getParameter("module"));
         String question = request.getParameter("questionInput");
@@ -86,21 +84,16 @@ public class AdminController {
     }
 
     private void insertAnswers(HttpServletRequest request, int questionId, int qType) {
-
         boolean isRight = false;
-
         int end = 5;
         int i = 1;
-
         if (qType == 2)
             end = 3;
-
         while (i < end){
             if (i == 1)
                 isRight = true;
             else
                 isRight = false;
-
             answerService.insertAnswer(new Answer(
                     questionId, request.getParameter("answer"+i), isRight
             ));
@@ -109,12 +102,16 @@ public class AdminController {
     }
 
     private void saveImage(String filename, MultipartFile image) {
-        try {
-            String root = "C:/Apache/Tomcat9/webapps/TestingApplication1.1/src/main/webapp/resources/img/";
-            File file = new File(root + filename + image.toString() + ".jpg");
-            FileUtils.writeByteArrayToFile(file, image.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!image.isEmpty()){
+            try {
+                String root = "C:/Apache/Tomcat9/webapps/TestingApplication1.1/src/main/webapp/resources/img/";
+                File file = new File(root + filename + image.toString() + ".jpg");
+                FileUtils.writeByteArrayToFile(file, image.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //
         }
     }
 }
