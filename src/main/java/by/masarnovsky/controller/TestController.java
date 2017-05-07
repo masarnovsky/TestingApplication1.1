@@ -9,7 +9,9 @@ import by.masarnovsky.service.QuestionService;
 import by.masarnovsky.service.ResultService;
 import by.masarnovsky.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/test")
@@ -53,15 +59,26 @@ public class TestController {
         LocalTime localTime = LocalTime.now();
         System.out.println("test started at: " + localTime);
 
-        final Timer testTimer = new Timer();
-        testTimer.schedule(new TimerTask() {
+//        final Timer testTimer = new Timer();
+//        testTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                LocalTime llocalTime = LocalTime.now();
+//                System.out.println("test ended at: " + llocalTime);
+//                showEnd(request);
+//                System.out.println("test ended at(after): " + llocalTime);
+//                testTimer.cancel();
+//                testTimer.purge();
+//            }
+//        }, 20000);
+
+        TaskScheduler scheduler = new ConcurrentTaskScheduler();
+        scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
+            @PostConstruct
             public void run() {
                 LocalTime llocalTime = LocalTime.now();
                 System.out.println("test ended at: " + llocalTime);
-                // add logic
-                testTimer.cancel();
-                testTimer.purge();
             }
         }, 20000);
 
