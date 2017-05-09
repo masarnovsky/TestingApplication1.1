@@ -1,8 +1,8 @@
 package by.masarnovsky;
 
 public enum TestType {
-    TRAINING(0),
-    TESTING(1);
+    TRAINING(3),
+    TESTING(6);
 
     private int type;
 
@@ -10,7 +10,7 @@ public enum TestType {
         this.type = type;
     }
 
-    public int getType(){
+    public int getIntValue(){
         return type;
     }
 }

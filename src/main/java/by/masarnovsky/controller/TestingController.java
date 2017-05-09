@@ -1,7 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.TestType;
-import by.masarnovsky.model.Answer;
+import by.masarnovsky.model.CurrentTestingSessionStorage;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.User;
 import by.masarnovsky.service.AnswerService;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/testing")
@@ -40,10 +39,16 @@ public class TestingController {
         if (isAnotherTestStarted(request)) {
             ui.addAttribute("msg", "Другой тест уже запущен!");
         }
+        User user = (User) request.getSession().getAttribute("user");
+        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING);
+        List<Question> questions = questionService.getQuestionsForModule(module, testingSession.getTestType().getIntValue());
+        testingSession.addQuestionsFromList(questions);
 
+        //
 
         // set into data structures
         //
+        request.getSession().setAttribute("testingSession", testingSession);
         return "test";
     }
 
@@ -57,7 +62,7 @@ public class TestingController {
     }
 
     private boolean isAnotherTestStarted(HttpServletRequest request){
-        if (request.getSession().getAttribute("testType") == null)
+        if (request.getSession().getAttribute("testingSession") == null)
             return false;
         return true;
     }
