@@ -12,9 +12,6 @@
         <div class="col s12 l10 offset-l1">
                 <h5 class="center-align col s12">Вопрос ${qId + 1} из ${qCount}</h5>
                 <h5 class="center-align col s12">Правильных ответов: ${rightAnswers}</h5>
-                <%--<div class="progress">--%>
-                    <%--<div class="determinate" style="width: 70%"/>--%>
-                <%--</div>--%>
                 <div class="row">
                     <div class="col s12">
                         <p class="center-align col s12">Question:  ${questions[qId].getQuestion()}</p>

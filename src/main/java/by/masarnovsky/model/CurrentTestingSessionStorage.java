@@ -22,6 +22,10 @@ public class CurrentTestingSessionStorage {
         }
     }
 
+    public int getCurrentIndex() {
+        return currentIndex;
+    }
+
     public QuestionWithAnswers getCurrentQuestion() {
         return questionWithAnswersList.get(currentIndex);
     }
