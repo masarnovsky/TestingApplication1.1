@@ -1,6 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.TestType;
+import by.masarnovsky.model.Answer;
 import by.masarnovsky.model.CurrentTestingSessionStorage;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -43,11 +45,11 @@ public class TestingController {
         CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING);
         List<Question> questions = questionService.getQuestionsForModule(module, testingSession.getTestType().getIntValue());
         testingSession.addQuestionsFromList(questions);
-
-        //
-
-        // set into data structures
-        //
+        for (Question q: questions){
+            List<Answer> answers = answerService.getAnswersForQuestion(q);
+            Collections.shuffle(answers);
+            testingSession.getQuestionById(q.getId()).setAnswers(answers);
+        }
         request.getSession().setAttribute("testingSession", testingSession);
         return "test";
     }
