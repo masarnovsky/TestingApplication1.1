@@ -10,7 +10,7 @@
         </div>
     <div class="row">
         <div class="col s12">
-            <%--<h4 class="col s12 center-align">${msg}</h4>--%>
+            <h4 class="col s12 center-align">${msg}</h4>
             <div class="col s12">
                 <ul class="collection">
                     <c:set var="ind" value="${0}"/>

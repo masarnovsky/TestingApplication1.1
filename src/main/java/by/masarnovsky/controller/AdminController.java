@@ -105,7 +105,7 @@ public class AdminController {
         if (!image.isEmpty()){
             try {
                 String root = "C:/Apache/Tomcat9/webapps/TestingApplication1.1/src/main/webapp/resources/img/";
-                File file = new File(root + filename + image.toString() + ".jpg");
+                File file = new File(root + image.hashCode() + ".jpg");
                 FileUtils.writeByteArrayToFile(file, image.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
