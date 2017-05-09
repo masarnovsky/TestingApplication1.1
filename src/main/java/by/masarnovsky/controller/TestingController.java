@@ -63,11 +63,3 @@ public class TestingController {
     }
 }
 
-class CurrentTestingSessionStorage {
-    private User user;
-    private TestType testType;
-    private List<Question> questions;
-    private boolean[] questionsAnsw;
-    private Map<Integer, List<Answer>> answersMap;
-    private String message;
-}
