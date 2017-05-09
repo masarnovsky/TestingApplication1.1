@@ -30,10 +30,10 @@
             </div>
         </div>
 
-        <%--<div class="col s12">--%>
-            <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/test/start/testing">Тестовый режим (6 questions)</a>--%>
+        <div class="col s12">
+            <a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>
             <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/test/start/training">Тренировочный режим (3 questions)</a>--%>
-        <%--</div>--%>
+        </div>
 
     </div>
 </div>
