@@ -25,8 +25,8 @@
                     </div>
                 </div>
 
-            <form:form class="col s12" modelAttribute="answer"  id="answerForm" action="/test/getNextQuestion/-1">
-
+            <form:form class="col s12" modelAttribute="answer"  id="answerForm" action="/testing/getNextQuestion">
+            <input id="userAnswer" name="userAnswer" hidden>
             <c:if test="${qType ne 4}">
                 <div class="row">
                     <div class="col s12">
@@ -72,14 +72,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function submitForm(id) {
-        document.getElementById("answerForm").setAttribute("action", "/test/getNextQuestion/" + id);
-//        document.getElementById("submitButton").removeAttribute("disabled");
-    }
-</script>
-
-
 <c:import url="footer.jsp"/>

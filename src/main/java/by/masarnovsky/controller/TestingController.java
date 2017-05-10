@@ -32,18 +32,18 @@ public class TestingController {
     @Autowired
     private ResultService resultService;
 
-    private final int TRAINING_SIZE = 3;
-    private final int TESTING_SIZE = 6;
-
     @RequestMapping(value = "/start/training", method = RequestMethod.GET)
     String startTraining(@RequestParam(value = "module", required = true) int module,
                          HttpServletRequest request, Model ui){
         if (isAnotherTestStarted(request)) {
+            System.out.println();
             ui.addAttribute("msg", "Другой тест уже запущен!");
+            return "home";
         }
         User user = (User) request.getSession().getAttribute("user");
         CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING);
         List<Question> questions = questionService.getQuestionsForModule(module, testingSession.getTestType().getIntValue());
+        Collections.shuffle(questions);
         testingSession.addQuestionsFromList(questions);
         for (Question q: questions){
             List<Answer> answers = answerService.getAnswersForQuestion(q);
@@ -56,6 +56,15 @@ public class TestingController {
 
     @RequestMapping(value = "/start/testing", method = RequestMethod.GET)
     String startTesting(){
+        return "test";
+    }
+
+    @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
+    String getNextQuestion(HttpServletRequest request) {
+        CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
+        String userAnswer = request.getParameter("userAnswer");
+        testingSession.toNextQuestion();
+        request.getSession().setAttribute("testingSession", testingSession);
         return "test";
     }
 

@@ -2,6 +2,10 @@ $(document).ready(function() {
     $('select').material_select();
 });
 
+function submitForm(id) {
+    document.getElementById("userAnswer").setAttribute("value", id);
+}
+
 
 
 var activeType;
@@ -37,8 +41,6 @@ var fourthType = '<div id="fourthType"><div class="col s12"><div class="col s12 
     '</div></div></div></div>';
 
 function qTypeChanged(v){
-    // 4 - 1, 2 - 1, 4+pic - 1, pic + map
-
     if (v == 1){
        document.getElementById('module').innerHTML = firstType;
     }
@@ -50,5 +52,4 @@ function qTypeChanged(v){
     } else if (v == 4){
         document.getElementById('module').innerHTML = fourthType;
     }
-
 }

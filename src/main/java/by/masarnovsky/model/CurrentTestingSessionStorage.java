@@ -30,12 +30,20 @@ public class CurrentTestingSessionStorage {
         return questionWithAnswersList.get(currentIndex);
     }
 
-    public QuestionWithAnswers getNextQuestion() {
+    public QuestionWithAnswers toNextQuestion() {
         return questionWithAnswersList.get(++currentIndex);
     }
 
-    public QuestionWithAnswers getPreviousQuestion() {
+    public QuestionWithAnswers toPreviousQuestion() {
         return questionWithAnswersList.get(--currentIndex);
+    }
+
+    public QuestionWithAnswers getNextQuestion() {
+        return questionWithAnswersList.get(currentIndex + 1);
+    }
+
+    public QuestionWithAnswers getPreviousQuestion() {
+        return questionWithAnswersList.get(currentIndex - 1);
     }
 
     public int getQuestionCount() {
