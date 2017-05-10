@@ -30,19 +30,39 @@ public class CurrentTestingSessionStorage {
         return questionWithAnswersList.get(currentIndex);
     }
 
+    public int getRightAnswerId() {
+        return getCurrentQuestion().getRightAnswerId();
+    }
+
+    public void setUserAnswerToQuestion(boolean isTrue){
+        getCurrentQuestion().setUserChoseRightAnswer(isTrue);
+    }
+
     public QuestionWithAnswers toNextQuestion() {
+        if (currentIndex >= questionWithAnswersList.size()-1){
+            return null;
+        }
         return questionWithAnswersList.get(++currentIndex);
     }
 
     public QuestionWithAnswers toPreviousQuestion() {
+        if (currentIndex <= 0){
+            return null;
+        }
         return questionWithAnswersList.get(--currentIndex);
     }
 
     public QuestionWithAnswers getNextQuestion() {
+        if (currentIndex >= questionWithAnswersList.size()-1){
+            return null;
+        }
         return questionWithAnswersList.get(currentIndex + 1);
     }
 
     public QuestionWithAnswers getPreviousQuestion() {
+        if (currentIndex <= 0){
+            return null;
+        }
         return questionWithAnswersList.get(currentIndex - 1);
     }
 

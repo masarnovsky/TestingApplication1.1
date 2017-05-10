@@ -16,6 +16,17 @@ public class QuestionWithAnswers {
         this.question = question;
     }
 
+    public int getRightAnswerId() {
+        int id = -1;
+        for (Answer a: answers){
+            if (a.isRight() == true) {
+                id = a.getId();
+                break;
+            }
+        }
+        return id;
+    }
+
     public boolean isUserChoseRightAnswer() {
         return isUserChoseRightAnswer;
     }

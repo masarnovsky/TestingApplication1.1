@@ -61,14 +61,34 @@ public class TestingController {
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
     String getNextQuestion(HttpServletRequest request) {
+        String page = "test";
         CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
-        String userAnswer = request.getParameter("userAnswer");
-        testingSession.toNextQuestion();
+        int userAnswer = -2;
+        try {
+            userAnswer = Integer.valueOf(request.getParameter("userAnswer"));
+        } catch (NumberFormatException e) {
+            System.out.println("user input is empty");
+        }
+        boolean isTrue = false;
+        if (testingSession.getRightAnswerId() == userAnswer) {
+            isTrue = true;
+        }
+        testingSession.setUserAnswerToQuestion(isTrue);
+        if (testingSession.toNextQuestion() == null){
+            page = getResults(request);
+        }
         request.getSession().setAttribute("testingSession", testingSession);
+        return page;
+    }
+
+    @RequestMapping(value = "/getPrevQuestion", method = RequestMethod.POST)
+    String getPrevQuestion(HttpServletRequest request) {
+        CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
+        testingSession.toPreviousQuestion();
         return "test";
     }
 
-    String getResults() {
+    String getResults(HttpServletRequest request) {
         return "endTesting";
     }
 

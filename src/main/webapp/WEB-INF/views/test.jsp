@@ -59,17 +59,16 @@
         <c:set var="testType" value="${testingSession.getTestType().getStringValue()}"/>
         <c:if test="${testType eq 'training'}">
             <div class="col s12">
-                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="prevButton" type="submit">Назад</button>
-                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="submitButton" type="submit">Далее</button>
+                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="prevButton" onclick="setActionToPrevQ()" type="submit" hidden>Назад</button>
+                <button class="btn waves-effect waves-light indigo col s4 offset-s2" id="submitButton" onclick="setActionToNextQ()" type="submit">Далее</button>
             </div>
         </c:if>
         <c:if test="${testType eq 'testing'}">
             <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" type="submit">Далее</button>
         </c:if>
         </form:form>
-
-
         </div>
     </div>
 </div>
 <c:import url="footer.jsp"/>
+

@@ -3,7 +3,15 @@ $(document).ready(function() {
 });
 
 function submitForm(id) {
-    document.getElementById("userAnswer").setAttribute("value", id);
+    document.getElementById('userAnswer').setAttribute('value', id);
+}
+
+function setActionToPrevQ() {
+    document.getElementById('answerForm').setAttribute('action', '/testing/getPrevQuestion');
+}
+
+function setActionToNextQ() {
+    document.getElementById('answerForm').setAttribute('action', '/testing/getNextQuestion');
 }
 
 
