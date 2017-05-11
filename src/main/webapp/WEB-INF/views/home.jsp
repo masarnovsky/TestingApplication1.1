@@ -4,37 +4,37 @@
 
 <c:import url="header.jsp"/>
 
-<div class="container">
+<div class="container white z-depth-2 padding-right-left-15px">
+    <div class="row without-margin-bottom margin-top-50px">
         <div class="col s12 center-align">
-            <h4>Модули   <i class="material-icons">info</i></h4>
-            <h5 class="col s12 center-align">${msg}</h5>
+            <h5>Модули   <i class="material-icons">info</i></h5>
+            <c:if test="${msg ne null}">
+                <h5 class="col s12 center-align">${msg}</h5>
+            </c:if>
         </div>
-    <div class="row">
+    </div>
+    <div class="row padding-bottom-15px">
         <div class="col s12">
             <div class="col s12">
                 <ul class="collection">
                     <c:set var="ind" value="${0}"/>
                     <c:forEach var="module" items="${modules}">
                         <li class="collection-item">
-                                <c:set var="ind" value="${ind + 1}"/>
+                            <c:set var="ind" value="${ind + 1}"/>
                                 ${module.getTheme()}
-                                <span>
-                                    <a class="secondary-content" href="/test/start?module=${module.getId()}&type=training">Тренировка</a>
-                                    <span class="secondary-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                    <a class="secondary-content" href="/test/start?module=${module.getId()}&type=testing">Тестирование</a>
-                                </span>
-                            <%--<div class="collapsible-body"><p class="col s10 offset-s1">Lorem for module ${module.getTheme()}</p></div>--%>
+                            <span>
+                                <a class="secondary-content" href="/test/start?module=${module.getId()}&type=training">Тренировка</a>
+                                <span class="secondary-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <a class="secondary-content" href="/test/start?module=${module.getId()}&type=testing">Тестирование</a>
+                            </span>
                         </li>
                     </c:forEach>
                 </ul>
             </div>
         </div>
-
-        <div class="col s12">
-            <a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>
-            <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/test/start/training">Тренировочный режим (3 questions)</a>--%>
-        </div>
-
+        <%--<div class="col s12">--%>
+        <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>--%>
+        <%--</div>--%>
     </div>
 </div>
 
