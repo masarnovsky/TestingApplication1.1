@@ -32,9 +32,9 @@
                 </ul>
             </div>
         </div>
-        <%--<div class="col s12">--%>
-        <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>--%>
-        <%--</div>--%>
+        <div class="col s12">
+        <a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>
+        </div>
     </div>
 </div>
 
