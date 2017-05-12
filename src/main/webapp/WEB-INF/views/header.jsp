@@ -6,10 +6,10 @@
     <title>ECDL тестирование</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/resources/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="/resources/css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="/resources/css/style.css?var=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-<body>
+<body class="grey lighten-3">
 <nav class="light-blue lighten-1" role="navigation">
     <c:if test="${testingSession eq null}">
         <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">ECDL</a>

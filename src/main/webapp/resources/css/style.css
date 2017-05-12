@@ -7,11 +7,15 @@
 }
 
 .without-margin-bottom {
-    margin-bottom: 0px !important;
+    margin-bottom: 0px;
 }
 
 .margin-top-50px {
     margin-top: 50px;
+}
+
+.margin-top-15px {
+    margin-top: 15px;
 }
 
 .padding-right-left-15px {
@@ -20,7 +24,11 @@
 }
 
 .padding-bottom-15px {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+}
+
+.padding-top-15px {
+    padding-top: 15px;
 }
 
 .fullHeight {
@@ -28,7 +36,7 @@
 }
 
 .padding-bottom-30px {
-    padding-bottom: 30px !important;
+    padding-bottom: 30px;
 }
 
 .padding-30px {
