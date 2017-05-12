@@ -39,18 +39,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/signin",method = RequestMethod.POST)
-    public String addNewUser(@Valid User user, BindingResult br, Model ui){
+    public String addNewUser(@Valid User user, BindingResult br, HttpServletRequest request,Model ui){
         if (br.hasErrors()){
             return "signin";
         }
-        if (userService.getUserByLogin(user.getLogin()) == null){
+        if (userService.getUserByLogin(user.getLogin()).size() <= 0){
+            if (!request.getParameter("repeatPassword").equals(user.getPassword())){
+                ui.addAttribute("message", "Пароли не совпадают");
+                return "signin";
+            }
             userService.addUser(user);
             ui.addAttribute("message", "Пользователь зарегистрирован. Пожалуйста, авторизуйтесь.");
         } else {
             ui.addAttribute("message", "Пользователь c таким логином уже существует!");
             return "signin";
         }
-        return "redirect:/";
+//        return "redirect:/";
+        return "index";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "login")
