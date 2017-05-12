@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserById(id);
     }
 
-    public User getUserByLogin(String login) {
+    public List<User> getUserByLogin(String login) {
         return userDAO.getUserByLogin(login);
     }
 

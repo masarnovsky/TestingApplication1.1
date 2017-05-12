@@ -19,10 +19,10 @@ public class User {
     private String email;
 
     @Size(min = 3, max = 20, message = "Логин должен состоять минимум из 3 символов, максимум 20")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Только буквы и цифры, без пробелов.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "В логине только буквы и цифры, без пробелов.")
     private String login;
 
-    @Size(min = 6, max = 20, message = "Минимум 6 символов.")
+    @Size(min = 6, max = 20, message = "Минимум 6 символов в пароле.")
     private String password;
     private String role;
     private Date regDate;

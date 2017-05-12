@@ -61,13 +61,13 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginUser(User user, Model ui, HttpServletRequest request){
-        User currentUser = userService.getUserByLogin(user.getLogin());
+        List<User> currentUser = userService.getUserByLogin(user.getLogin());
         String page = "redirect:/home";
-        if (currentUser != null && currentUser.getPassword().equals(user.getPassword())){
-            if (userService.isAdmin(currentUser)){
+        if (currentUser != null && currentUser.size() > 0 && currentUser.get(0).getPassword().equals(user.getPassword())){
+            if (userService.isAdmin(currentUser.get(0))){
                 page = "redirect:/admin/adminhome";
             }
-            request.getSession().setAttribute("user", currentUser);
+            request.getSession().setAttribute("user", currentUser.get(0));
             request.getSession().setAttribute("isLogged", true);
         }
         else {
