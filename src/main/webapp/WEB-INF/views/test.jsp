@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col l12 ">
                             <div class="row"></div>
-                            <h5 class="center-align col s12">Вопрос:    ${currentQuestion.getQuestion().getQuestion()}</h5>
+                            <h5 class="center-align col s12 flow-text">Вопрос:    ${currentQuestion.getQuestion().getQuestion()}</h5>
                             <c:if test="${currentQuestion.getQuestion().getImg() ne null and qType ne 4}">
                                 <div class="col s12 center-align">
                                     <img src="/resources/img/${currentQuestion.getQuestion().getImg()}"/>
