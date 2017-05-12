@@ -1,10 +1,7 @@
 package by.masarnovsky.controller;
 
 import by.masarnovsky.TestType;
-import by.masarnovsky.model.Answer;
-import by.masarnovsky.model.CurrentTestingSessionStorage;
-import by.masarnovsky.model.Question;
-import by.masarnovsky.model.User;
+import by.masarnovsky.model.*;
 import by.masarnovsky.service.AnswerService;
 import by.masarnovsky.service.QuestionService;
 import by.masarnovsky.service.ResultService;
@@ -67,13 +64,14 @@ public class TestingController {
         try {
             userAnswer = Integer.valueOf(request.getParameter("userAnswer"));
         } catch (NumberFormatException e) {
-            System.out.println("user input is empty");
+            //System.out.println("user input is empty");
         }
         boolean isTrue = false;
         if (testingSession.getRightAnswerId() == userAnswer) {
             isTrue = true;
         }
         testingSession.setUserAnswerToQuestion(isTrue);
+        testingSession.setThatUserSeeQuestion(true);
         if (testingSession.toNextQuestion() == null){
             page = getResults(request);
         }
@@ -90,6 +88,17 @@ public class TestingController {
 
     String getResults(HttpServletRequest request) {
         return "endTesting";
+    }
+
+    void calculateRightAnswers(CurrentTestingSessionStorage testingSession) {
+
+        for (QuestionWithAnswers q: testingSession.getQuestionWithAnswersList()){
+            //
+        }
+    }
+
+    void endTestAndCalculateResult() {
+        //
     }
 
     private boolean isAnotherTestStarted(HttpServletRequest request){

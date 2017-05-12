@@ -6,6 +6,7 @@ public class QuestionWithAnswers {
     private Question question;
     private List<Answer> answers;
     private boolean isUserChoseRightAnswer;
+    private boolean isUserSeeThisQuestion;
 
     public QuestionWithAnswers(Question question, List<Answer> answers) {
         this.question = question;
@@ -57,5 +58,13 @@ public class QuestionWithAnswers {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public boolean isUserSeeThisQuestion() {
+        return isUserSeeThisQuestion;
+    }
+
+    public void setUserSeeThisQuestion(boolean userSeeThisQuestion) {
+        isUserSeeThisQuestion = userSeeThisQuestion;
     }
 }

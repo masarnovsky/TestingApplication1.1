@@ -38,6 +38,10 @@ public class CurrentTestingSessionStorage {
         getCurrentQuestion().setUserChoseRightAnswer(isTrue);
     }
 
+    public void setThatUserSeeQuestion(boolean isSee){
+        getCurrentQuestion().setUserSeeThisQuestion(isSee);
+    }
+
     public QuestionWithAnswers toNextQuestion() {
         if (currentIndex >= questionWithAnswersList.size()-1){
             return null;
