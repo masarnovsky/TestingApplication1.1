@@ -17,7 +17,7 @@ import java.util.List;
 public class ResultDAOJdbcImpl implements ResultDAO {
     private JdbcTemplate jdbcTemplate;
 
-    private final String GET_USER_RESULT = "select * from results where userId=? order by desc";
+    private final String GET_USER_RESULT = "select * from results where userId=? order by date desc";
     private final String GET_USER_RESULT_BY_MODULE = "select * from results where userId=? and module=?";
     private final String GET_USER_STRING_RESULT_BY_MODULE = "select result from results where userId=? and module=?";
     private final String INSERT_RESULT = "insert into results(userId, module, result) values(?, ?, ?)";
