@@ -21,8 +21,24 @@
                     <div class="row"></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col l12">
+                    <button onclick="openModal()" data-target="breakModel" class="btn red accent-4 col s8 offset-s2">Прервать тест</button>
+                </div>
+            </div>
         </div>
-
+<%--MODAL WINDOW--%>
+        <div id="breakModel" class="modal">
+            <div class="modal-content">
+                <h4>Прервать тест</h4>
+                <p>Вы уверены, что хотите прервать тест? Все данные будут утеряны.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/testing/breakTest" class="modal-action modal-close btn-flat">Прервать</a>
+                <a href="#" class="modal-action modal-close btn-flat">Вернуться к тесту</a>
+            </div>
+        </div>
+<%--MODAL WINDOW--%>
         <div class="col l9 ">
             <div class="row white z-depth-2">
                 <div class="col l12">

@@ -2,6 +2,10 @@ $(document).ready(function() {
     $('select').material_select();
 });
 
+function openModal() {
+    $('#breakModel').modal();
+}
+
 function submitForm(id) {
     document.getElementById('userAnswer').setAttribute('value', id);
 }

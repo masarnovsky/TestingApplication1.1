@@ -23,18 +23,18 @@
                             <c:set var="ind" value="${ind + 1}"/>
                                 ${module.getTheme()}
                             <span>
-                                <a class="secondary-content" href="/test/start?module=${module.getId()}&type=training">Тренировка</a>
+                                <a class="secondary-content" href="/testing/start/training?module=${module.getId()}">Тренировка</a>
                                 <span class="secondary-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <a class="secondary-content" href="/test/start?module=${module.getId()}&type=testing">Тестирование</a>
+                                <a class="secondary-content" href="/testing/start/testing?module=${module.getId()}">Тестирование</a>
                             </span>
                         </li>
                     </c:forEach>
                 </ul>
             </div>
         </div>
-        <div class="col s12">
-        <a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>
-        </div>
+        <%--<div class="col s12">--%>
+        <%--<a class="col s4 offset-l2 btn waves-effect waves-light indigo" href="/testing/start/training?module=6">training режим (6 questions)</a>--%>
+        <%--</div>--%>
     </div>
 </div>
 

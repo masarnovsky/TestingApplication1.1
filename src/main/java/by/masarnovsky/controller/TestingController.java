@@ -34,12 +34,21 @@ public class TestingController {
     String startTraining(@RequestParam(value = "module", required = true) int module,
                          HttpServletRequest request, Model ui){
         if (isAnotherTestStarted(request)) {
-            System.out.println();
             ui.addAttribute("msg", "Другой тест уже запущен!");
             return "home";
         }
         User user = (User) request.getSession().getAttribute("user");
         CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING);
+        setTestingSession(request, testingSession, module);
+        return "test";
+    }
+
+    @RequestMapping(value = "/start/testing", method = RequestMethod.GET)
+    String startTesting(){
+        return "test";
+    }
+
+    private void setTestingSession(HttpServletRequest request, CurrentTestingSessionStorage testingSession, int module){
         List<Question> questions = questionService.getQuestionsForModule(module, testingSession.getTestType().getIntValue());
         Collections.shuffle(questions);
         testingSession.addQuestionsFromList(questions);
@@ -49,12 +58,6 @@ public class TestingController {
             testingSession.getQuestionById(q.getId()).setAnswers(answers);
         }
         request.getSession().setAttribute("testingSession", testingSession);
-        return "test";
-    }
-
-    @RequestMapping(value = "/start/testing", method = RequestMethod.GET)
-    String startTesting(){
-        return "test";
     }
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
@@ -74,9 +77,6 @@ public class TestingController {
         testingSession.setUserAnswerToQuestion(isTrue);
         testingSession.setThatUserSeeQuestion(true);
 //        testingSession.setUserAnswerToAnswersArray(isTrue);
-        for (Boolean b: checkRightAnswers(testingSession)){
-            System.out.println(b);
-        }
         if (testingSession.toNextQuestion() == null){
 //            page = getResults(request);
             return "forward:showResults";
@@ -95,12 +95,11 @@ public class TestingController {
     @RequestMapping(value = "/showResults")
     String getResults(HttpServletRequest request, Model ui) {
         CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
-        ui.addAttribute(testingSession);
         Boolean[] answers = checkRightAnswers(testingSession);
         int count = (int) Arrays.stream(answers).filter(a -> a == true).count();
-        System.out.println(count);
         ui.addAttribute("answers", checkRightAnswers(testingSession));
         ui.addAttribute("rightAnswers", count);
+        ui.addAttribute(testingSession);
         request.getSession().setAttribute("testingSession", null);
         return "endTesting";
     }
@@ -120,8 +119,10 @@ public class TestingController {
         return answersArray;
     }
 
-    void endTestAndCalculateResult() {
-        //
+    @RequestMapping(value = "/breakTest")
+    String breakTest(HttpServletRequest request) {
+        request.getSession().setAttribute("testingSession", null);
+        return "redirect:/home";
     }
 
     private boolean isAnotherTestStarted(HttpServletRequest request){
