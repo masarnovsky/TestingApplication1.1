@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,8 +73,13 @@ public class TestingController {
         }
         testingSession.setUserAnswerToQuestion(isTrue);
         testingSession.setThatUserSeeQuestion(true);
+//        testingSession.setUserAnswerToAnswersArray(isTrue);
+        for (Boolean b: checkRightAnswers(testingSession)){
+            System.out.println(b);
+        }
         if (testingSession.toNextQuestion() == null){
-            page = getResults(request);
+//            page = getResults(request);
+            return "forward:showResults";
         }
         request.getSession().setAttribute("testingSession", testingSession);
         return page;
@@ -86,15 +92,32 @@ public class TestingController {
         return "test";
     }
 
-    String getResults(HttpServletRequest request) {
+    @RequestMapping(value = "/showResults")
+    String getResults(HttpServletRequest request, Model ui) {
+        CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
+        ui.addAttribute(testingSession);
+        Boolean[] answers = checkRightAnswers(testingSession);
+        int count = (int) Arrays.stream(answers).filter(a -> a == true).count();
+        System.out.println(count);
+        ui.addAttribute("answers", checkRightAnswers(testingSession));
+        ui.addAttribute("rightAnswers", count);
+        request.getSession().setAttribute("testingSession", null);
         return "endTesting";
     }
 
-    void calculateRightAnswers(CurrentTestingSessionStorage testingSession) {
-
+    Boolean[] checkRightAnswers(CurrentTestingSessionStorage testingSession) {
+        Boolean[] answersArray = new Boolean[testingSession.getQuestionCount()];
+        int ind = 0;
         for (QuestionWithAnswers q: testingSession.getQuestionWithAnswersList()){
-            //
+            if (q.isUserChoseRightAnswer() == true && q.isUserSeeThisQuestion() == true){
+                answersArray[ind++] = true;
+            } else if (q.isUserChoseRightAnswer() == false && q.isUserSeeThisQuestion() == true) {
+                answersArray[ind++] = false;
+            } else {
+                answersArray[ind++] = null;
+            }
         }
+        return answersArray;
     }
 
     void endTestAndCalculateResult() {

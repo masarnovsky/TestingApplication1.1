@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col s12 center-align">
-            <h5>${msg}</h5>
+            <h5>${msg} ${answers[0]} ${answers[1]}</h5>
             <h5>Вы ответили на ${rightAnswers} правильных вопросов из ${qCount}</h5>
             <c:if test="${rightAnswers >= avg}">
                 <h4>Отличный результат!</h4>

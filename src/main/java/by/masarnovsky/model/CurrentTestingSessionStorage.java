@@ -10,6 +10,7 @@ public class CurrentTestingSessionStorage {
     private TestType testType;
     private String message;
     private List<QuestionWithAnswers> questionWithAnswersList;
+    private Boolean[] rightAnswers;
     private int currentIndex;
 
     public void addNewQuestionWithAnswers(Question question, List<Answer> answers){
@@ -20,6 +21,15 @@ public class CurrentTestingSessionStorage {
         for (Question q: questions){
             addNewQuestion(q);
         }
+        rightAnswers = new Boolean[questions.size()];
+    }
+
+    public Boolean[] getRightAnswers() {
+        return rightAnswers;
+    }
+
+    public void setUserAnswerToAnswersArray(boolean isTrue){
+        rightAnswers[currentIndex] = isTrue;
     }
 
     public int getCurrentIndex() {
