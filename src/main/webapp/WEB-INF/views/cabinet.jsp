@@ -53,38 +53,47 @@
                     <%--</div>--%>
                 <%--</section>--%>
                 <section id="history" hidden class="col s12 white z-depth-2 margin-top-15px without-margin-bottom">
-                    <h5 class="col s12 center-align">История прохождения тестов</h5>
-                    <table class="col s12 striped centered padding-bottom-30px">
-                        <thead><tr>
-                            <th>Модуль</th>
-                            <th>Результат</th>
-                            <th>Дата</th>
-                            <th>Время</th>
-                        </tr></thead>
-                        <tbody>
-                        <c:forEach var="result" items="${resultHistory}">
-                            <tr>
-                                <td>${result.getModule()}</td>
+                    <c:if test="${resultHistory.size() eq 0}">
+                        <div class="row">
+                            <div class="col l12">
+                                <h4 class="center-align light">История пуста</h4>
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${resultHistory.size() ne 0}">
+                        <h5 class="col s12 center-align">История прохождения тестов</h5>
+                        <table class="col s12 striped centered padding-bottom-30px">
+                            <thead><tr>
+                                <th>Модуль</th>
+                                <th>Результат</th>
+                                <th>Дата</th>
+                                <th>Время</th>
+                            </tr></thead>
+                            <tbody>
+                            <c:forEach var="result" items="${resultHistory}">
+                                <tr>
+                                    <td>${result.getModule()}</td>
 
-                                <c:set var="res" value="${result.getResult()}"/>
+                                    <c:set var="res" value="${result.getResult()}"/>
 
-                                <c:if test="${res eq 'not_started'}">
-                                    <c:set var="res" value="Не начат"/>
-                                </c:if>
-                                <c:if test="${res eq 'passed'}">
-                                    <c:set var="res" value="Сдан"/>
-                                </c:if>
-                                <c:if test="${res eq 'failed'}">
-                                    <c:set var="res" value="Провален"/>
-                                </c:if>
+                                    <c:if test="${res eq 'not_started'}">
+                                        <c:set var="res" value="Не начат"/>
+                                    </c:if>
+                                    <c:if test="${res eq 'passed'}">
+                                        <c:set var="res" value="Сдан"/>
+                                    </c:if>
+                                    <c:if test="${res eq 'failed'}">
+                                        <c:set var="res" value="Провален"/>
+                                    </c:if>
 
-                                <td>${res}</td>
-                                <td>${result.getDate()}</td>
-                                <td>${result.getTime()}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                                    <td>${res}</td>
+                                    <td>${result.getDate()}</td>
+                                    <td>${result.getTime()}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
                     <div class="row"></div>
                 </section>
             </div>
