@@ -5,18 +5,19 @@
 
 <c:set var="avg" value="${atestingSession.getQuestionCount()/rightAnswers}" />
 <c:set var="questions" value="${atestingSession.getQuestionWithAnswersList()}" />
+<c:if test="${rightAnswers >= avg}">
+    <c:set value="Тест пройден!" var="resultMsg"/>
+</c:if>
+<c:if test="${rightAnswers < avg}">
+    <c:set value="Тест провален!" var="resultMsg"/>
+</c:if>
+
 <div class="container">
     <div class="row">
         <div class="col s12 white z-depth-2 margin-top-15px">
             <div class="row">
                 <div class="col l12 padding-top-15px">
-                    <h5 class="center-align">Вы ответили правильно на ${rightAnswers} из ${atestingSession.getQuestionCount()} вопросов</h5>
-                    <c:if test="${rightAnswers >= avg}">
-                        <h4 class="center-align light">Тест пройден!</h4>
-                    </c:if>
-                    <c:if test="${rightAnswers < avg}">
-                        <h4 class="center-align light">Тест провален!</h4>
-                    </c:if>
+                    <h5 class="center-align">Вы ответили правильно на ${rightAnswers} из ${atestingSession.getQuestionCount()} вопросов. ${resultMsg}</h5>
                 </div>
             </div>
             <div class="row">
@@ -26,9 +27,6 @@
                 <div class="col s12">
                     <ul class="collection col s10 offset-s1" style="border: hidden;">
                         <c:forEach var="q" items="${questions}">
-                            <c:if test="${q.isUserChoseRightAnswer() eq null}">
-                                <c:set var="cl" value="blue"/>
-                            </c:if>
                             <c:if test="${q.isUserChoseRightAnswer() eq false}">
                                 <c:set var="cl" value="red"/>
                             </c:if>

@@ -5,8 +5,8 @@ import java.util.List;
 public class QuestionWithAnswers {
     private Question question;
     private List<Answer> answers;
-    private boolean isUserChoseRightAnswer;
-    private boolean isUserSeeThisQuestion;
+    private Boolean isUserChoseRightAnswer;
+    private Boolean isUserSeeThisQuestion;
 
     public QuestionWithAnswers(Question question, List<Answer> answers) {
         this.question = question;
