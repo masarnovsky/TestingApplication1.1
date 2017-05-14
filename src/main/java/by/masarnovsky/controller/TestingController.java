@@ -38,7 +38,7 @@ public class TestingController {
             return "home";
         }
         User user = (User) request.getSession().getAttribute("user");
-        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING);
+        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TRAINING, module);
         setTestingSession(request, testingSession, module);
         return "test";
     }
@@ -51,7 +51,7 @@ public class TestingController {
             return "home";
         }
         User user = (User) request.getSession().getAttribute("user");
-        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TESTING);
+        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TESTING, module);
         // start timer
         setTestingSession(request, testingSession, module);
         return "test";
@@ -107,11 +107,23 @@ public class TestingController {
         CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
         Boolean[] answers = checkRightAnswers(testingSession);
         int count = (int) Arrays.stream(answers).filter(a -> a == true).count();
-        ui.addAttribute("answers", checkRightAnswers(testingSession));
+        int procent = (100 * count) / answers.length;
+        String resultMsg = "failed";
+        if (procent >= 75)
+            resultMsg = "passed";
+        ui.addAttribute(procent);
         ui.addAttribute("rightAnswers", count);
         ui.addAttribute("atestingSession", testingSession);
         request.getSession().setAttribute("testingSession", null);
+        if (testingSession.getTestType() == TestType.TESTING){
+            insertResultIntoDatabase(testingSession, resultMsg);
+        }
         return "endTesting";
+    }
+
+    private void insertResultIntoDatabase(CurrentTestingSessionStorage testingSession, String result) {
+        resultService.insertResult(testingSession.getUser().getId(),
+                testingSession.getModule(), result);
     }
 
     Boolean[] checkRightAnswers(CurrentTestingSessionStorage testingSession) {

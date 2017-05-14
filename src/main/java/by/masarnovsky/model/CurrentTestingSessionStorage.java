@@ -7,10 +7,10 @@ import java.util.List;
 
 public class CurrentTestingSessionStorage {
     private User user;
+    private int module;
     private TestType testType;
     private String message;
     private List<QuestionWithAnswers> questionWithAnswersList;
-//    private Boolean[] rightAnswers;
     private int currentIndex;
 
     public void addNewQuestionWithAnswers(Question question, List<Answer> answers){
@@ -21,16 +21,7 @@ public class CurrentTestingSessionStorage {
         for (Question q: questions){
             addNewQuestion(q);
         }
-//        rightAnswers = new Boolean[questions.size()];
     }
-
-//    public Boolean[] getRightAnswers() {
-//        return rightAnswers;
-//    }
-
-//    public void setUserAnswerToAnswersArray(boolean isTrue){
-//        rightAnswers[currentIndex] = isTrue;
-//    }
 
     public int getCurrentIndex() {
         return currentIndex;
@@ -99,8 +90,9 @@ public class CurrentTestingSessionStorage {
         return question;
     }
 
-    public CurrentTestingSessionStorage(User user, TestType testType){
+    public CurrentTestingSessionStorage(User user, TestType testType, int module){
         this.user = user;
+        this.module = module;
         this.testType = testType;
         this.questionWithAnswersList = new ArrayList<>();
         this.currentIndex = 0;
@@ -108,6 +100,10 @@ public class CurrentTestingSessionStorage {
 
     public User getUser() {
         return user;
+    }
+
+    public int getModule() {
+        return module;
     }
 
     public TestType getTestType() {
