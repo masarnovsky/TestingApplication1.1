@@ -18,6 +18,15 @@ function setActionToNextQ() {
     document.getElementById('answerForm').setAttribute('action', '/testing/getNextQuestion');
 }
 
+function historyAction() {
+    if ($('#historyButton').html() == 'История прохождения') {
+        $('#history').show();
+        $('#historyButton').html('Скрыть историю');
+    } else {
+        $('#history').hide();
+        $('#historyButton').html('История прохождения');
+    }
+}
 
 
 var activeType;

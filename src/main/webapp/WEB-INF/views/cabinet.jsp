@@ -44,15 +44,15 @@
                         </c:forEach>
                     </div>
                 </section>
-                <section id="chart" class="row z-depth-2 white">
-                    <div class="col s5">
-                        //chart
-                    </div>
-                    <div class="col s7">
-                        //info
-                    </div>
-                </section>
-                <section id="history" hidden class="row white z-depth-2">
+                <%--<section id="chart" class="row z-depth-2 white">--%>
+                    <%--<div class="col s5">--%>
+                        <%--//chart--%>
+                    <%--</div>--%>
+                    <%--<div class="col s7">--%>
+                        <%--//info--%>
+                    <%--</div>--%>
+                <%--</section>--%>
+                <section id="history" hidden class="col s12 white z-depth-2 margin-top-15px without-margin-bottom">
                     <h5 class="col s12 center-align">История прохождения тестов</h5>
                     <table class="col s12 striped centered padding-bottom-30px">
                         <thead><tr>
@@ -90,16 +90,11 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <button class="btn waves-effect waves-light indigo col s4 offset-s4" onclick="getHistory()">История прохождения</button>
+                    <button id="historyButton" class="btn indigo col s4 offset-s4" onclick="historyAction()">История прохождения</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-<script>
-    function getHistory() {
-        document.getElementById("history").removeAttribute("hidden");
-    }
-</script>
 <c:import url="footer.jsp"/>
