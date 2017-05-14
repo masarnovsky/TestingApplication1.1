@@ -36,6 +36,10 @@
     padding-top: 15px;
 }
 
+.padding-0px {
+    padding: 0px;
+}
+
 .fullHeight {
     height: 70%;
 }

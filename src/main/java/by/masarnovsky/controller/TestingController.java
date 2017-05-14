@@ -44,7 +44,16 @@ public class TestingController {
     }
 
     @RequestMapping(value = "/start/testing", method = RequestMethod.GET)
-    String startTesting(){
+    String startTesting(@RequestParam(value = "module", required = true) int module,
+                        HttpServletRequest request, Model ui){
+        if (isAnotherTestStarted(request)) {
+            ui.addAttribute("msg", "Другой тест уже запущен!");
+            return "home";
+        }
+        User user = (User) request.getSession().getAttribute("user");
+        CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TESTING);
+        // start timer
+        setTestingSession(request, testingSession, module);
         return "test";
     }
 
@@ -58,6 +67,7 @@ public class TestingController {
             testingSession.getQuestionById(q.getId()).setAnswers(answers);
         }
         request.getSession().setAttribute("testingSession", testingSession);
+        request.getSession().setAttribute("atestingSession", null);
     }
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
@@ -99,7 +109,7 @@ public class TestingController {
         int count = (int) Arrays.stream(answers).filter(a -> a == true).count();
         ui.addAttribute("answers", checkRightAnswers(testingSession));
         ui.addAttribute("rightAnswers", count);
-        ui.addAttribute(testingSession);
+        ui.addAttribute("atestingSession", testingSession);
         request.getSession().setAttribute("testingSession", null);
         return "endTesting";
     }

@@ -6,7 +6,7 @@
     <title>ECDL тестирование</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/resources/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="/resources/css/style.css?var=1"/>
+    <link type="text/css" rel="stylesheet" href="/resources/css/style.css?var=2"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body class="grey lighten-3">

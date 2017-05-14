@@ -3,36 +3,49 @@
 
 <c:import url="header.jsp"/>
 
+<c:set var="avg" value="${atestingSession.getQuestionCount()/rightAnswers}" />
+<c:set var="questions" value="${atestingSession.getQuestionWithAnswersList()}" />
 <div class="container">
     <div class="row">
-        <div class="col s12 center-align">
-            <h5>${msg} ${answers[0]} ${answers[1]}</h5>
-            <h5>Вы ответили на ${rightAnswers} правильных вопросов из ${qCount}</h5>
-            <c:if test="${rightAnswers >= avg}">
-                <h4>Отличный результат!</h4>
-            </c:if>
-            <c:if test="${rightAnswers < avg}">
-                <h4>Плохой результат!</h4>
-            </c:if>
+        <div class="col s12 white z-depth-2 margin-top-15px">
+            <div class="row">
+                <div class="col l12 padding-top-15px">
+                    <h5 class="center-align">Вы ответили правильно на ${rightAnswers} из ${atestingSession.getQuestionCount()} вопросов</h5>
+                    <c:if test="${rightAnswers >= avg}">
+                        <h4 class="center-align light">Тест пройден!</h4>
+                    </c:if>
+                    <c:if test="${rightAnswers < avg}">
+                        <h4 class="center-align light">Тест провален!</h4>
+                    </c:if>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h4 class="light">Результаты ответов:</h4>
+                </div>
+                <div class="col s12">
+                    <ul class="collection col s10 offset-s1" style="border: hidden;">
+                        <c:forEach var="q" items="${questions}">
+                            <c:if test="${q.isUserChoseRightAnswer() eq null}">
+                                <c:set var="cl" value="blue"/>
+                            </c:if>
+                            <c:if test="${q.isUserChoseRightAnswer() eq false}">
+                                <c:set var="cl" value="red"/>
+                            </c:if>
+                            <c:if test="${q.isUserChoseRightAnswer() eq true}">
+                                <c:set var="cl" value="green"/>
+                            </c:if>
+                            <li class="collection-item ${cl}">${q.getQuestion().getQuestion()}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <a class="btn waves-effect waves-light indigo col s12 m6 l4 offset-l4" href="/home">На главную</a>
+                </div>
+            </div>
         </div>
-
-        <div class="col s12 center-align">
-            <h4>Результаты ответов:</h4>
-        </div>
-
-        <c:set var="answ" value="${questionsAnsw}"/>
-        <c:set var="ind" value="${0}"/>
-
-        <div class="col s12">
-            <ul class="left-align">
-                <c:forEach var="a" items="${answ}">
-                    <li class="${a}">${ind} - ${questions[ind].getQuestion()} - ${a}</li>
-                    <c:set var="ind" value="${ind+1}"/>
-                </c:forEach>
-            </ul>
-        </div>
-
-        <a class="btn waves-effect waves-light indigo col s12 m6 l4 offset-l4" href="/home">На главную</a>
     </div>
 </div>
 

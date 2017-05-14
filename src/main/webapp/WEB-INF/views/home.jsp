@@ -4,8 +4,8 @@
 
 <c:import url="header.jsp"/>
 
-<div class="container white z-depth-2 padding-right-left-15px">
-    <div class="row without-margin-bottom margin-top-50px">
+<div class="container white z-depth-2">
+    <div class="row without-margin-bottom margin-top-15px">
         <div class="col s12 center-align">
             <h5>Модули   <i class="material-icons">info</i></h5>
             <c:if test="${msg ne null}">
