@@ -27,7 +27,7 @@
                 <div class="col s12">
                     <ul class="collection col s10 offset-s1" style="border: hidden;">
                         <c:forEach var="q" items="${questions}">
-                            <c:if test="${q.isUserChoseRightAnswer() eq false}">
+                            <c:if test="${q.isUserChoseRightAnswer() ne true}">
                                 <c:set var="cl" value="red"/>
                             </c:if>
                             <c:if test="${q.isUserChoseRightAnswer() eq true}">

@@ -15,7 +15,9 @@
         <div class="col l3">
             <div class="row">
                 <div class="col l12 white z-depth-2">
-                    <div class="row"></div>
+                    <div class="row">
+                        <div id="timer"></div>
+                    </div>
                     <h6 class="center-align col s12">Вопрос ${qId + 1} из ${testingSession.getQuestionCount()}</h6>
                     <h6 class="center-align col s12">Правильных ответов: ${rightAnswers}</h6>
                     <div class="row"></div>
@@ -36,6 +38,16 @@
             <div class="modal-footer">
                 <a href="/testing/breakTest" class="modal-action modal-close btn-flat">Прервать</a>
                 <a href="#" class="modal-action modal-close btn-flat">Вернуться к тесту</a>
+            </div>
+        </div>
+
+        <div id="timeIsOverModal" class="modal">
+            <div class="modal-content">
+                <h4>Прервать тест</h4>
+                <p>Вы уверены, что хотите прервать тест? Все данные будут утеряны.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/testing/showResults" class="modal-action modal-close btn-flat">Показать результат</a>
             </div>
         </div>
 <%--MODAL WINDOW--%>
@@ -59,6 +71,7 @@
                         <div class="col l8 offset-l2">
                             <form:form modelAttribute="answer"  id="answerForm" action="/testing/getNextQuestion">
                                 <input id="userAnswer" name="userAnswer" hidden>
+                                <input id="timerValue" name="timerValue" hidden>
                                 <c:if test="${qType ne 4}">
                                     <div class="row">
                                         <div class="col s12">
@@ -113,4 +126,25 @@
     </div>
 </div>
 <c:import url="footer.jsp"/>
+<script>
+    var minutes = 0;
+    var seconds = 2;
+    console.log('start timer');
+    var timer = setInterval(function () {
+        document.getElementById('timer').innerHTML = 'minutes: ' + minutes + '    seconds: ' + seconds;
+        --seconds;
+        if (seconds == 0){
+            --minutes;
+            if (minutes < 0){
+                console.log('time is over!');
+                $('#timeIsOverModal').modal({
+                    dismissible: false
+                });
+                $('#timeIsOverModal').modal('open');
+            } else {
+                seconds = 59;
+            }
+        }
+    }, 1000);
+</script>
 

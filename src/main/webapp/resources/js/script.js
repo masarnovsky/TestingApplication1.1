@@ -28,7 +28,6 @@ function historyAction() {
     }
 }
 
-
 var activeType;
 
 var firstType = '<div id="firstType">' +
