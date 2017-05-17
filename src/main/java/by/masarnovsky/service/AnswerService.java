@@ -8,5 +8,5 @@ import java.util.List;
 public interface AnswerService {
     List<Answer> getAnswersForQuestion(Question q);
     List<Answer> getAnswersForQuestion(int id);
-    void insertAnswer(Answer a);
+    void save(Answer a);
 }

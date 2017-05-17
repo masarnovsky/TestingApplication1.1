@@ -28,8 +28,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public int addQuestion(Question q) {
-        return questionDAO.addQuestion(q);
+    public int save(Question q) {
+        return questionDAO.save(q);
     }
 
     @Override

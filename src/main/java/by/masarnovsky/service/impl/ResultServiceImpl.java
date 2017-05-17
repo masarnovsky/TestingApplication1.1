@@ -40,12 +40,12 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
-    public void insertResult(Result result) {
-        resultDAO.insertResult(result);
+    public void save(Result result) {
+        resultDAO.save(result);
     }
 
     @Override
-    public void insertResult(int userId, int moduleId, String result) {
-        resultDAO.insertResult(userId, moduleId, result);
+    public void save(int userId, int moduleId, String result) {
+        resultDAO.save(userId, moduleId, result);
     }
 }

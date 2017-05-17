@@ -42,7 +42,7 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     @Override
     @Transactional
-    public int addQuestion(Question q) {
+    public int save(Question q) {
         jdbcTemplate.update(INSERT_QUESTION, new Object[]{q.getModule(), q.getQuestion(), q.getImg(), q.getType()});
         return jdbcTemplate.queryForObject(GET_LAST_ID, Integer.class);
     }

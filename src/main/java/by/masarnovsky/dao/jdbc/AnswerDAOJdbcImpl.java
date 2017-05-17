@@ -31,7 +31,7 @@ public class AnswerDAOJdbcImpl implements AnswerDAO {
     }
 
     @Override
-    public void insertAnswer(Answer a) {
+    public void save(Answer a) {
         jdbcTemplate.update(INSERT_ANSWER, new Object[]{a.getQuestionId(), a.getText(), a.isRight()});
     }
 }

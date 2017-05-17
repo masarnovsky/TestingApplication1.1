@@ -9,6 +9,6 @@ public interface QuestionService {
     List<Question> getQuestionSet(int count);
     List<Question> getQuestionsForModule(int moduleId, int count);
     Question getQuestionById(int id);
-    int addQuestion(Question q);
+    int save(Question q);
     List<QuestionType> getTypes();
 }

@@ -16,12 +16,12 @@ public class UserServiceImpl implements UserService {
     }
 
     //@Transactional
-    public void addUser(User user) {
-        userDAO.addUser(user);
+    public void save(User user) {
+        userDAO.save(user);
     }
 
-    public void updateUser(User user) {
-        userDAO.updateUser(user);
+    public void update(User user) {
+        userDAO.update(user);
     }
 
     public List<User> listUsers() {
@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserByLogin(login);
     }
 
-    public void removeUser(int id) {
-        userDAO.removeUser(id);
+    public void delete(int id) {
+        userDAO.delete(id);
     }
 
     @Override

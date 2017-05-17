@@ -11,6 +11,6 @@ public interface ResultDAO {
     List<Result> getUserResult(int id);
     List<Result> getUserResultByModule(int idUser, int idModule);
     List<String> getUserStringResultByModule(int idUser, int idModule);
-    void insertResult(Result result);
-    void insertResult(int userId, int moduleId, String result);
+    void save(Result result);
+    void save(int userId, int moduleId, String result);
 }

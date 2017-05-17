@@ -55,12 +55,12 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     }
 
     @Override
-    public void insertResult(Result result) {
-        insertResult(result.getUserId(), result.getModule(), result.getResult());
+    public void save(Result result) {
+        save(result.getUserId(), result.getModule(), result.getResult());
     }
 
     @Override
-    public void insertResult(int userId, int moduleId, String result) {
+    public void save(int userId, int moduleId, String result) {
         jdbcTemplate.update(INSERT_RESULT, userId, moduleId, result);
     }
 }

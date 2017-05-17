@@ -22,11 +22,11 @@ public class UserDAOJdbcImpl implements UserDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void addUser(User user) {
+    public void save(User user) {
         jdbcTemplate.update(ADD_NEW_USER, user.getName(), user.getSurname(), user.getEmail(), user.getLogin(), user.getPassword());
     }
 
-    public void updateUser(User user) {
+    public void update(User user) {
         //
     }
 
@@ -46,7 +46,7 @@ public class UserDAOJdbcImpl implements UserDAO {
         return jdbcTemplate.query(GET_USER_BY_LOGIN, new Object[]{login}, new UserRowMapper());
     }
 
-    public void removeUser(int id) {
+    public void delete(int id) {
     }
 
     @Override

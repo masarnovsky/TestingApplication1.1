@@ -23,7 +23,7 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public void insertAnswer(Answer a) {
-        answerDAO.insertAnswer(a);
+    public void save(Answer a) {
+        answerDAO.save(a);
     }
 }
