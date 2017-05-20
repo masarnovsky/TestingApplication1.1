@@ -132,7 +132,7 @@ public class TestController {
                 result = "passed";
             }
             User user = (User) request.getSession().getAttribute("user");
-            resultService.insertResult(new Result(
+            resultService.save(new Result(
                     user.getId(),
                     (int) request.getSession().getAttribute("module"),
                     result

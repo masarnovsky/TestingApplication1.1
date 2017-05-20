@@ -48,7 +48,7 @@ public class UserController {
                 ui.addAttribute("message", "Пароли не совпадают");
                 return "signin";
             }
-            userService.addUser(user);
+            userService.save(user);
             ui.addAttribute("message", "Пользователь зарегистрирован. Пожалуйста, авторизуйтесь.");
         } else {
             ui.addAttribute("message", "Пользователь c таким логином уже существует!");

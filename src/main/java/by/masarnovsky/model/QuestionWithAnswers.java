@@ -3,10 +3,10 @@ package by.masarnovsky.model;
 import java.util.List;
 
 public class QuestionWithAnswers {
-    private Question question;
-    private List<Answer> answers;
-    private Boolean isUserChoseRightAnswer;
-    private Boolean isUserSeeThisQuestion;
+    private Question question  = null;
+    private List<Answer> answers  = null;
+    private Boolean isUserChoseRightAnswer = null;
+    private Boolean isUserSeeThisQuestion  = null;
 
     public QuestionWithAnswers(Question question, List<Answer> answers) {
         this.question = question;
@@ -28,7 +28,7 @@ public class QuestionWithAnswers {
         return id;
     }
 
-    public boolean isUserChoseRightAnswer() {
+    public Boolean isUserChoseRightAnswer() {
         return isUserChoseRightAnswer;
     }
 
@@ -60,7 +60,7 @@ public class QuestionWithAnswers {
         this.answers = answers;
     }
 
-    public boolean isUserSeeThisQuestion() {
+    public Boolean isUserSeeThisQuestion() {
         return isUserSeeThisQuestion;
     }
 

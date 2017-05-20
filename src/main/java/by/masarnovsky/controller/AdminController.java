@@ -75,7 +75,7 @@ public class AdminController {
         }
 
         Question q = new Question(module, question, imgName, qType);
-        int questionId = questionService.addQuestion(q);
+        int questionId = questionService.save(q);
         insertAnswers(request, questionId, qType);
 
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
@@ -94,7 +94,7 @@ public class AdminController {
                 isRight = true;
             else
                 isRight = false;
-            answerService.insertAnswer(new Answer(
+            answerService.save(new Answer(
                     questionId, request.getParameter("answer"+i), isRight
             ));
             i++;

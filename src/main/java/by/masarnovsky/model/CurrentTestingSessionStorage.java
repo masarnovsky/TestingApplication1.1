@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentTestingSessionStorage {
-    private User user;
+    private User user  = null;
     private int module;
-    private TestType testType;
-    private String message;
-    private List<QuestionWithAnswers> questionWithAnswersList;
+    private TestType testType  = null;
+    private String message  = null;
+    private List<QuestionWithAnswers> questionWithAnswersList  = null;
     private int currentIndex;
 
     public void addNewQuestionWithAnswers(Question question, List<Answer> answers){
