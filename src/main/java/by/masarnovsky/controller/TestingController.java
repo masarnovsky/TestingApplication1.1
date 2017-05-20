@@ -52,8 +52,10 @@ public class TestingController {
         }
         User user = (User) request.getSession().getAttribute("user");
         CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TESTING, module);
-        request.getSession().setAttribute("minutes", 0);
-        request.getSession().setAttribute("seconds", 15);
+        int minutes = 2;
+        int seconds = 59;
+        request.getSession().setAttribute("minutes", minutes);
+        request.getSession().setAttribute("seconds", seconds);
         setTestingSession(request, testingSession, module);
         return "test";
     }
