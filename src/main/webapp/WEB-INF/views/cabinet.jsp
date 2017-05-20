@@ -4,7 +4,7 @@
 <div class="row">
 <div class="col l10 offset-l1">
     <div class="row margin-top-15px">
-        <div class="col l3">
+        <div class="col l4">
             <div class="row white z-depth-2 margin-left-right-5px">
                 <div class="col l12">
                     <ul class="collection">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="col l9">
+        <div class="col l8">
             <div class="row">
                 <section id="modules" class="col s12 white z-depth-2">
                     <h5 class="col s12 center-align">Статистика</h5>
