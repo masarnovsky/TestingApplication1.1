@@ -10,7 +10,7 @@
 <c:set var="answers" value="${currentQuestion.getAnswers()}"/>
 <c:set var="testType" value="${testingSession.getTestType().getStringValue()}"/>
 
-<div>
+<div id="testPage">
     <div class="row margin-top-15px padding-right-left-15px">
         <div class="col l3">
             <div class="row">
@@ -43,8 +43,8 @@
 
         <div id="timeIsOverModal" class="modal">
             <div class="modal-content">
-                <h4>Прервать тест</h4>
-                <p>Вы уверены, что хотите прервать тест? Все данные будут утеряны.</p>
+                <h4>Время истекло</h4>
+                <p>Будут засчитаны только те ответы, на которые Вы успели ответить.</p>
             </div>
             <div class="modal-footer">
                 <a href="/testing/showResults" class="modal-action modal-close btn-flat">Показать результат</a>
@@ -71,7 +71,8 @@
                         <div class="col l8 offset-l2">
                             <form:form modelAttribute="answer"  id="answerForm" action="/testing/getNextQuestion">
                                 <input id="userAnswer" name="userAnswer" hidden>
-                                <input id="timerValue" name="timerValue" hidden>
+                                <input id="minutes" name="minutes" value="${minutes}" hidden>
+                                <input id="seconds" name="seconds" value="${seconds}" hidden>
                                 <c:if test="${qType ne 4}">
                                     <div class="row">
                                         <div class="col s12">
@@ -113,7 +114,7 @@
                                 <c:if test="${testType eq 'testing'}">
                                     <div class="row">
                                         <div class="col s12">
-                                            <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" type="submit">Далее</button>
+                                            <button class="btn waves-effect waves-light indigo col s12 l4 offset-l4" id="submitButton" onclick="setActionToNextQ()" type="submit">Далее</button>
                                         </div>
                                     </div>
                                 </c:if>
@@ -127,24 +128,24 @@
 </div>
 <c:import url="footer.jsp"/>
 <script>
-    var minutes = 0;
-    var seconds = 2;
-    console.log('start timer');
-    var timer = setInterval(function () {
-        document.getElementById('timer').innerHTML = 'minutes: ' + minutes + '    seconds: ' + seconds;
-        --seconds;
-        if (seconds == 0){
-            --minutes;
-            if (minutes < 0){
-                console.log('time is over!');
-                $('#timeIsOverModal').modal({
-                    dismissible: false
-                });
-                $('#timeIsOverModal').modal('open');
-            } else {
-                seconds = 59;
-            }
-        }
-    }, 1000);
+//    var timer = setInterval(function () {
+//        var minutes = $('#minutes').val();
+//        var seconds = $('#seconds').val();
+//        console.log(minutes);
+//        console.log(seconds);
+//        $('#timer').html('minutes: ' + minutes + '    seconds: ' + seconds);
+//        --seconds;
+//        if (seconds == 0){
+//            --minutes;
+//            if (minutes < 0){
+//                $('#timeIsOverModal').modal({
+//                    dismissible: false
+//                });
+//                $('#timeIsOverModal').modal('open');
+//            } else {
+//                seconds = 59;
+//            }
+//        }
+//    }, 1000);
 </script>
 

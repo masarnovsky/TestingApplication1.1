@@ -52,7 +52,8 @@ public class TestingController {
         }
         User user = (User) request.getSession().getAttribute("user");
         CurrentTestingSessionStorage testingSession = new CurrentTestingSessionStorage(user, TestType.TESTING, module);
-        // start timer
+        request.getSession().setAttribute("minutes", 0);
+        request.getSession().setAttribute("seconds", 15);
         setTestingSession(request, testingSession, module);
         return "test";
     }
@@ -68,6 +69,7 @@ public class TestingController {
         }
         request.getSession().setAttribute("testingSession", testingSession);
         request.getSession().setAttribute("atestingSession", null);
+        request.getSession().setAttribute("currentTimer", 2000);
     }
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
@@ -80,19 +82,28 @@ public class TestingController {
         } catch (NumberFormatException e) {
             //System.out.println("user input is empty");
         }
+        
         boolean isTrue = false;
         if (testingSession.getRightAnswerId() == userAnswer) {
             isTrue = true;
         }
         testingSession.setUserAnswerToQuestion(isTrue);
         testingSession.setThatUserSeeQuestion(true);
-//        testingSession.setUserAnswerToAnswersArray(isTrue);
         if (testingSession.toNextQuestion() == null){
-//            page = getResults(request);
             return "forward:showResults";
+        }
+        if (testingSession.getTestType() == TestType.TESTING){
+            setTimer(request);
         }
         request.getSession().setAttribute("testingSession", testingSession);
         return page;
+    }
+
+    private void setTimer(HttpServletRequest request) {
+        int minutes = Integer.valueOf(request.getParameter("minutes"));
+        int seconds = Integer.valueOf(request.getParameter("seconds"));
+        request.getSession().setAttribute("minutes", minutes);
+        request.getSession().setAttribute("seconds", seconds);
     }
 
     @RequestMapping(value = "/getPrevQuestion", method = RequestMethod.POST)
@@ -122,7 +133,7 @@ public class TestingController {
     }
 
     private void insertResultIntoDatabase(CurrentTestingSessionStorage testingSession, String result) {
-        resultService.insertResult(testingSession.getUser().getId(),
+        resultService.save(testingSession.getUser().getId(),
                 testingSession.getModule(), result);
     }
 
@@ -130,10 +141,11 @@ public class TestingController {
         Boolean[] answersArray = new Boolean[testingSession.getQuestionCount()];
         int ind = 0;
         for (QuestionWithAnswers q: testingSession.getQuestionWithAnswersList()){
-            if (q.isUserChoseRightAnswer() == true && q.isUserSeeThisQuestion() == true){
-                answersArray[ind++] = true;
-            } else if (q.isUserChoseRightAnswer() == false && q.isUserSeeThisQuestion() == true) {
+            if ((q.isUserChoseRightAnswer() == null || q.isUserSeeThisQuestion() == null)
+                    || (q.isUserChoseRightAnswer() == false && q.isUserSeeThisQuestion() == true)) {
                 answersArray[ind++] = false;
+            } else if (q.isUserChoseRightAnswer() == true && q.isUserSeeThisQuestion() == true){
+                answersArray[ind++] = true;
             } else {
                 answersArray[ind++] = null;
             }
