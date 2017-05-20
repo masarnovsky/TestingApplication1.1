@@ -14,10 +14,10 @@
     <div class="row margin-top-15px padding-right-left-15px">
         <div class="col l3">
             <div class="row">
+                <div id="timer" class="col s12 yellow btn-large accent-4"></div>
+            </div>
+            <div class="row">
                 <div class="col l12 white z-depth-2">
-                    <div class="row">
-                        <div id="timer"></div>
-                    </div>
                     <h6 class="center-align col s12">Вопрос ${qId + 1} из ${testingSession.getQuestionCount()}</h6>
                     <h6 class="center-align col s12">Правильных ответов: ${rightAnswers}</h6>
                     <div class="row"></div>

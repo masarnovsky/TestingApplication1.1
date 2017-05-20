@@ -8,20 +8,25 @@ function openModal() {
 
 var minutes = $('#minutes').val();
 var seconds = $('#seconds').val();
+var runTumer = true;
 
 $('#testPage').ready(function () {
     setInterval(function () {
         $('#timer').html('minutes: ' + minutes + '    seconds: ' + seconds);
-        --seconds;
-        if (seconds == 0){
-            --minutes;
-            if (minutes < 0){
-                $('#timeIsOverModal').modal({
-                    dismissible: false
-                });
-                $('#timeIsOverModal').modal('open');
-            } else {
-                seconds = 59;
+        if (runTumer == true) {
+            --seconds;
+            if (seconds == 0){
+                --minutes;
+                if (minutes < 0){
+                    minutes = 0;
+                    runTumer = false;
+                    $('#timeIsOverModal').modal({
+                        dismissible: false
+                    });
+                    $('#timeIsOverModal').modal('open');
+                } else {
+                    seconds = 59;
+                }
             }
         }
     }, 1000);
@@ -29,10 +34,6 @@ $('#testPage').ready(function () {
 
 function submitForm(id) {
     $('#userAnswer').attr('value', id);
-
-    // WTF?? without tho lines not working
-    // $('#minutes').attr('value', minutes);
-    // $('#seconds').attr('value', seconds);
 }
 
 function setActionToPrevQ() {
