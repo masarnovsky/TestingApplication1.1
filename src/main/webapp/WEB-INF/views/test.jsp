@@ -13,13 +13,18 @@
 <div id="testPage">
     <div class="row margin-top-15px padding-right-left-15px">
         <div class="col l3">
-            <div class="row">
-                <div id="timer" class="col s12 yellow btn-large accent-4"></div>
-            </div>
+            <c:if test="${testType eq 'testing'}">
+                <div class="row">
+                    <div id="timer" class="col s12 yellow btn-large accent-4"></div>
+                </div>
+            </c:if>
             <div class="row">
                 <div class="col l12 white z-depth-2">
+                    <div class="row"></div>
                     <h6 class="center-align col s12">Вопрос ${qId + 1} из ${testingSession.getQuestionCount()}</h6>
-                    <h6 class="center-align col s12">Правильных ответов: ${rightAnswers}</h6>
+                    <c:if test="${testType eq 'training'}">
+                        <h6 class="center-align col s12">Правильных ответов: ${rightAnswers}</h6>
+                    </c:if>
                     <div class="row"></div>
                 </div>
             </div>
@@ -127,25 +132,4 @@
     </div>
 </div>
 <c:import url="footer.jsp"/>
-<script>
-//    var timer = setInterval(function () {
-//        var minutes = $('#minutes').val();
-//        var seconds = $('#seconds').val();
-//        console.log(minutes);
-//        console.log(seconds);
-//        $('#timer').html('minutes: ' + minutes + '    seconds: ' + seconds);
-//        --seconds;
-//        if (seconds == 0){
-//            --minutes;
-//            if (minutes < 0){
-//                $('#timeIsOverModal').modal({
-//                    dismissible: false
-//                });
-//                $('#timeIsOverModal').modal('open');
-//            } else {
-//                seconds = 59;
-//            }
-//        }
-//    }, 1000);
-</script>
 
