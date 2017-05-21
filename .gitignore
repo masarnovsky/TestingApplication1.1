@@ -2,6 +2,7 @@
 test
 TestingApplication1.1.iml
 target
+dbparams.properties
 /src/main/java/by/masarnovsky/controller/UsController.java
 fonts/roboto/
 /src/main/webapp/resources/js/jquery.js
