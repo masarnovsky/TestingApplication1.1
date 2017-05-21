@@ -58,6 +58,22 @@
                             </div>
                         </div>
                     </form>
+
+
+                    <%--<div class="col s12">--%>
+                        <%--<div class="col s12 file-field input-field">--%>
+                            <%--<div class="btn"><span>Загрузить картинку</span>--%>
+                                <%--<input id="imgInp" type="file" name="image" accept="image/*">--%>
+                                <%--</div>--%>
+                            <%--<div class="file-path-wrapper">--%>
+                                <%--<input name="image-name" class="file-path validate" type="text">--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--<div class="col s12" id="imgPlaceholder">--%>
+                            <%--<img id="blah" src="#" />--%>
+                        <%--</div>--%>
+                    </div>
+
                 </div>
             </div>
         </div>

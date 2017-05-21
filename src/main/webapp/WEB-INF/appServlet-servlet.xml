@@ -83,8 +83,6 @@
         <property name="resultDAO" ref="resultDAO"/>
     </bean>
 
-
-
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driver}"/>
         <property name="url" value="${db.url}" />

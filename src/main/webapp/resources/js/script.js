@@ -99,11 +99,14 @@ var thirdType =
         '<div class="col s12">'+
             '<div class="col s12 file-field input-field">' +
                 '<div class="btn"><span>Загрузить картинку</span>'+
-                    '<input type="file" name="image" accept="image/*">' +
+                    '<input id="imgFile" type="file" name="image" onchange="readURL(this)" accept="image/*">' +
                 '</div>' +
                 '<div class="file-path-wrapper">'+
                     '<input name="image-name" class="file-path validate" type="text">' +
                 '</div>' +
+            '</div>' +
+            '<div class="col s12 center-align" id="imgPlaceholder" hidden>' +
+                '<img id="imgPic" class="responsive-img" src="#" />' +
             '</div>' +
         '</div>' +
 
@@ -152,5 +155,16 @@ function qTypeChanged(v){
         document.getElementById('module').innerHTML = thirdType;
     } else if (v == 4){
         document.getElementById('module').innerHTML = fourthType;
+    }
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        $('#imgPlaceholder').show();
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imgPic').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
     }
 }
