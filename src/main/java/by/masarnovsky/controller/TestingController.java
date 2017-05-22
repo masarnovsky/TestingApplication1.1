@@ -72,6 +72,7 @@ public class TestingController {
         request.getSession().setAttribute("testingSession", testingSession);
         request.getSession().setAttribute("atestingSession", null);
         request.getSession().setAttribute("currentTimer", 2000);
+        request.getSession().setAttribute("rightAnswers", getRightAnswersCount(testingSession));
     }
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
@@ -98,6 +99,7 @@ public class TestingController {
             setTimer(request);
         }
         request.getSession().setAttribute("testingSession", testingSession);
+        request.getSession().setAttribute("rightAnswers", getRightAnswersCount(testingSession));
         return page;
     }
 
@@ -118,9 +120,8 @@ public class TestingController {
     @RequestMapping(value = "/showResults")
     String getResults(HttpServletRequest request, Model ui) {
         CurrentTestingSessionStorage testingSession = (CurrentTestingSessionStorage) request.getSession().getAttribute("testingSession");
-        Boolean[] answers = checkRightAnswers(testingSession);
-        int count = (int) Arrays.stream(answers).filter(a -> a == true).count();
-        int procent = (100 * count) / answers.length;
+        int count = getRightAnswersCount(testingSession);
+        int procent = (100 * count) / testingSession.getQuestionCount();
         String resultMsg = "failed";
         if (procent >= 75)
             resultMsg = "passed";
@@ -132,6 +133,11 @@ public class TestingController {
             insertResultIntoDatabase(testingSession, resultMsg);
         }
         return "endTesting";
+    }
+
+    private int getRightAnswersCount(CurrentTestingSessionStorage testingSession){
+        Boolean[] answers = checkRightAnswers(testingSession);
+        return (int) Arrays.stream(answers).filter(a -> a == true).count();
     }
 
     private void insertResultIntoDatabase(CurrentTestingSessionStorage testingSession, String result) {
