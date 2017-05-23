@@ -48,4 +48,24 @@ public class ResultServiceImpl implements ResultService{
     public void save(int userId, int moduleId, String result) {
         resultDAO.save(userId, moduleId, result);
     }
+
+    @Override
+    public int getPassedTestsCount() {
+        return resultDAO.getPassedTestsCount();
+    }
+
+    @Override
+    public int getFailedTestsCount() {
+        return resultDAO.getFailedTestsCount();
+    }
+
+    @Override
+    public int getPassedTestsCountForUser(User user) {
+        return resultDAO.getPassedTestsCountForUser(user);
+    }
+
+    @Override
+    public int getFailedTestsCountForUser(User user) {
+        return resultDAO.getFailedTestsCountForUser(user);
+    }
 }

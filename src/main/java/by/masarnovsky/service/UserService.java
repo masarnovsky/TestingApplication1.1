@@ -12,4 +12,5 @@ public interface UserService {
     List<User> getUserByLogin(String login);
     void delete(int id);
     boolean isAdmin(User user);
+    int getUsersCount();
 }

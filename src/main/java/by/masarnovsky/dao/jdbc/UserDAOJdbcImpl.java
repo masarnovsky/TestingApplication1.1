@@ -3,6 +3,7 @@ package by.masarnovsky.dao.jdbc;
 import by.masarnovsky.dao.UserDAO;
 import by.masarnovsky.dao.rowmapper.UserRowMapper;
 import by.masarnovsky.model.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ public class UserDAOJdbcImpl implements UserDAO {
     private final String ADD_NEW_USER = "insert into users(name, surname, email, login, password) values (?, ?, ?, ?, ?)";
     private final String GET_USER_BY_LOGIN = "select * from users where login=?";
     private final String GET_USER_BY_ID = "select * from users where id=?";
+    private final String GET_USERS_COUNT = "select count(*) from users where role = 'user'";
 
     //@Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -52,6 +54,15 @@ public class UserDAOJdbcImpl implements UserDAO {
     @Override
     public boolean isAdmin(User user) {
         return user.getRole().equals("admin");
+    }
+
+    @Override
+    public int getUsersCount() {
+        try {
+            return jdbcTemplate.queryForObject(GET_USERS_COUNT, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
     }
 }
 

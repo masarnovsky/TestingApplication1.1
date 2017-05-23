@@ -13,4 +13,8 @@ public interface ResultService{
     List<String> getUserStringResultByModule(int idUser, int idModule);
     void save(Result result);
     void save(int userId, int moduleId, String result);
+    int getPassedTestsCount();
+    int getFailedTestsCount();
+    int getPassedTestsCountForUser(User user);
+    int getFailedTestsCountForUser(User user);
 }

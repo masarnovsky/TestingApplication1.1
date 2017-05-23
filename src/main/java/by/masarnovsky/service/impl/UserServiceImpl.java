@@ -44,4 +44,9 @@ public class UserServiceImpl implements UserService {
     public boolean isAdmin(User user) {
         return userDAO.isAdmin(user);
     }
+
+    @Override
+    public int getUsersCount() {
+        return userDAO.getUsersCount();
+    }
 }

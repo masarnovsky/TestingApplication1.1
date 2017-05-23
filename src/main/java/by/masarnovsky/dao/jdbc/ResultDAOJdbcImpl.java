@@ -5,6 +5,7 @@ import by.masarnovsky.dao.rowmapper.ResultRowMapper;
 import by.masarnovsky.model.Result;
 import by.masarnovsky.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,10 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     private final String GET_USER_RESULT_BY_MODULE = "select * from results where userId=? and module=?";
     private final String GET_USER_STRING_RESULT_BY_MODULE = "select result from results where userId=? and module=?";
     private final String INSERT_RESULT = "insert into results(userId, module, result) values(?, ?, ?)";
+    private final String GET_PASSED_TESTS_COUNT = "select count(*) from results where result = 'passed'";
+    private final String GET_FAILED_TESTS_COUNT = "select count(*) from results where result = 'failed'";
+    private final String GET_PASSED_TESTS_COUNT_FOR_USER = "select count(*) from results where result = 'passed' and userId = ?";
+    private final String GET_FAILED_TESTS_COUNT_FOR_USER = "select count(*) from results where result = 'failed' and userId = ?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -62,5 +67,42 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     @Override
     public void save(int userId, int moduleId, String result) {
         jdbcTemplate.update(INSERT_RESULT, userId, moduleId, result);
+    }
+
+    @Override
+    public int getPassedTestsCount() {
+        try {
+            return jdbcTemplate.queryForObject(GET_PASSED_TESTS_COUNT, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+
+    }
+
+    @Override
+    public int getFailedTestsCount() {
+        try {
+            return jdbcTemplate.queryForObject(GET_FAILED_TESTS_COUNT, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getPassedTestsCountForUser(User user) {
+        try {
+            return jdbcTemplate.queryForObject(GET_PASSED_TESTS_COUNT_FOR_USER, new Object[]{user.getId()}, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getFailedTestsCountForUser(User user) {
+        try {
+            return jdbcTemplate.queryForObject(GET_FAILED_TESTS_COUNT_FOR_USER, new Object[]{user.getId()}, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
     }
 }
