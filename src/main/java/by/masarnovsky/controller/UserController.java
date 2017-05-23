@@ -86,8 +86,14 @@ public class UserController {
     public String cabinet(HttpServletRequest request, Model ui){
         updateModulesResults(request);
         updateResultHistory(request, ui);
-        // get&set module status (from results)
+        updateChart(request, ui);
         return "cabinet";
+    }
+
+    private void updateChart(HttpServletRequest request, Model ui) {
+        User user = (User) request.getSession().getAttribute("user");
+        ui.addAttribute("failedAttempts", resultService.getFailedTestsCountForUser(user));
+        ui.addAttribute("passedAttempts", resultService.getPassedTestsCountForUser(user));
     }
 
     private void updateModulesResults(HttpServletRequest request){

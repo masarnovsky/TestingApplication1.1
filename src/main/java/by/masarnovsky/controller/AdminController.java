@@ -4,10 +4,7 @@ import by.masarnovsky.model.Answer;
 import by.masarnovsky.model.Module;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.QuestionType;
-import by.masarnovsky.service.AnswerService;
-import by.masarnovsky.service.ModuleService;
-import by.masarnovsky.service.QuestionService;
-import by.masarnovsky.service.UserService;
+import by.masarnovsky.service.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,14 +35,20 @@ public class AdminController {
     @Autowired
     AnswerService answerService;
 
+    @Autowired
+    ResultService resultService;
+
     @RequestMapping(value = "/adminhome")
     String adminHome(){
         return "adminhome";
     }
 
-    @RequestMapping(value = "/statistic")
+    @RequestMapping(value = "/statistics")
     String getStatistic(Model ui){
-        return "adminstatistic";
+        ui.addAttribute("usersCount", userService.getUsersCount());
+        ui.addAttribute("passedCount", resultService.getPassedTestsCount());
+        ui.addAttribute("failedCount", resultService.getFailedTestsCount());
+        return "adminstatistics";
     }
 
     @RequestMapping(value = "/createQuestion")
@@ -79,8 +82,10 @@ public class AdminController {
         insertAnswers(request, questionId, qType);
 
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
+        ui.addAttribute("link", "createQuestion");
+        ui.addAttribute("linkmessage", "Добавить еще вопрос");
 
-        return "forward:createQuestion";
+        return "adminquestionmanipulation";
     }
 
     private void insertAnswers(HttpServletRequest request, int questionId, int qType) {

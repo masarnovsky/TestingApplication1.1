@@ -6,13 +6,19 @@
     <title>ECDL тестирование</title>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/resources/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="/resources/css/style.css?var=2"/>
+    <link type="text/css" rel="stylesheet" href="/resources/css/style.css?var=3"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body class="grey lighten-3">
 <nav class="light-blue lighten-1" role="navigation">
 
-        <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">ECDL</a>
+        <div class="nav-wrapper container">
+            <c:if test="${user.getRole() == 'admin'}">
+                <a id="logo-container" href="/admin/adminhome" class="brand-logo">ECDL</a>
+            </c:if>
+            <c:if test="${user.getRole() == 'user'}">
+                <a id="logo-container" href="/home" class="brand-logo">ECDL</a>
+            </c:if>
             <ul class="right hide-on-med-and-down">
                 <c:if test="${testingSession eq null}">
                 <c:if test="${isLogged == true and user.getRole() eq 'user'}">
