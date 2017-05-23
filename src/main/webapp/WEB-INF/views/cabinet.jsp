@@ -26,11 +26,11 @@
 
                             <c:if test="${mStatus eq 'not_started'}">
                                 <c:set var="mStatusRus" value="Не начат"/>
-                                <c:set var="cl" value=""/>
+                                <c:set var="cl" value="blue"/>
                             </c:if>
                             <c:if test="${mStatus eq 'passed'}">
                                 <c:set var="mStatusRus" value="Сдан"/>
-                                <c:set var="cl" value="blue"/>
+                                <c:set var="cl" value="green"/>
                             </c:if>
                             <c:if test="${mStatus eq 'failed'}">
                                 <c:set var="mStatusRus" value="Провален"/>
@@ -44,14 +44,13 @@
                         </c:forEach>
                     </div>
                 </section>
-                <%--<section id="chart" class="row z-depth-2 white">--%>
-                    <%--<div class="col s5">--%>
-                        <%--//chart--%>
-                    <%--</div>--%>
-                    <%--<div class="col s7">--%>
-                        <%--//info--%>
-                    <%--</div>--%>
-                <%--</section>--%>
+                <section id="chart" class="col s12 z-depth-2 white margin-top-15px without-margin-bottom">
+                    <div class="row"></div>
+                    <div class="col s8 offset-s2">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="row"></div>
+                </section>
                 <section id="history" hidden class="col s12 white z-depth-2 margin-top-15px without-margin-bottom">
                     <c:if test="${resultHistory.size() eq 0}">
                         <div class="row">
@@ -106,4 +105,38 @@
     </div>
 </div>
 </div>
+<script type="text/javascript" src="/resources/js/Chart.min.js"></script>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Сдано", "Провалено"],
+            datasets: [{
+                label: 'Соотношение результатов',
+                data: [${passedAttempts}, ${failedAttempts}],
+                backgroundColor: [
+                    'green',
+                    'red'
+                ],
+                borderColor: [
+                    'green',
+                    'red',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                position: 'right',
+                display: true,
+            },
+            title: {
+                display: true,
+                text: 'Соотношение попыток'
+            }
+        }
+    });
+
+</script>
 <c:import url="footer.jsp"/>
