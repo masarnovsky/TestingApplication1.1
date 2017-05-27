@@ -53,11 +53,22 @@ public class AdminController {
 
     @RequestMapping(value = "/createQuestion")
     String createQuestion(Model ui){
-        List<Module> modulesList = moduleService.getModules();
-        List<QuestionType> qtList = questionService.getTypes();
-        ui.addAttribute("modulesList", modulesList);
-        ui.addAttribute("qtList", qtList);
+        collectModulesAndTypes(ui);
         return "admincreatequestion";
+    }
+
+    @RequestMapping(value = "/editQuestion")
+    String editQuestion(Model ui){
+        collectModulesAndTypes(ui);
+        return "admineditquestion";
+    }
+
+    @RequestMapping(value = "/getQuestionsListForModule")
+    String getQuestionsListForModule(Model ui, HttpServletRequest request){
+        System.out.println("module: " + request.getParameter("module"));
+        List<Question> questions = questionService.getAllQuestionsForModule(Integer.valueOf(request.getParameter("module")));
+        ui.addAttribute("questions", questions);
+        return "adminlistofquestions";
     }
 
     @RequestMapping(value = "/insertQuestionIntoDatabase", method = RequestMethod.POST)
@@ -118,5 +129,12 @@ public class AdminController {
         } else {
             //
         }
+    }
+
+    private void collectModulesAndTypes(Model ui) {
+        List<Module> modulesList = moduleService.getModules();
+        List<QuestionType> qtList = questionService.getTypes();
+        ui.addAttribute("modulesList", modulesList);
+        ui.addAttribute("qtList", qtList);
     }
 }
