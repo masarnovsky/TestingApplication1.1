@@ -23,6 +23,11 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.getQuestionsForModule(moduleId, count);
     }
 
+    @Override
+    public List<Question> getAllQuestionsForModule(int module) {
+        return questionDAO.getAllQuestionsForModule(module);
+    }
+
     public Question getQuestionById(int id) {
         return questionDAO.getQuestionById(id);
     }

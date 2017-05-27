@@ -18,6 +18,7 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     private final String GET_RANDOM_QUESTION_SET = "select * from questions order by rand() limit ?";
     private final String GET_QUESTIONS_FOR_MODULE = "select * from questions where module = ? order by rand() limit ?";
+    private final String GET_ALL_QUESTIONS_FOR_MODULE = "select * from questions where module = ?";
     private final String GET_QUESTION_TYPES = "select * from questionTypes";
     private final String GET_LAST_ID = "select LAST_INSERT_ID()";
     private final String INSERT_QUESTION = "insert into questions(module, question, img, type) values(?,?,?,?)";
@@ -34,6 +35,11 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
     @Override
     public List<Question> getQuestionsForModule(int moduleId, int count) {
         return jdbcTemplate.query(GET_QUESTIONS_FOR_MODULE, new Object[]{moduleId, count}, new QuestionRowMapper());
+    }
+
+    @Override
+    public List<Question> getAllQuestionsForModule(int module) {
+        return jdbcTemplate.query(GET_ALL_QUESTIONS_FOR_MODULE, new Object[]{module}, new QuestionRowMapper());
     }
 
     public Question getQuestionById(int id) {
