@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col s12 center-align">
                     <h4>Создание нового вопроса</h4>
-                    <h5 class="flow-text">Для создания вопроса заполите необходимые поля</h5>
+                    <h5 class="flow-text">Для создания вопроса заполните необходимые поля</h5>
                     <h5 class="flow-text">Правильный ответ должен идти первым!</h5>
                     <h5 class="flow-text">${adminmessage}</h5>
                 </div>
@@ -58,20 +58,6 @@
                             </div>
                         </div>
                     </form>
-
-
-                    <%--<div class="col s12">--%>
-                        <%--<div class="col s12 file-field input-field">--%>
-                            <%--<div class="btn"><span>Загрузить картинку</span>--%>
-                                <%--<input id="imgInp" type="file" name="image" accept="image/*">--%>
-                                <%--</div>--%>
-                            <%--<div class="file-path-wrapper">--%>
-                                <%--<input name="image-name" class="file-path validate" type="text">--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--<div class="col s12" id="imgPlaceholder">--%>
-                            <%--<img id="blah" src="#" />--%>
-                        <%--</div>--%>
                     </div>
 
                 </div>

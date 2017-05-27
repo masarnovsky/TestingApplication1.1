@@ -67,7 +67,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginUser(User user, Model ui, HttpServletRequest request){
         List<User> currentUser = userService.getUserByLogin(user.getLogin());
-        String page = "redirect:/home";
+        String page = "redirect:/u/home";
         if (currentUser != null && currentUser.size() > 0 && currentUser.get(0).getPassword().equals(user.getPassword())){
             if (userService.isAdmin(currentUser.get(0))){
                 page = "redirect:/admin/adminhome";
@@ -82,7 +82,7 @@ public class UserController {
         return page;
     }
 
-    @RequestMapping("/cabinet")
+    @RequestMapping("/u/cabinet")
     public String cabinet(HttpServletRequest request, Model ui){
         updateModulesResults(request);
         updateResultHistory(request, ui);

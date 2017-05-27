@@ -164,7 +164,7 @@ public class TestingController {
     @RequestMapping(value = "/breakTest")
     String breakTest(HttpServletRequest request) {
         request.getSession().setAttribute("testingSession", null);
-        return "redirect:/home";
+        return "redirect:/u/home";
     }
 
     private boolean isAnotherTestStarted(HttpServletRequest request){

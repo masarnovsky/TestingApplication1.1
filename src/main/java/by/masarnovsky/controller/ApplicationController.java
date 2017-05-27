@@ -21,7 +21,7 @@ public class ApplicationController {
         return "index";
     }
 
-    @RequestMapping("/home")
+    @RequestMapping("/u/home")
     String getHome(HttpServletRequest request) {
         List<Module> modules = (List<Module>) request.getSession().getAttribute("modules");
         if (modules == null){

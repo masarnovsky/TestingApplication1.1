@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/admin/*")
-public class SecurityFilter implements Filter {
+@WebFilter(urlPatterns = {"/u/*", "/testing/*"})
+public class SecurityFilterUser implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -22,8 +22,7 @@ public class SecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-//        System.out.println("in filter " + user.getRole());
-        if (user == null || !user.getRole().equals("admin")) {
+        if (user == null || !user.getRole().equals("user")) {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/");
             dispatcher.forward(request, response);
             return;

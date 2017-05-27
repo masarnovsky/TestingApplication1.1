@@ -17,16 +17,16 @@
                 <a id="logo-container" href="/admin/adminhome" class="brand-logo">ECDL</a>
             </c:if>
             <c:if test="${user.getRole() == 'user'}">
-                <a id="logo-container" href="/home" class="brand-logo">ECDL</a>
+                <a id="logo-container" href="/u/home" class="brand-logo">ECDL</a>
             </c:if>
             <ul class="right hide-on-med-and-down">
                 <c:if test="${testingSession eq null}">
                 <c:if test="${isLogged == true and user.getRole() eq 'user'}">
-                    <li><a href="/home">Тесты</a></li>
-                    <li><a href="/user/cabinet">Пользователь: ${user.getLogin()}</a></li>
+                    <li><a href="/u/home">Тесты</a></li>
+                    <li><a href="/user/u/cabinet">Пользователь: ${user.getLogin()}</a></li>
                 </c:if>
                 <c:if test="${isLogged == true and user.getRole() == 'admin'}">
-                    <li>Панель администратора</li>
+                    <li><a id="adminhome" href="/admin/adminhome">Панель администратора</a></li>
                 </c:if>
                 </c:if>
                 <c:if test="${isLogged == true}">

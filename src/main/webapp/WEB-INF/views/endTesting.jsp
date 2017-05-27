@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <a class="btn waves-effect waves-light indigo col s12 m6 l4 offset-l4" href="/home">На главную</a>
+                    <a class="btn waves-effect waves-light indigo col s12 m6 l4 offset-l4" href="/u/home">На главную</a>
                 </div>
             </div>
         </div>
