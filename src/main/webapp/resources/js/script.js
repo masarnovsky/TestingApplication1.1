@@ -2,6 +2,24 @@ $(document).ready(function() {
     $('select').material_select();
 });
 
+function setModule(id) {
+    console.log(id);
+    $('#moduleInput').attr('value', id);
+}
+
+$('#butt').click(function() {
+    console.log($('#moduleInput').val());
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: "/admin/getQuestionsListForModule?module=" + $('#moduleInput').val(),
+        data: "",
+        success: function(response){
+            $('#containerForModules').html(response);
+        }
+    });
+});
+
 function openModal() {
     $('#breakModel').modal();
 }
