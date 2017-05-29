@@ -9,4 +9,5 @@ public interface AnswerService {
     List<Answer> getAnswersForQuestion(Question q);
     List<Answer> getAnswersForQuestion(int id);
     void save(Answer a);
+    int update(Answer a);
 }

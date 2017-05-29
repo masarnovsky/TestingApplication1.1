@@ -26,4 +26,9 @@ public class AnswerServiceImpl implements AnswerService {
     public void save(Answer a) {
         answerDAO.save(a);
     }
+
+    @Override
+    public int update(Answer a) {
+        return answerDAO.update(a);
+    }
 }

@@ -16,6 +16,7 @@ public class AnswerDAOJdbcImpl implements AnswerDAO {
 
     private final String GET_ANSWERS_FOR_QUESTION = "select * from answers where questionId=?";
     private final String INSERT_ANSWER = "insert into answers(questionId, text, isRight) values(?,?,?)";
+    private final String UPDATE_ANSWER = "update answers set questionId=?, text=?, isRight=? where id=?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -33,5 +34,10 @@ public class AnswerDAOJdbcImpl implements AnswerDAO {
     @Override
     public void save(Answer a) {
         jdbcTemplate.update(INSERT_ANSWER, new Object[]{a.getQuestionId(), a.getText(), a.isRight()});
+    }
+
+    @Override
+    public int update(Answer a) {
+        return jdbcTemplate.update(UPDATE_ANSWER, new Object[]{a.getQuestionId(), a.getText(), a.isRight(), a.getId()});
     }
 }
