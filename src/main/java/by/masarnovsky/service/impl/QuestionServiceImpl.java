@@ -38,6 +38,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public int update(Question q) {
+        return questionDAO.update(q);
+    }
+
+    @Override
     public List<QuestionType> getTypes() {
         return questionDAO.getTypes();
     }

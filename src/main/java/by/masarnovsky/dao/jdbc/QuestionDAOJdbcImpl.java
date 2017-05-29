@@ -6,6 +6,7 @@ import by.masarnovsky.dao.rowmapper.QuestionTypeRowMapper;
 import by.masarnovsky.model.Question;
 import by.masarnovsky.model.QuestionType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,8 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
     private final String GET_QUESTION_TYPES = "select * from questionTypes";
     private final String GET_LAST_ID = "select LAST_INSERT_ID()";
     private final String INSERT_QUESTION = "insert into questions(module, question, img, type) values(?,?,?,?)";
+    private final String GET_QUESTION_BY_ID = "select * from questions where id=?";
+    private final String UPDATE_QUESTION = "update questions set module=?, question=?, img=?, type=? where id=?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -43,7 +46,11 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
     }
 
     public Question getQuestionById(int id) {
-        return null;
+        try {
+            return jdbcTemplate.queryForObject(GET_QUESTION_BY_ID, new Object[]{id}, new QuestionRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
@@ -51,6 +58,11 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
     public int save(Question q) {
         jdbcTemplate.update(INSERT_QUESTION, new Object[]{q.getModule(), q.getQuestion(), q.getImg(), q.getType()});
         return jdbcTemplate.queryForObject(GET_LAST_ID, Integer.class);
+    }
+
+    @Override
+    public int update(Question q) {
+        return jdbcTemplate.update(UPDATE_QUESTION, new Object[]{q.getModule(), q.getQuestion(), q.getId(), q.getType(), q.getId()});
     }
 
     @Override

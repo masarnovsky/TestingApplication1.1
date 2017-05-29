@@ -11,5 +11,6 @@ public interface QuestionDAO {
     List<Question> getAllQuestionsForModule(int module);
     Question getQuestionById(int id);
     int save(Question q);
+    int update(Question q);
     List<QuestionType> getTypes();
 }
