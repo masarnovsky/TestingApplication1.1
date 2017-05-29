@@ -65,10 +65,20 @@ public class AdminController {
 
     @RequestMapping(value = "/getQuestionsListForModule")
     String getQuestionsListForModule(Model ui, HttpServletRequest request){
-        System.out.println("module: " + request.getParameter("module"));
         List<Question> questions = questionService.getAllQuestionsForModule(Integer.valueOf(request.getParameter("module")));
         ui.addAttribute("questions", questions);
         return "adminlistofquestions";
+    }
+
+    @RequestMapping(value = "/editQuestionById")
+    String editQuestionById(@RequestParam (value = "id", required = true) int id, HttpServletRequest request, Model ui){
+//        List<Question> questions = (List<Question>) request.getSession().getAttribute("questions");
+        Question question = questionService.getQuestionById(id);
+        List<Answer> answers = answerService.getAnswersForQuestion(question);
+        collectModulesAndTypes(ui);
+        request.getSession().setAttribute("question", question);
+        request.getSession().setAttribute("answers", answers);
+        return "editquestionform";
     }
 
     @RequestMapping(value = "/insertQuestionIntoDatabase", method = RequestMethod.POST)
@@ -91,12 +101,32 @@ public class AdminController {
         Question q = new Question(module, question, imgName, qType);
         int questionId = questionService.save(q);
         insertAnswers(request, questionId, qType);
-
         ui.addAttribute("adminmessage", "Вопрос добавлен в базу данных");
         ui.addAttribute("link", "createQuestion");
         ui.addAttribute("linkmessage", "Добавить еще вопрос");
-
         return "adminquestionmanipulation";
+    }
+
+    @RequestMapping(value = "/updateQuestionInDatabase", method = RequestMethod.POST)
+    String updateQuestionInDatabase(Model ui, @RequestParam(value = "image", required = false)MultipartFile image,
+                                    HttpServletRequest request) {
+        String questionInput = request.getParameter("questionInput");
+        Question question = (Question) request.getSession().getAttribute("question");
+        question.setQuestion(questionInput);
+        questionService.update(question);
+        updateAnswers(request);
+        ui.addAttribute("adminmessage", "&nbsp; Вопрос был обновлен &nbsp;");
+        ui.addAttribute("link", "editQuestion");
+        ui.addAttribute("linkmessage", "Изменить еще вопрос");
+        return "adminquestionmanipulation";
+    }
+
+    private void updateAnswers(HttpServletRequest request) {
+        List<Answer> answers = (List<Answer>) request.getSession().getAttribute("answers");
+        for (int i = 0; i < answers.size(); i++) {
+            answers.get(i).setText(request.getParameter("answer"+(i+1)));
+            answerService.update(answers.get(i));
+        }
     }
 
     private void insertAnswers(HttpServletRequest request, int questionId, int qType) {

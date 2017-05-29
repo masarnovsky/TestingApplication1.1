@@ -62,7 +62,7 @@ public class QuestionDAOJdbcImpl implements QuestionDAO{
 
     @Override
     public int update(Question q) {
-        return jdbcTemplate.update(UPDATE_QUESTION, new Object[]{q.getModule(), q.getQuestion(), q.getId(), q.getType(), q.getId()});
+        return jdbcTemplate.update(UPDATE_QUESTION, new Object[]{q.getModule(), q.getQuestion(), q.getImg(), q.getType(), q.getId()});
     }
 
     @Override
