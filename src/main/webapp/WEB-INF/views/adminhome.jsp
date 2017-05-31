@@ -2,12 +2,27 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:import url="header.jsp"/>
 
-<div class="container valign-wrapper">
-    <div class="row valign">
-        <div class="col s12 center-align">
-            <div><h4><a href="/admin/statistics">Статистика</a></h4></div>
-            <div><h4><a href="/admin/createQuestion">Создать вопрос</a></h4></div>
-            <div><h4><a href="/admin/editQuestion">Редактировать вопрос</a></h4></div>
+<div class="container">
+    <div class="row white z-depth-2 margin-top-15px">
+        <div class="col l12">
+            <div class="row"></div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <a class="btn indigo col l6 offset-l3" href="/admin/statistics">Статистика</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l12 center-align">
+                    <a class="btn indigo col l6 offset-l3" href="/admin/createQuestion">Создать вопрос</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col l12 center-align">
+                    <a class="btn indigo col l6 offset-l3" href="/admin/editQuestion">Редактировать вопрос</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<c:import url="footer.jsp"/>
