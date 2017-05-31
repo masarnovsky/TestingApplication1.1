@@ -56,8 +56,9 @@
                             <c:if test="${question.getType() ne 4}">
                                 <c:if test="${question.getImg() ne null}">
                                     <div class="col s12 center-align" id="imgPlaceholder">
-                                        <img id="imgPic" class="responsive-img" src="/resources/img/${question.getImg()}" />
+                                        <img id="imgPic" class="responsive-img" src="/resources/img/${question.getImg()}" style="border: 1px solid black;"/>
                                     </div>
+                                    <div class="margin-top-15px"></div>
                                 </c:if>
                                 <c:set var="ind" value="1"/>
                                 <c:forEach var="answer" items="${answers}" >

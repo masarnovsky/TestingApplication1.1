@@ -124,7 +124,7 @@ var thirdType =
                 '</div>' +
             '</div>' +
             '<div class="col s12 center-align" id="imgPlaceholder" hidden>' +
-                '<img id="imgPic" class="responsive-img" src="#" />' +
+                '<img id="imgPic" class="responsive-img" src="#" style="border: 1px solid black;" />' +
             '</div>' +
         '</div>' +
 

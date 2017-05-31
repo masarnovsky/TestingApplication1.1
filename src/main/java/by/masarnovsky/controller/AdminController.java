@@ -94,8 +94,8 @@ public class AdminController {
         if (image == null)
             ui.addAttribute("uploadImage", null);
         else{
-            imgName = request.getParameter("image-name");
-            saveImage(imgName, image);
+//            imgName = request.getParameter("image-name");
+            imgName = saveImage(image);
         }
 
         Question q = new Question(module, question, imgName, qType);
@@ -147,18 +147,20 @@ public class AdminController {
         }
     }
 
-    private void saveImage(String filename, MultipartFile image) {
+    private String saveImage(MultipartFile image) {
         if (!image.isEmpty()){
             try {
                 String root = "C:/Apache/Tomcat9/webapps/TestingApplication1.1/src/main/webapp/resources/img/";
-                File file = new File(root + image.hashCode() + ".jpg");
+                String name = String.valueOf(image.hashCode());
+                System.out.println(name);
+                File file = new File(root + name + ".jpg");
                 FileUtils.writeByteArrayToFile(file, image.getBytes());
+                return name;
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            //
         }
+        return null;
     }
 
     private void collectModulesAndTypes(Model ui) {
