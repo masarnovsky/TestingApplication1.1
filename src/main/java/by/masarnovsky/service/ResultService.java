@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ResultService{
     List<Result> getAllResults();
+    int getUsersCountForModule(int module);
     List<Result> getUserResult(User user);
     List<Result> getUserResult(int id);
     List<Result> getUserResultByModule(int idUser, int idModule);
@@ -17,4 +18,6 @@ public interface ResultService{
     int getFailedTestsCount();
     int getPassedTestsCountForUser(User user);
     int getFailedTestsCountForUser(User user);
+    int getPassedTestsCountForModule(int module);
+    int getFailedTestsCountForModule(int module);
 }

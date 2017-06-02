@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div id="module">
-                            <c:if test="${question.getType() ne 4}">
+                            <%--<c:if test="${question.getType() ne 4}">--%>
                                 <c:if test="${question.getImg() ne null}">
                                     <div class="col s12 center-align" id="imgPlaceholder">
                                         <img id="imgPic" class="responsive-img" src="/resources/img/${question.getImg()}" style="border: 1px solid black;"/>
@@ -68,7 +68,7 @@
                                         <c:set var="ind" value="${ind + 1}"/>
                                     </div>
                                 </c:forEach>
-                            </c:if>
+                            <%--</c:if>--%>
                         </div>
                         <div class="row">
                             <div class="col s12">

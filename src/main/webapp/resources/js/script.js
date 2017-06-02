@@ -169,11 +169,12 @@ function qTypeChanged(v){
     if (v == 2){
        document.getElementById('module').innerHTML = secondType;
     }
-    if (v == 3){
+    if (v == 3 || v == 4){
         document.getElementById('module').innerHTML = thirdType;
-    } else if (v == 4){
-        document.getElementById('module').innerHTML = fourthType;
     }
+    // else if (v == 4){
+    //     document.getElementById('module').innerHTML = fourthType;
+    // }
 }
 
 function readURL(input) {

@@ -1,9 +1,6 @@
 package by.masarnovsky.controller;
 
-import by.masarnovsky.model.Answer;
-import by.masarnovsky.model.Module;
-import by.masarnovsky.model.Question;
-import by.masarnovsky.model.QuestionType;
+import by.masarnovsky.model.*;
 import by.masarnovsky.service.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,6 +43,20 @@ public class AdminController {
 
     @RequestMapping(value = "/statistics")
     String getStatistic(Model ui){
+        List<Module> modules = moduleService.getModules();
+        List<ModulesStatistic> statistics = new ArrayList<>();
+        for (Module m: modules){
+            statistics.add(
+                    new ModulesStatistic(
+                            m.getId(), m.getTheme(),
+                            resultService.getUsersCountForModule(m.getId()),
+                            resultService.getPassedTestsCountForModule(m.getId()),
+                            resultService.getFailedTestsCountForModule(m.getId())
+                    )
+            );
+        }
+
+        ui.addAttribute("statistics", statistics);
         ui.addAttribute("usersCount", userService.getUsersCount());
         ui.addAttribute("passedCount", resultService.getPassedTestsCount());
         ui.addAttribute("failedCount", resultService.getFailedTestsCount());
@@ -151,9 +163,8 @@ public class AdminController {
         if (!image.isEmpty()){
             try {
                 String root = "C:/Apache/Tomcat9/webapps/TestingApplication1.1/src/main/webapp/resources/img/";
-                String name = String.valueOf(image.hashCode());
-                System.out.println(name);
-                File file = new File(root + name + ".jpg");
+                String name = String.valueOf(image.hashCode()) + ".jpg";
+                File file = new File(root + name);
                 FileUtils.writeByteArrayToFile(file, image.getBytes());
                 return name;
             } catch (IOException e) {

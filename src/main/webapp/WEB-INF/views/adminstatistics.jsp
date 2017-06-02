@@ -4,27 +4,60 @@
 <c:import url="header.jsp"/>
 <div class="container">
     <div class="row white z-depth-2 margin-top-15px">
-        <div class="col s12">
+        <div class="col l12">
             <div class="row">
-                <h4 class="col s12 center-align">Общая статистика</h4>
-            </div>
-            <div class="row center-align">
-                <div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px blue">Пользователей: ${usersCount}</span></div>
-                <div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px green">Успешно сдано: ${passedCount}</span> </div>
-                <div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px red">Провалено: ${failedCount}</span> </div>
+                <h4 class="col l12 center-align">Общая статистика</h4>
             </div>
             <div class="row">
-                <div class="col s8 offset-s2">
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <button id="detailStat" class="btn indigo col s4 offset-s4" onclick="detailStat()">Детальная статистика</button>
+                <div class="col l12">
+                    <table class="col s12 striped centered padding-bottom-30px">
+                        <thead><tr>
+                            <th>Модуль</th>
+                            <th>Пользователи</th>
+                            <th>Сдано</th>
+                            <th>Провалено</th>
+                        </tr></thead>
+                        <tbody>
+                        <c:forEach var="s" items="${statistics}">
+                            <tr>
+                                <td>${s.getModule()}</td>
+                                <td>${s.getPeoples()}</td>
+                                <td>${s.getPassed()}</td>
+                                <td>${s.getFailed()}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <%--<div class="row white z-depth-2 margin-top-15px">--%>
+        <%--<div class="col s12">--%>
+            <%--<div class="row">--%>
+                <%--<h4 class="col s12 center-align">Общая статистика</h4>--%>
+            <%--</div>--%>
+            <%--<div class="row center-align">--%>
+                <%--<div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px blue">Пользователей: ${usersCount}</span></div>--%>
+                <%--<div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px green">Успешно сдано: ${passedCount}</span> </div>--%>
+                <%--<div class="padding-right-left-15px col s4"><span class="z-depth-2 padding-15px-10px red">Провалено: ${failedCount}</span> </div>--%>
+            <%--</div>--%>
+            <%--<div class="row">--%>
+                <%--<div class="col s8 offset-s2">--%>
+                    <%--<canvas id="myChart"></canvas>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+
+        <%--</div>--%>
+    <%--</div>--%>
+
+    <%--<div class="row">--%>
+        <%--<div class="col s12">--%>
+            <%--<button id="detailStat" class="btn indigo col s4 offset-s4" onclick="detailStat()">Детальная статистика</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
 </div>
 <script type="text/javascript" src="/resources/js/Chart.min.js"></script>
 <script>

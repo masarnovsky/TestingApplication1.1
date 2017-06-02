@@ -20,6 +20,11 @@ public class ResultServiceImpl implements ResultService{
     }
 
     @Override
+    public int getUsersCountForModule(int module) {
+        return resultDAO.getUsersCountForModule(module);
+    }
+
+    @Override
     public List<Result> getUserResult(User user) {
         return getUserResult(user.getId());
     }
@@ -67,5 +72,15 @@ public class ResultServiceImpl implements ResultService{
     @Override
     public int getFailedTestsCountForUser(User user) {
         return resultDAO.getFailedTestsCountForUser(user);
+    }
+
+    @Override
+    public int getPassedTestsCountForModule(int module) {
+        return resultDAO.getPassedTestsCountForModule(module);
+    }
+
+    @Override
+    public int getFailedTestsCountForModule(int module) {
+        return resultDAO.getFailedTestsCountForModule(module);
     }
 }

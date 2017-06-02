@@ -26,6 +26,9 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     private final String GET_FAILED_TESTS_COUNT = "select count(*) from results where result = 'failed'";
     private final String GET_PASSED_TESTS_COUNT_FOR_USER = "select count(*) from results where result = 'passed' and userId = ?";
     private final String GET_FAILED_TESTS_COUNT_FOR_USER = "select count(*) from results where result = 'failed' and userId = ?";
+    private final String GET_USERS_COUNT_FOR_MODULE = "SELECT COUNT(*) AS cnt FROM (SELECT userId from results WHERE module=? GROUP BY userId) AS t;";
+    private final String GET_PASSED_TESTS_COUNT_FOR_MODULE = "select count(*) from results where result='passed' and module=?";
+    private final String GET_FAILED_TESTS_COUNT_FOR_MODULE = "select count(*) from results where result='failed' and module=?";
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -34,6 +37,15 @@ public class ResultDAOJdbcImpl implements ResultDAO {
 
     public List<Result> getAllResults() {
         return null;
+    }
+
+    @Override
+    public int getUsersCountForModule(int moduleId) {
+        try {
+            return jdbcTemplate.queryForObject(GET_USERS_COUNT_FOR_MODULE, new Object[]{moduleId}, Integer.class);
+        } catch (EmptyResultDataAccessException e){
+            return 0;
+        }
     }
 
     public List<Result> getUserResult(User user) {
@@ -101,6 +113,24 @@ public class ResultDAOJdbcImpl implements ResultDAO {
     public int getFailedTestsCountForUser(User user) {
         try {
             return jdbcTemplate.queryForObject(GET_FAILED_TESTS_COUNT_FOR_USER, new Object[]{user.getId()}, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getPassedTestsCountForModule(int module) {
+        try {
+            return jdbcTemplate.queryForObject(GET_PASSED_TESTS_COUNT_FOR_MODULE, new Object[]{module}, Integer.class);
+        } catch (EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public int getFailedTestsCountForModule(int module) {
+        try {
+            return jdbcTemplate.queryForObject(GET_FAILED_TESTS_COUNT_FOR_MODULE, new Object[]{module}, Integer.class);
         } catch (EmptyResultDataAccessException e) {
             return 0;
         }
