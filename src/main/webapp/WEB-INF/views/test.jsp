@@ -97,10 +97,10 @@
                                 <c:if test="${qType eq 4}">
                                     <div class="row">
                                         <div class="col s12 center-align">
-                                            <img src="/resources/img/${currentQuestion.getQuestion().getImg()}" usemap="#${currentQuestion.getQuestion().getId()}"/>
+                                            <img src="/resources/img/${currentQuestion.getQuestion().getImg()}" usemap="#${currentQuestion.getQuestion().getId()}" style="border: 1px solid black;"/>
                                             <map name="#${currentQuestion.getQuestion().getId()}">
                                                 <c:forEach var="answer" items="${answers}">
-                                                    <area shape="poly" href="#${answer.getId()}" coords="${answer.getText()}" onclick="submitForm(${answer.getId()})"/>
+                                                    <area shape="rect" href="#${answer.getId()}" coords="${answer.getText()}" onclick="submitForm(${answer.getId()})"/>
                                                 </c:forEach>
                                             </map>
                                         </div>

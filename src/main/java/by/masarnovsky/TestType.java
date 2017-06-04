@@ -1,8 +1,8 @@
 package by.masarnovsky;
 
 public enum TestType {
-    TRAINING(3, "training"),
-    TESTING(6, "testing");
+    TRAINING(10, "training"),
+    TESTING(20, "testing");
 
     private int type;
     private String name;

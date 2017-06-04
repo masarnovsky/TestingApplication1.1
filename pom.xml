@@ -42,8 +42,6 @@
             <artifactId>spring-web</artifactId>
             <version>${spring.mvc}</version>
         </dependency>
-
-        <!--MYBE NOT-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -59,8 +57,6 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.mvc}</version>
         </dependency>
-
-
 
         <!--SERVLET-->
         <dependency>

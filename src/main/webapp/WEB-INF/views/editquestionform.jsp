@@ -62,11 +62,20 @@
                                 </c:if>
                                 <c:set var="ind" value="1"/>
                                 <c:forEach var="answer" items="${answers}" >
-                                    <div class="input-field col s12">
-                                        <label>Правильный ответ:</label>
-                                        <input value="${answer.getText()}" name="answer${ind}" type="text" />
-                                        <c:set var="ind" value="${ind + 1}"/>
-                                    </div>
+                                    <c:if test="${ind eq 1}">
+                                        <div class="input-field col s12">
+                                            <label>Правильный ответ:</label>
+                                            <input value="${answer.getText()}" name="answer${ind}" type="text" />
+                                            <c:set var="ind" value="${ind + 1}"/>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${ind ne 1}">
+                                        <div class="input-field col s12">
+                                            <label>Ответ:</label>
+                                            <input value="${answer.getText()}" name="answer${ind}" type="text" />
+                                            <c:set var="ind" value="${ind + 1}"/>
+                                        </div>
+                                    </c:if>
                                 </c:forEach>
                             <%--</c:if>--%>
                         </div>

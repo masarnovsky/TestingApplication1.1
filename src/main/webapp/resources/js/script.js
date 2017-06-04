@@ -8,7 +8,6 @@ function setModule(id) {
 }
 
 $('#butt').click(function() {
-    console.log($('#moduleInput').val());
     $.ajax({
         type: "GET",
         cache: false,
