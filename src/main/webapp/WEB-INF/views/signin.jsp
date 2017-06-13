@@ -38,6 +38,7 @@
                     <h6><form:errors path="email" cssClass="error col s12 light"/></h6>
                     <h6><form:errors path="login" cssClass="error col s12 light"/></h6>
                     <h6><form:errors path="password" cssClass="error col s12 light"/></h6>
+                    <div class="row"></div>
                 </div>
                 <div class="col s12 l6">
                     <a class="btn waves-effect waves-light indigo col s12" href="/">На главную</a>

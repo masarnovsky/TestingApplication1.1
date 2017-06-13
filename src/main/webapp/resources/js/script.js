@@ -19,6 +19,7 @@ $('#butt').click(function() {
     });
 });
 
+
 function openModal() {
     $('#breakModel').modal();
 }
@@ -29,7 +30,7 @@ var runTumer = true;
 
 $('#testPage').ready(function () {
     setInterval(function () {
-        $('#timer').html('minutes: ' + minutes + '    seconds: ' + seconds);
+        $('#timer').html('Минут: ' + minutes + '    секунд: ' + seconds);
         if (runTumer == true) {
             --seconds;
             if (seconds == 0){
@@ -163,6 +164,7 @@ var fourthType =
 
 function qTypeChanged(v){
     if (v == 1){
+        // $('#module').html(firstType);
        document.getElementById('module').innerHTML = firstType;
     }
     if (v == 2){

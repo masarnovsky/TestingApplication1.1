@@ -15,7 +15,9 @@
         <div class="col l3">
             <c:if test="${testType eq 'testing'}">
                 <div class="row">
-                    <div id="timer" class="col s12 yellow btn-large accent-4"></div>
+                    <div id="timer" class="col s12 red btn-large accent-4">
+                        Минут:&nbsp;&nbsp;&nbsp;секунд:&nbsp;&nbsp;
+                    </div>
                 </div>
             </c:if>
             <div class="row">

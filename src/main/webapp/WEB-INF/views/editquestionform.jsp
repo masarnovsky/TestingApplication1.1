@@ -6,7 +6,7 @@
         <div class="col s12">
             <div class="row">
                 <div class="col s12 center-align">
-                    <h4>Изменение вопроса</h4>
+                    <h4>Редактирование вопроса</h4>
                 </div>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
                                             </c:if>
                                         </c:forEach>
                                     </select>
-                                    <label>Тип вопроса</label>
+                                    <label>Тип ответа</label>
                                 </div>
                             </div>
                         </div>

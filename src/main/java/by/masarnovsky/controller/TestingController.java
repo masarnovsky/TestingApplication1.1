@@ -125,7 +125,7 @@ public class TestingController {
         String resultMsg = "failed";
         if (procent >= 75)
             resultMsg = "passed";
-        ui.addAttribute(procent);
+        ui.addAttribute("resultMsg", resultMsg);
         ui.addAttribute("rightAnswers", count);
         ui.addAttribute("atestingSession", testingSession);
         request.getSession().setAttribute("testingSession", null);

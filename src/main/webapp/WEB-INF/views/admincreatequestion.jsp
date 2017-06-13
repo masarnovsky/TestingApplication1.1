@@ -36,7 +36,7 @@
                                             <option value="${questionType.getId()}">${questionType.getDescr()}</option>
                                         </c:forEach>
                                     </select>
-                                    <label>Тип вопроса</label>
+                                    <label>Тип ответа</label>
                                 </div>
                             </div>
                         </div>

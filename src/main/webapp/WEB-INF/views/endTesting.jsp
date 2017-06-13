@@ -5,10 +5,10 @@
 
 <c:set var="avg" value="${atestingSession.getQuestionCount()/rightAnswers}" />
 <c:set var="questions" value="${atestingSession.getQuestionWithAnswersList()}" />
-<c:if test="${procent >= 75}">
+<c:if test="${resultMsg eq 'passed'}">
     <c:set value="Тест пройден!" var="resultMsg"/>
 </c:if>
-<c:if test="${procent < 75}">
+<c:if test="${resultMsg eq 'failed'}">
     <c:set value="Тест провален!" var="resultMsg"/>
 </c:if>
 
