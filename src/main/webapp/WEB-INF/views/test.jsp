@@ -57,6 +57,19 @@
                 <a href="/testing/showResults" class="modal-action modal-close btn-flat">Показать результат</a>
             </div>
         </div>
+
+        <div id="showResultAfterLastQuestionModal" class="modal">
+            <div class="modal-content">
+                <h4>Прервать тест</h4>
+                <p>Вы уверены, что хотите прервать тест? Все данные будут утеряны.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/testing/showResults" class="modal-action modal-close btn-flat">Показать результат</a>
+                <c:if test="${testType eq 'training'}">
+                    <a href="#" class="modal-action modal-close btn-flat">Вернуться к тесту</a>
+                </c:if>
+            </div>
+        </div>
 <%--MODAL WINDOW--%>
         <div class="col l9 ">
             <div class="row white z-depth-2">
@@ -108,7 +121,6 @@
                                         </div>
                                     </div>
                                 </c:if>
-
 
                                 <c:if test="${testType eq 'training'}">
                                     <div class="row">

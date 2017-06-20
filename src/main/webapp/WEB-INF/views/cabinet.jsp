@@ -44,13 +44,15 @@
                         </c:forEach>
                     </div>
                 </section>
-                <section id="chart" class="col s12 z-depth-2 white margin-top-15px without-margin-bottom">
-                    <div class="row"></div>
-                    <div class="col s8 offset-s2">
-                        <canvas id="myChart"></canvas>
-                    </div>
-                    <div class="row"></div>
-                </section>
+                <c:if test="${resultHistory.size() ne 0}">
+                    <section id="chart" class="col s12 z-depth-2 white margin-top-15px without-margin-bottom">
+                        <div class="row"></div>
+                        <div class="col s8 offset-s2">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                        <div class="row"></div>
+                    </section>
+                </c:if>
                 <section id="history" hidden class="col s12 white z-depth-2 margin-top-15px without-margin-bottom">
                     <c:if test="${resultHistory.size() eq 0}">
                         <div class="row">

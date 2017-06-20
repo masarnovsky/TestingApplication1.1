@@ -10,6 +10,7 @@
             <h3 class="center-align col s12">ECDL Тестирование</h3>
             <h5 class="center-align col s12 light">Для прохождения тестов нужно авторизоваться</h5>
             <h5 class="center-align col s12 light">${message}</h5>
+            <div class="row"></div>
             <div class="col s12">
                 <a class="btn waves-effect waves-light indigo col s12 l4 offset-l1" href="/user?login">Войти</a>
                 <a class="btn waves-effect waves-light indigo col s12 l4 offset-l2" href="/user?signin">Регистрация</a>

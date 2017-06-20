@@ -7,6 +7,12 @@ function setModule(id) {
     $('#moduleInput').attr('value', id);
 }
 
+function showResultAfterLastQuestion() {
+    console.log('here');
+    document.getElementById('answerForm').setAttribute('action', '');
+    $('#showResultAfterLastQuestionModal').modal('open');
+}
+
 $('#butt').click(function() {
     $.ajax({
         type: "GET",

@@ -54,7 +54,6 @@ public class UserController {
             ui.addAttribute("message", "Пользователь c таким логином уже существует!");
             return "signin";
         }
-//        return "redirect:/";
         return "index";
     }
 

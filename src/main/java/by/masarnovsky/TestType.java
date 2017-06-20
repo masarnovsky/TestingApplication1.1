@@ -2,7 +2,7 @@ package by.masarnovsky;
 
 public enum TestType {
     TRAINING(10, "training"),
-    TESTING(20, "testing");
+    TESTING(10, "testing");
 
     private int type;
     private String name;
