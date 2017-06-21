@@ -56,12 +56,17 @@ public class TestingController {
         int seconds = 59;
         request.getSession().setAttribute("minutes", minutes);
         request.getSession().setAttribute("seconds", seconds);
-        setTestingSession(request, testingSession, module);
+        if (!setTestingSession(request, testingSession, module)) {
+            ui.addAttribute("msg", "Нет вопросов!");
+            return "home";
+        }
         return "test";
     }
 
-    private void setTestingSession(HttpServletRequest request, CurrentTestingSessionStorage testingSession, int module){
+    private boolean setTestingSession(HttpServletRequest request, CurrentTestingSessionStorage testingSession, int module){
         List<Question> questions = questionService.getQuestionsForModule(module, testingSession.getTestType().getIntValue());
+        if (questions.size() == 0)
+            return false;
         Collections.shuffle(questions);
         testingSession.addQuestionsFromList(questions);
         for (Question q: questions){
@@ -73,6 +78,7 @@ public class TestingController {
         request.getSession().setAttribute("atestingSession", null);
         request.getSession().setAttribute("currentTimer", 2000);
         request.getSession().setAttribute("rightAnswers", getRightAnswersCount(testingSession));
+        return true;
     }
 
     @RequestMapping(value = "/getNextQuestion", method = RequestMethod.POST)
